@@ -1,2 +1,6 @@
-# CSI5131-Project
-Game design project - Enemy wave procedual generation
+# CSI5139J-Project
+PCG project - A player-adaptive enemy generation framework in Unity Engine
+## Group Members
+- Kangwei Liao
+- Yiqun Hao
+- Dengyu Liang
