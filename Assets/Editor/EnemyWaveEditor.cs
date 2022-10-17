@@ -28,6 +28,7 @@ public class EnemyWaveEditor : Editor {
     SerializedProperty minSpeed;
     SerializedProperty maxSpeed;
     SerializedProperty attackSpeed;
+    SerializedProperty randomSpawn;
     #endregion
 
     int _enemyChoiceIndex = 0;
@@ -43,7 +44,7 @@ public class EnemyWaveEditor : Editor {
         minSpeed = serializedObject.FindProperty("minSpeed");
         maxSpeed = serializedObject.FindProperty("maxSpeed");
         attackSpeed = serializedObject.FindProperty("attackSpeed");
-
+        randomSpawn = serializedObject.FindProperty("randomSpawn");
         enemyPrefabsNames.Add("None");
     }
 
@@ -110,6 +111,9 @@ public class EnemyWaveEditor : Editor {
         }
         EditorGUILayout.Space(5);
         EditorGUILayout.PropertyField(enemySpawnPoints);
+        EditorGUIUtility.labelWidth = 100;
+        EditorGUILayout.PropertyField(randomSpawn);
+        
         serializedObject.ApplyModifiedProperties(); // apply changes been made to a SerializedObject
 
         //if (GUILayout.Button("Open Editor Window")) {
