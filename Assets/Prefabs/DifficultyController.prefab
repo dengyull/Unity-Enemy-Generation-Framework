@@ -45,10 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 3
-  enemyPrefabs:
-  - {fileID: 153412, guid: 548c56f4bcf4db24b8aa057e9846a005, type: 3}
-  - {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
-  - {fileID: 100002, guid: e5171f72421770240bd7c3989fe351e3, type: 3}
+  enemyPrefabs: []
   enemySpawnPoints: []
   minHealth: 10
   maxHealth: 100

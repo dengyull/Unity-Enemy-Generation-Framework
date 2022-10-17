@@ -25,11 +25,11 @@ public class EnemyWaveManager : MonoBehaviour {
                 int randEnemy = Random.Range(0, enemyPrefabs.Count);
                 int randSpawnPoint = Random.Range(0, enemySpawnPoints.Count);
                 Instantiate(enemyPrefabs[randEnemy], enemySpawnPoints[randSpawnPoint].position, 
-                    transform.rotation); // instantiate an enermy
+                    transform.rotation); // instantiate a random enemy at random position
             } else {
-                Instantiate(enemyPrefabs[0], enemySpawnPoints[0].position, transform.rotation); // instantiate an enermy
+                Instantiate(enemyPrefabs[0], enemySpawnPoints[0].position, transform.rotation);
             }
-            spawnTimer = spawnInterval; // reset timer
+            spawnTimer = spawnInterval; // reset spawn timer
         }
     }
 }

@@ -18,7 +18,7 @@ using UnityEditor.Callbacks;
 [CustomEditor(typeof(EnemyWaveManager))]
 public class EnemyWaveEditor : Editor {
 
-    #region  SerializedProperties
+    #region SerializedProperties
     // set of serialized properties in EnemyWaveManager
     SerializedProperty spawnInterval;
     SerializedProperty enemyPrefabs;
@@ -45,7 +45,6 @@ public class EnemyWaveEditor : Editor {
         maxSpeed = serializedObject.FindProperty("maxSpeed");
         attackSpeed = serializedObject.FindProperty("attackSpeed");
         randomSpawn = serializedObject.FindProperty("randomSpawn");
-        enemyPrefabsNames.Add("None");
     }
 
     public override void OnInspectorGUI() {
@@ -109,7 +108,7 @@ public class EnemyWaveEditor : Editor {
         }
 
         EditorGUILayout.Space(5);
-        EditorGUILayout.PropertyField(enemySpawnPoints); // Spawn points array
+        EditorGUILayout.PropertyField(enemySpawnPoints); // Field for spawn points
         EditorGUILayout.Space(5);
         EditorGUILayout.Slider(spawnInterval, 1f, 10f); // use slider to control spawnInterval
         EditorGUILayout.PropertyField(randomSpawn); // toggle randomSpawn
@@ -121,8 +120,9 @@ public class EnemyWaveEditor : Editor {
         serializedObject.ApplyModifiedProperties(); // apply changes been made to the serializedObject
     }
 
-    void DrawGUILine(float i_height = 1.2f) {
-        // draw a horizontal line in inspector; from https://forum.unity.com/threads/horizontal-line-in-editor-window.520812/
+    void DrawGUILine(float i_height = 1f) {
+        // draw a horizontal line in inspector; pasted from:
+        // https://forum.unity.com/threads/horizontal-line-in-editor-window.520812/
         Rect rect = EditorGUILayout.GetControlRect(false, i_height);
         rect.height = i_height;
         EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));

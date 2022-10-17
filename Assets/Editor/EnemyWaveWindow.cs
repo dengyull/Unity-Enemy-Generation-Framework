@@ -11,8 +11,6 @@ public class EnemyWaveWindow : EditorWindow {
     }
 
     private void OnGUI() {
-        if (GUILayout.Button("Place Spawn Point(s)")) {
-            Debug.Log("Place Spawn Point(s) clicked");
-        }
+        // window contents
     }
 }
