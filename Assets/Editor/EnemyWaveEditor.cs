@@ -15,7 +15,7 @@ using UnityEditor.Callbacks;
 //    }
 //}
 
-[CustomEditor(typeof(EnemyWaveManager))]
+[CustomEditor(typeof(GEGManager))]
 public class EnemyWaveEditor : Editor {
 
     #region SerializedProperties

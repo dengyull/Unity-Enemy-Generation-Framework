@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWaveManager : MonoBehaviour {
+public class GEGManager : MonoBehaviour {
     [SerializeField] float spawnInterval = 3f;
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] List<Transform> enemySpawnPoints;
