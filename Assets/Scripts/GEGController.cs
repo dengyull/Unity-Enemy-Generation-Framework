@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GEGManager : MonoBehaviour {
+public class GEGController : MonoBehaviour {
     [SerializeField] float spawnInterval = 3f;
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] List<Transform> enemySpawnPoints;
