@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5618037ca0ec10f499e855de8cd38821, type: 3}
   m_Name: EnemyScriptableObject
   m_EditorClassIdentifier: 
-  spawnInterval: 3
-  enemyPrefabs: []
-  enemySpawnPoints: []
-  minHealth: 0
-  maxHealth: 0
-  minSpeed: 0
-  maxSpeed: 0
+  playerPrefabs:
+  - {fileID: 100006, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+  enemyPrefabs:
+  - {fileID: 153412, guid: 548c56f4bcf4db24b8aa057e9846a005, type: 3}
+  - {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
+  - {fileID: 100002, guid: e5171f72421770240bd7c3989fe351e3, type: 3}
+  enemySpawnPoints:
+  - {fileID: 2822966016776001251, guid: 812cf0d81fa2f9d4c91c3a4d8cdaba71, type: 3}
