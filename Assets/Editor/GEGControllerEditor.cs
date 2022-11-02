@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Callbacks;
 
 //public class AssetHandler { // Handle events on related assets
 //    [OnOpenAsset()]
@@ -15,8 +14,8 @@ using UnityEditor.Callbacks;
 //    }
 //}
 
-[CustomEditor(typeof(GEGManager))]
-public class EnemyWaveEditor : Editor {
+[CustomEditor(typeof(GEGController))]
+public class GEGControllerEditor : Editor {
 
     #region SerializedProperties
     // set of serialized properties in EnemyWaveManager
