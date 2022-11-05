@@ -67,4 +67,160 @@ public class GEGLevelController : MonoBehaviour {
         return propertyValues;
     }
 
+	[SerializeField] List<Transform> enemySpawnPoints;
+    [SerializeField] GEGPackedData packedData;
+    [SerializeField] bool randomSpawn = false;
+
+    /*Dictionary<string, double> enemypropertyGenerator(int difflevel, List<GEGEnemyProperty> PropertyList)
+    {
+        Dictionary<string, double> re = new Dictionary<string, double>();
+        for (int i = 0; i < PropertyList.Count; i++)
+        {
+            re.Add(PropertyList[i].PropertyName(), PropertyList[i].PropertyCalculator(difflevel));
+        }
+        return re;
+    }*/
+    Dictionary<string, double> enemypropertyGenerators(int difflevel, Dictionary PropertyList)
+    {
+        Dictionary<string, double> re = new Dictionary<string, double>();
+        foreach (KeyValuePair<string, bool> kvp in PropertyList)
+        {
+            if (kvp.Value)
+            {
+                if (kvp.Key == "health")
+                {
+                    re.Add("health", todoHP(difflevel));
+                } 
+                else if (kvp.Key == "Speed")
+                {
+                    re.Add("Speed", todoSpeed(difflevel));
+                }
+                else if (kvp.Key == "AttackRate")
+                {
+                    re.Add("AttackRate", todoAttackRate(difflevel));
+                }
+            }
+        }
+        return re;
+    }
+    double PropertyCal(double difficultyEnem, int difficulty, double baseValue, bool v)
+    {
+        double re;
+        if (v)
+        {
+            re = difficultyEnem * difficulty / baseValue;
+        }
+        else
+        {
+            re = difficultyEnem * baseValue * difficulty;
+        }
+        return re;
+    }
+    List<double> todoHP(int difflevel)
+    {
+        List<double> re = new List<double>();
+        int enemyNumber = enemyPrefabs.Count;
+        for (int i = 0; i < enemyNumber; i++)
+        {
+            re.Add(PropertyCal(difficultyHP[i], difflevel, baseHP[i],false));
+        }
+        return re;
+    }
+
+
+    List<double> todoSpeed(int difflevel)
+    {
+        List<double> re = new List<double>();
+        int enemyNumber = enemyPrefabs.Count;
+        for (int i = 0; i < enemyNumber; i++)
+        {
+            re.Add(PropertyCal(difficultySpeed[i], difflevel, baseSpeed[i], false));
+        }
+        return re;
+
+    }
+
+
+    List<double> todoAttackRate(int difflevel)
+    {
+        List<double> re = new List<double>();
+        int enemyNumber = enemyPrefabs.Count;
+        for (int i = 0; i < enemyNumber; i++)
+        {
+            re.Add(PropertyCal(difficultyAttackRate[i], difflevel, baseAttackRate[i], false));
+        }
+        return re;
+
+    }
+
+    void running(int difflevel)
+    {
+        enemypropertyGenerators(difflevel);
+        List<int> enemys = enemyNumberGenerator(difflevel);
+        enemypositionsGenerator(enemys);
+
+    }
+
+    double enemyNumberCal(float difficultyEnem, int difficulty, float baseValue, bool v)
+    {
+        double re;
+        if (v)
+        {
+            re = difficultyEnem * difficulty / baseValue;
+        }
+        else
+        {
+            re = difficultyEnem * baseValue * difficulty;
+        }
+        return re;
+    }
+    int enemyPercentage(int difflevel)
+    {
+        return Mathf.RoundToInt(GEGPackedData.enemyTypeData.Count * difflevel / 10);
+    }
+    List<int> enemyNumberGenerator(int difflevel)
+    {
+        
+        List<int> re = new List<int>();
+        int t = enemyPercentage(difflevel);
+        for (int i = 0; i < t; i++)
+        {
+            
+            int ts = (int)enemyNumberCal(GEGPackedData.enemyTypeData[i].Item3, difflevel, GEGPackedData.enemyTypeData[i].Item2, true);
+            re.Add(ts);
+        }
+        return re;
+    }
+
+    List<List<int>> enemypositionsGenerator(List<int> enemys)
+    {
+        List<List<int>> res = new List<List<int>>();
+        for (int i = 0; i < enemys.Count; i++)
+        {
+            List<int> re = new List<int>();
+            for (int j = 0; j < enemys[i]; j++)
+            {
+                re.Add(enemypositionGenerator());
+            }
+            res.Add(re);
+
+        }
+        return res;
+    }
+
+    // return Enemy Spawn Point from list randomly, or 0 point.could extend more strategies.
+    int enemypositionGenerator()
+    {
+
+        if (randomSpawn)
+        {
+            return Random.Range(0, enemySpawnPoints.Count);
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+
 }
