@@ -1,15 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GEGFramework;
+/// <summary>
+/// Update enemy numbers, attributes and locations based on difficulty level
+/// </summary>
 public class GEGLevelController : MonoBehaviour {
-    // Start is called before the first frame update
-    void Start() {
-    }
 
-    // Update is called once per frame
-    void Update() {
+    [SerializeField] List<GameObject> enemyPrefabs;
+    [SerializeField] List<Transform> enemySpawnPoints;
+    [SerializeField] GEGPackedData packedData;
+    [SerializeField] bool randomSpawn = false;
+    [SerializeField] Dictionary<string, bool> PropertyList;
+    [SerializeField] List<GEGTypeContainer> enemyTypeData;
+    /// <summary>
+    /// an example to run.
+    /// </summary>
+    /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
+    /// <param name="PropertyList">Dictionary contains all attributes with enable or not</param>
+    /// <returns></returns>
+    public void RunExample(int difflevel, List<GEGTypeContainer> PropertyList)
+    {
+        List<int> enemys = enemyNumberGenerator(difflevel);
+        enemypropertyGenerators(difflevel, enemyTypeData);
+        List<List<int>> position = enemypositionsGenerator(enemys);
+        for (int i = 0; i < enemys.Count; i++)
+        {
+            for (int j = 0; j < enemys[i]; j++)
+            {
+                Instantiate(PropertyList[i].prefab, enemySpawnPoints[position[i][j]].position, transform.rotation);
+                //Debug.Log("enemy type " + i + ", health: " + enemyproperty[i]["health"] + ", speed: " + enemyproperty[i]["Speed"] + ". location SpawnPoints" + position[i][j]);
+            }
 
+        }
     }
 
     /// <summary>
@@ -26,6 +49,7 @@ public class GEGLevelController : MonoBehaviour {
     /// Q: Why is the dictBaseVals for each property not for each enemy type?
     /// 
     /// public Dictionary<string, float[]> UpdateProperties(int gameDiff, GEGPackedData packedData) { // new constructor
+    /// 
     public Dictionary<string, float[]> UpdateProperties(int gameDiff, float[] typeDiff,
         Dictionary<string, bool> dictProperty, Dictionary<string, int> dictBaseVals, Dictionary<string, bool> dictPropotion) {
 
@@ -67,98 +91,32 @@ public class GEGLevelController : MonoBehaviour {
         return propertyValues;
     }
 
-	[SerializeField] List<Transform> enemySpawnPoints;
-    [SerializeField] GEGPackedData packedData;
-    [SerializeField] bool randomSpawn = false;
-
-    /*Dictionary<string, double> enemypropertyGenerator(int difflevel, List<GEGEnemyProperty> PropertyList)
+    /// <summary>
+    /// Generate enemy properties.
+    /// </summary>
+    /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
+    /// <param name="PropertyList">Dictionary contains all attributes with enable or not</param>
+    /// <returns></returns>
+    void enemypropertyGenerators(int difflevel, List<GEGTypeContainer> enemyTypeData)
     {
-        Dictionary<string, double> re = new Dictionary<string, double>();
-        for (int i = 0; i < PropertyList.Count; i++)
+        
+        for (int i = 0; i < enemyTypeData.Count; i++)
         {
-            re.Add(PropertyList[i].PropertyName(), PropertyList[i].PropertyCalculator(difflevel));
+            enemypropertyGenerator(difflevel, enemyTypeData[i].dictBasicProperty);//error with access.
         }
-        return re;
-    }*/
-    Dictionary<string, double> enemypropertyGenerators(int difflevel, Dictionary PropertyList)
+    }
+
+    void enemypropertyGenerator(int difflevel, Dictionary<string, GEGProperty<double>> PropertyList)
     {
-        Dictionary<string, double> re = new Dictionary<string, double>();
-        foreach (KeyValuePair<string, bool> kvp in PropertyList)
+        
+        foreach (KeyValuePair<string, GEGProperty<double>> kvp in PropertyList)
         {
-            if (kvp.Value)
+            GEGProperty<double> Property = kvp.Value;
+            if (Property.enabled)//error with access.
             {
-                if (kvp.Key == "health")
-                {
-                    re.Add("health", todoHP(difflevel));
-                } 
-                else if (kvp.Key == "Speed")
-                {
-                    re.Add("Speed", todoSpeed(difflevel));
-                }
-                else if (kvp.Key == "AttackRate")
-                {
-                    re.Add("AttackRate", todoAttackRate(difflevel));
-                }
+                Property.PropertyCalculateMethod(difflevel);
             }
         }
-        return re;
-    }
-    double PropertyCal(double difficultyEnem, int difficulty, double baseValue, bool v)
-    {
-        double re;
-        if (v)
-        {
-            re = difficultyEnem * difficulty / baseValue;
-        }
-        else
-        {
-            re = difficultyEnem * baseValue * difficulty;
-        }
-        return re;
-    }
-    List<double> todoHP(int difflevel)
-    {
-        List<double> re = new List<double>();
-        int enemyNumber = enemyPrefabs.Count;
-        for (int i = 0; i < enemyNumber; i++)
-        {
-            re.Add(PropertyCal(difficultyHP[i], difflevel, baseHP[i],false));
-        }
-        return re;
-    }
-
-
-    List<double> todoSpeed(int difflevel)
-    {
-        List<double> re = new List<double>();
-        int enemyNumber = enemyPrefabs.Count;
-        for (int i = 0; i < enemyNumber; i++)
-        {
-            re.Add(PropertyCal(difficultySpeed[i], difflevel, baseSpeed[i], false));
-        }
-        return re;
-
-    }
-
-
-    List<double> todoAttackRate(int difflevel)
-    {
-        List<double> re = new List<double>();
-        int enemyNumber = enemyPrefabs.Count;
-        for (int i = 0; i < enemyNumber; i++)
-        {
-            re.Add(PropertyCal(difficultyAttackRate[i], difflevel, baseAttackRate[i], false));
-        }
-        return re;
-
-    }
-
-    void running(int difflevel)
-    {
-        enemypropertyGenerators(difflevel);
-        List<int> enemys = enemyNumberGenerator(difflevel);
-        enemypositionsGenerator(enemys);
-
     }
 
     double enemyNumberCal(float difficultyEnem, int difficulty, float baseValue, bool v)
@@ -178,6 +136,11 @@ public class GEGLevelController : MonoBehaviour {
     {
         return Mathf.RoundToInt(GEGPackedData.enemyTypeData.Count * difflevel / 10);
     }
+    /// <summary>
+    /// Generate enemy number.
+    /// </summary>
+    /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
+    /// <returns></returns>
     List<int> enemyNumberGenerator(int difflevel)
     {
         
@@ -186,12 +149,16 @@ public class GEGLevelController : MonoBehaviour {
         for (int i = 0; i < t; i++)
         {
             
-            int ts = (int)enemyNumberCal(GEGPackedData.enemyTypeData[i].Item3, difflevel, GEGPackedData.enemyTypeData[i].Item2, true);
+            int ts = (int)enemyNumberCal(GEGPackedData.enemyTypeData[i].diffFactor, difflevel, GEGPackedData.enemyTypeData[i].diffFactor, true);//error with access.
             re.Add(ts);
         }
         return re;
     }
-
+    /// <summary>
+    /// Generate each enemies position.
+    /// </summary>
+    /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
+    /// <returns></returns>
     List<List<int>> enemypositionsGenerator(List<int> enemys)
     {
         List<List<int>> res = new List<List<int>>();
@@ -203,7 +170,6 @@ public class GEGLevelController : MonoBehaviour {
                 re.Add(enemypositionGenerator());
             }
             res.Add(re);
-
         }
         return res;
     }

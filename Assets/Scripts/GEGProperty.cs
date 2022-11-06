@@ -13,5 +13,12 @@ namespace GEGFramework {
         /// <param name="difficulty">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
         public void Update(int difficulty);
+
+        /// <summary>
+        /// Calculate value based on given difficulty level
+        /// </summary>
+        /// <param name="difficulty">Difficulty level (from 0 to 10)</param>
+        /// <returns></returns>
+        public T PropertyCalculateMethod(int difficulty);
     }
 }
