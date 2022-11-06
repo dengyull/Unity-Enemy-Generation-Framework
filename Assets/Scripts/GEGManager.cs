@@ -23,6 +23,7 @@ public class GEGManager : MonoBehaviour {
         lastDiffLevel = defaultDifficulty; // test value
         newDiffLevel = lastDiffLevel;
         scoreManager = new GEGScoreManager(5); // test values
+
     }
 
     void Update() {

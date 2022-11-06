@@ -10,7 +10,7 @@ namespace GEGFramework {
 
     public class GEGTypeContainer {
         GEGCharacterType type;
-        GameObject prefab { get; set; } // Prefab for this type of character
+        public GameObject prefab { get; set; } // Prefab for this type of character
         public float diffFactor; // Only used when GEGTypeContainer.type is GEGCharacterType.Enemy
         public string name { get; set; } // Name for this type of character, usually equals prefab's name
         public Dictionary<string, GEGProperty<double>> dictBasicProperty;

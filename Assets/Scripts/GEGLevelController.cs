@@ -7,12 +7,10 @@ using GEGFramework;
 /// </summary>
 public class GEGLevelController : MonoBehaviour {
 
-    [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] List<Transform> enemySpawnPoints;
     [SerializeField] GEGPackedData packedData;
     [SerializeField] bool randomSpawn = false;
-    [SerializeField] Dictionary<string, bool> PropertyList;
-    [SerializeField] List<GEGTypeContainer> enemyTypeData;
+    List<GEGTypeContainer> enemyTypeData;// = packedData.enemyTypeData;
     /// <summary>
     /// an example to run.
     /// </summary>
@@ -33,6 +31,11 @@ public class GEGLevelController : MonoBehaviour {
             }
 
         }
+    }
+
+    public void SortenemyType()
+    {
+        enemyTypeData.Sort((a, b) => a.diffFactor.CompareTo(b.diffFactor));
     }
 
     /// <summary>
@@ -114,7 +117,7 @@ public class GEGLevelController : MonoBehaviour {
             GEGProperty<double> Property = kvp.Value;
             if (Property.enabled)//error with access.
             {
-                Property.PropertyCalculateMethod(difflevel);
+                Property.Update(difflevel);
             }
         }
     }
@@ -143,7 +146,7 @@ public class GEGLevelController : MonoBehaviour {
     /// <returns></returns>
     List<int> enemyNumberGenerator(int difflevel)
     {
-        
+        SortenemyType();
         List<int> re = new List<int>();
         int t = enemyPercentage(difflevel);
         for (int i = 0; i < t; i++)
@@ -177,7 +180,6 @@ public class GEGLevelController : MonoBehaviour {
     // return Enemy Spawn Point from list randomly, or 0 point.could extend more strategies.
     int enemypositionGenerator()
     {
-
         if (randomSpawn)
         {
             return Random.Range(0, enemySpawnPoints.Count);
