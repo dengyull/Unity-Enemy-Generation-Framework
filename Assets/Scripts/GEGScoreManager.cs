@@ -38,8 +38,8 @@ namespace GEGFramework {
                 case 0:
                     counters.zeroRounds++; // rounds (stay in zero difficulty level) + 1
                     break;
-                case int diff when diff < 8:
-                    counters.lowRounds++; // rounds (stay in 1-7 difficulty level) + 1
+                case int diff when diff < 7:
+                    counters.lowRounds++; // rounds (stay in 1-7 difficulty level) + 1 //Low difficulty should be 1-6
                     break;
                 case int diff when diff <= 10:
                     counters.peakRounds++; // rounds (stay in 8-10 difficulty level) + 1
@@ -53,60 +53,81 @@ namespace GEGFramework {
             }
 
             // TODO: base on players' status evaluate diffLevels:
-            if (counters.peakRounds > peakDuration) {
-                // Peak difficulty level duration reached => Already enough time spent at peak diffLevel
-                counters.peakRounds = 0; // Reset peak rounds counter
-                // TODO: compute a lower diffLevel => update newDiff
+
+
+            // Cases for difficulty equals to 0
+            if (prevDiff == 0)
+            {
+                // Enough time to relax, so we set difficulty to very low level including 1, 2, 3. 
+                if (counters.zeroRounds > zeroDuration)
+                {
+                    counters.zeroRounds = 0;
+                    newDiff = Random.Range(1, 4);
+                }
+
+                // Else not enough time to relax, so we continue 0 difficulty so do nothing
             }
-            // TODO: Conditions for other level duration reached...
-            // else if ...
+
+
+            // Cases for low difficulty from 1 to 6
+            else if (prevDiff > 0 && prevDiff < 7)
+            {
+                // Enough time for low level difficulty, so we switch to high level difficulty.
+                if ((counters.lowRounds > lowDuration)
+                {
+                    counters.lowRounds = 0;
+                    newDiff = 7;
+                }
+                // Not enough time in low level
+                else
+                {
+                    //Not reached the highest level for low difficulty yet, so we make the difficulty a little bit higher
+                    if (prevDiff < 6)
+                    {
+                        newDiff += 1;
+                    }
+                }
+
+            }
+
+
+
+            // Cases for high difficulty 7,8,9
+            else if (prevDiff >= 7)
+            {
+                if (counters.peakRounds > peakDuration)
+                {
+                    counters.peakRounds = 0;
+                    newDiff = 0;
+                }
+                else
+                {
+                    // 1. The time is not long enough
+                    int continuePeakOrNot = Random.Range(0, 10);
+
+                    // 30% new difficulty = 0
+                    if (continuePeakOrNot >= 7)
+                    {
+                        counters.peakRounds = 0;
+                        newDiff = 0;
+                    }
+
+                    // 70% increase difficulty
+                    else
+                    {
+                        if (prevDiff < 9)
+                        {
+                            newDiff += 1;
+                        }
+                    }
+                }
+            }
+
+            prevDiff = newDiff;
             return newDiff;
         }
 
-        /// <summary>
-        /// Returns a difficulty level (score) based on the inputs
-        /// </summary>
-        /// <param name="currPlayerHealth">Current player health within range [0, maxPlayerHealth]</param>
-        /// <param name="updateDiffInterval">Q: Not sure what is this?</param>
-        /// <param name="peakInterval">Desired peak interval</param>
-        /// <param name="lowDiffInterval">Desired low difficulty interval</param>
-        /// <param name="zeroDiffInterval">Desired zero difficulty interval</param>
-        /// <returns>New difficulty Level</returns>
-        //public int GetDifficulty(int currPlayerHealth, float updateDiffInterval, float peakInterval,
-        //    float lowDiffInterval, float zeroDiffInterval) {
-        //    // Q: Cases for letting new difficulty = 0?
-        //    if ((currPlayerHealth / maxPlayerHealth) < 10
-        //        || (currPlayerHealth - prevPlayerHealth) / maxPlayerHealth > 0.5) { // 1. No longer having good health
-        //                                                                            // ISSUE: Conditions are incorrect: 1. curh/maxh always <= 1; 2. why gain >50% health is a bad health?
-        //        currDiff = 0; // Set easy mode
-        //        passedTime = 0;
-        //    } else if (currDiff >= 8 && passedTime > peakInterval) { // 2. Peak for a long enough time
-        //        currDiff = 0;
-        //        passedTime = 0;
-        //    }
-        //    // Q: Cases for letting new difficulty = 0 < difficulty < 8?
-        //    else if (currDiff == 0 && passedTime >= zeroDiffInterval) {
-        //        passedTime = 0;
-        //        currDiff = Random.Range(1, 5);
-        //    } else if (currDiff < 8 && passedTime < lowDiffInterval) {
-        //        currDiff++;
-        //    }
-        //    // Q: Cases for letting new difficulty > 8?
-        //    else if (currDiff >= 8 && passedTime <= peakInterval) { // 1. The time is not long enough
-        //        int peakOrNot = Random.Range(0, 10);
-        //        if (peakOrNot >= 7) { // Q: 30% new difficulty = 0?
-        //            currDiff = 0;
-        //            passedTime = 0;
-        //        } else if (peakOrNot < 7 && currDiff != 10) { // Q: 70% increase difficulty?
-        //            currDiff += 1;
-        //            passedTime += updateDiffInterval; // Q: Why only here should passedTime be increased?
-        //        }
-        //    } else if ((currDiff < 8 || currPlayerHealth > 60)
-        //        && passedTime >= lowDiffInterval) { // 2. Remain easy for a long time
-        //        currDiff = 8;
-        //    }
-        //    return currDiff;
-        //}
+        
     }
 
 }
