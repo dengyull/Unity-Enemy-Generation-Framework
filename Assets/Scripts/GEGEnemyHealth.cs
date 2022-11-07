@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GEGFramework;
 
-public class GEGEnemyHealth : GEGProperty<double>
+public class GEGEnemyHealth
 {
     public string _name = "speed";
     public string name
@@ -43,15 +43,4 @@ public class GEGEnemyHealth : GEGProperty<double>
         set { _value = value; }
     }
 
-    public void Update(int difficulty)
-    {
-        if (porportion)
-        {
-            value = baseValue * difficulty * diffWeight;
-        }
-        else
-        {
-            value = baseValue * diffWeight / difficulty;
-        }
-    }
 }

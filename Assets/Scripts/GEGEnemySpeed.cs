@@ -3,8 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using GEGFramework;
 
-public class GEGEnemySpeed : GEGProperty<double>
+public class GEGEnemySpeed//("speed", 0.1, 0.1,1f, true, true)
 {
+    public double _baseValue = 0.1;
+    public double baseValue
+    {
+        get { return _baseValue; }
+        set { _baseValue = value; }
+    }
+
+    public double _value = 0.1;
+    public double value
+    {
+        get { return _value; }
+        set { _value = value; }
+    }
+
     public string _name = "speed";
     public string name
     {
@@ -29,31 +43,7 @@ public class GEGEnemySpeed : GEGProperty<double>
         get { return _diffWeight; }
         set { _diffWeight = value; }
     }
-    public double _baseValue = 0.1;
-    public double baseValue
-    {
-        get { return _baseValue; }
-        set { _baseValue = value; }
-    }
-
-    public double _value = 0.1;
-    public double value
-    {
-        get { return _value; }
-        set { _value = value; }
-    }
 
 
-    public void Update(int difficulty)
-    {
-        if (porportion)
-        {
-            value = baseValue * difficulty * diffWeight;
-        }
-        else
-        {
-            value = baseValue * diffWeight / difficulty;
-        }
-    }
 
 }

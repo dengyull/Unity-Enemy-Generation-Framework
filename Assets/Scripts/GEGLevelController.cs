@@ -105,19 +105,19 @@ public class GEGLevelController : MonoBehaviour {
         
         for (int i = 0; i < enemyTypeData.Count; i++)
         {
-            enemypropertyGenerator(difflevel, enemyTypeData[i].dictBasicProperty);//error with access.
+            enemypropertyGenerator(difflevel, enemyTypeData[i].defaultProperty);//error with access.
         }
     }
 
-    void enemypropertyGenerator(int difflevel, Dictionary<string, GEGProperty<double>> PropertyList)
+    void enemypropertyGenerator(int difflevel, List<GEGProperty<double>> PropertyList)
     {
         
-        foreach (KeyValuePair<string, GEGProperty<double>> kvp in PropertyList)
+        foreach (GEGProperty<double> kvp in PropertyList)
         {
-            GEGProperty<double> Property = kvp.Value;
-            if (Property.enabled)//error with access.
+            
+            if (kvp.enabled)//error with access.
             {
-                Property.Update(difflevel);
+                kvp.Update(difflevel);
             }
         }
     }
