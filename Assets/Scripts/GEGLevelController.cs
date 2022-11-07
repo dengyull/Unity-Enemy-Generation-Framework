@@ -25,17 +25,9 @@ namespace GEGFramework
         /// <returns></returns>
         public void RunExample(GEGPackedData data, int diffLevel)
         {
-            List<int> enemys = enemyNumberGenerator(GEGPackedData.enemyTypeData, diffLevel);
-            enemypropertyGenerators(diffLevel, GEGPackedData.enemyTypeData);
-            List<List<int>> position = enemypositionsGenerator(enemys);
-            for (int i = 0; i < enemys.Count; i++)
-            {
-                for (int j = 0; j < enemys[i]; j++)
-                {
-                    Instantiate(GEGPackedData.enemyTypeData[i].prefab, enemySpawnPoints[position[i][j]].position);
-                }
-
-            }
+            List<int> enemys = EnemyNumberGenerator(GEGPackedData.enemyTypeData, diffLevel);
+            EnemyPropertyGenerator(diffLevel, GEGPackedData.enemyTypeData);
+            return enemys;
         }
 
         /// <summary>
@@ -44,11 +36,10 @@ namespace GEGFramework
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <param name="PropertyList">Dictionary contains all attributes with enable or not</param>
         /// <returns></returns>
-        void enemypropertyGenerators(int difflevel, List<GEGTypeContainer> enemyTypeData)
+        void EnemyPropertyGenerator(int difflevel, List<GEGTypeContainer> enemyTypeData)
         {
             for (int i = 0; i < enemyTypeData.Count; i++)
             {
-                //enemypropertyGenerator(difflevel, enemyTypeData[i].defaultProperty);
                 foreach (GEGProperty<double> kvp in enemyTypeData[i].defaultProperty)
                 {
                     if (kvp.enabled)
@@ -63,7 +54,7 @@ namespace GEGFramework
         /// Helper functions, computational purposes
         /// </summary>
         /// <returns></returns>
-        private double enemyNumberCal(float difficultyEnem, int difficulty, float baseValue, bool v)
+        private double EnemyNumberCal(float difficultyEnem, int difficulty, float baseValue, bool v)
         {
             if (v)
             {
@@ -80,7 +71,7 @@ namespace GEGFramework
         /// </summary>
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
-        List<int> enemyNumberGenerator(List<GEGTypeContainer> enemies, int difflevel)
+        List<int> EnemyNumberGenerator(List<GEGTypeContainer> enemies, int difflevel)
         {
             enemies.Sort((a, b) => a.diffFactor.CompareTo(b.diffFactor));//sort enemy by diffFactor
             List<int> re = new List<int>();
@@ -92,41 +83,7 @@ namespace GEGFramework
             }
             return re;
         }
-        /// <summary>
-        /// Generate each enemies position.
-        /// </summary>
-        /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
-        /// <returns></returns>
-        List<List<int>> enemypositionsGenerator(List<int> enemys)
-        {
-            List<List<int>> res = new List<List<int>>();
-            for (int i = 0; i < enemys.Count; i++)
-            {
-                List<int> re = new List<int>();
-                for (int j = 0; j < enemys[i]; j++)
-                {
 
-                    if (randomSpawn)
-                    {
-                        re.Add(Random.Range(0, enemySpawnPoints.Count));
-                    }
-                    else
-                    {
-                        if (enemySpawnPoints.Count >= i)
-                        {
-                            re.Add(i);
-                        }
-                        else
-                        {
-                            re.Add(enemySpawnPoints.Count);
-                        }
-
-                    }
-                }
-                res.Add(re);
-            }
-            return res;
-        }
 
     }
 
