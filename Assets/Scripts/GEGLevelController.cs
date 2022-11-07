@@ -7,39 +7,10 @@ using GEGFramework;
 /// </summary>
 public class GEGLevelController : MonoBehaviour {
 
-    List<Transform> enemySpawnPoints;
-    GEGPackedData packedDatas;
+    [SerializeField] List<Transform> enemySpawnPoints;
+    [SerializeField] GEGPackedData packedData;
     [SerializeField] bool randomSpawn = false;
-    bool SpanSignal;
-    float diffGenTimer;
-    [SerializeField] int DiffLevel;
-    void Start()
-    {
-        diffGenTimer = GEGPackedData.diffEvalInterval;
-    }
-
-    void Update()
-    {
-        diffGenTimer -= Time.deltaTime;
-        if (diffGenTimer <= 0 || SpanSignal)
-        {
-            RunExample(DiffLevel, GEGPackedData.enemyTypeData);
-            diffGenTimer -= GEGPackedData.diffEvalInterval;
-        }
-    }
-
-
-    /// <summary>
-    /// update diffcult level.
-    /// </summary>
-    /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
-    /// <returns></returns>
-    public void DiffChange(int NewDiffLevel)
-    {
-        DiffLevel = NewDiffLevel;
-    }
-
-    //List<GEGTypeContainer> enemyTypeData;// = packedData.enemyTypeData;
+    List<GEGTypeContainer> enemyTypeData;// = packedData.enemyTypeData;
     /// <summary>
     /// an example to run.
     /// </summary>
@@ -49,7 +20,7 @@ public class GEGLevelController : MonoBehaviour {
     public void RunExample(int difflevel, List<GEGTypeContainer> PropertyList)
     {
         List<int> enemys = enemyNumberGenerator(difflevel);
-        enemypropertyGenerators(difflevel, GEGPackedData.enemyTypeData);
+        enemypropertyGenerators(difflevel, enemyTypeData);
         List<List<int>> position = enemypositionsGenerator(enemys);
         for (int i = 0; i < enemys.Count; i++)
         {
@@ -62,6 +33,10 @@ public class GEGLevelController : MonoBehaviour {
         }
     }
 
+    public void SortenemyType()
+    {
+        enemyTypeData.Sort((a, b) => a.diffFactor.CompareTo(b.diffFactor));
+    }
 
     /// <summary>
     /// 
@@ -127,35 +102,43 @@ public class GEGLevelController : MonoBehaviour {
     /// <returns></returns>
     void enemypropertyGenerators(int difflevel, List<GEGTypeContainer> enemyTypeData)
     {
+        
         for (int i = 0; i < enemyTypeData.Count; i++)
         {
-            //enemypropertyGenerator(difflevel, enemyTypeData[i].defaultProperty);
-            foreach (GEGProperty<double> kvp in enemyTypeData[i].defaultProperty)
+            enemypropertyGenerator(difflevel, enemyTypeData[i].defaultProperty);//error with access.
+        }
+    }
+
+    void enemypropertyGenerator(int difflevel, List<GEGProperty<double>> PropertyList)
+    {
+        
+        foreach (GEGProperty<double> kvp in PropertyList)
+        {
+            
+            if (kvp.enabled)//error with access.
             {
-                if (kvp.enabled)
-                {
-                    kvp.Update(difflevel);
-                }
+                kvp.Update(difflevel);
             }
         }
     }
 
-    /// <summary>
-    /// Helper functions, computational purposes
-    /// </summary>
-    /// <returns></returns>
-    private double enemyNumberCal(float difficultyEnem, int difficulty, float baseValue, bool v)
+    double enemyNumberCal(float difficultyEnem, int difficulty, float baseValue, bool v)
     {
+        double re;
         if (v)
         {
-            return difficultyEnem* difficulty / baseValue;
+            re = difficultyEnem * difficulty / baseValue;
         }
         else
         {
-            return difficultyEnem * baseValue * difficulty;
+            re = difficultyEnem * baseValue * difficulty;
         }
+        return re;
     }
-
+    int enemyPercentage(int difflevel)
+    {
+        return Mathf.RoundToInt(GEGPackedData.enemyTypeData.Count * difflevel / 10);
+    }
     /// <summary>
     /// Generate enemy number.
     /// </summary>
@@ -163,13 +146,13 @@ public class GEGLevelController : MonoBehaviour {
     /// <returns></returns>
     List<int> enemyNumberGenerator(int difflevel)
     {
-        GEGPackedData.enemyTypeData.Sort((a, b) => a.diffFactor.CompareTo(b.diffFactor));//sort enemy by diffFactor
+        SortenemyType();
         List<int> re = new List<int>();
-        int t = Mathf.RoundToInt(GEGPackedData.enemyTypeData.Count * difflevel / 10);
+        int t = enemyPercentage(difflevel);
         for (int i = 0; i < t; i++)
         {
             
-            int ts = (int)enemyNumberCal(GEGPackedData.enemyTypeData[i].diffFactor, difflevel, GEGPackedData.enemyTypeData[i].diffFactor, true);
+            int ts = (int)enemyNumberCal(GEGPackedData.enemyTypeData[i].diffFactor, difflevel, GEGPackedData.enemyTypeData[i].diffFactor, true);//error with access.
             re.Add(ts);
         }
         return re;
@@ -187,26 +170,25 @@ public class GEGLevelController : MonoBehaviour {
             List<int> re = new List<int>();
             for (int j = 0; j < enemys[i]; j++)
             {
-
-                if (randomSpawn)
-                {
-                    re.Add(Random.Range(0, enemySpawnPoints.Count));
-                }
-                else
-                {
-                    if (enemySpawnPoints.Count >= i)
-                    {
-                        re.Add(i);
-                    } else
-                    {
-                        re.Add(enemySpawnPoints.Count);
-                    }
-                    
-                }
+                re.Add(enemypositionGenerator());
             }
             res.Add(re);
         }
         return res;
     }
+
+    // return Enemy Spawn Point from list randomly, or 0 point.could extend more strategies.
+    int enemypositionGenerator()
+    {
+        if (randomSpawn)
+        {
+            return Random.Range(0, enemySpawnPoints.Count);
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
 
 }
