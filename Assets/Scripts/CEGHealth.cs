@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GEGFramework;
 
-public class GEGEnemyHealth
+public class CEGHealth
 {
 
     public float value;
@@ -13,7 +13,7 @@ public class GEGEnemyHealth
     public bool enabled { get; set; }
     public bool porportion { get; set; }
     public float diffWeight { get; set; }
-    public GEGEnemyHealth(string propName, float value, float baseValue, float diffWeight = 0f, bool enabled = false, bool porportion = true)
+    public CEGHealth(string propName, float value, float baseValue, float diffWeight = 0f,bool enabled = false, bool porportion = true)
         //: base(propName, value, baseValue, 0f, false, true)
     {
         name = propName;
