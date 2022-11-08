@@ -9,20 +9,16 @@ public class GEGManager : MonoBehaviour {
 
     static GEGPackedData packedData;
     static GEGScoreManager scoreManager;
+    static GEGLevelController controller;
 
-    [SerializeField] GEGLevelController controller; // Not good...
-    [SerializeField, Range(0, 10)] int defaultDifficulty; // prompt for default difficulty level for this scene
+    [SerializeField, Range(0, 10)] int defaultDiff; // prompt for default difficulty level for this scene
 
     float diffEvalTimer; // countdown timer for difficulty evaluation
-    int lastDiffLevel, newDiffLevel;
 
     void Start() {
         packedData = new GEGPackedData();
         diffEvalTimer = GEGPackedData.diffEvalInterval;
-
-        lastDiffLevel = defaultDifficulty; // test value
-        newDiffLevel = lastDiffLevel;
-        scoreManager = new GEGScoreManager(5); // test values
+        scoreManager = new GEGScoreManager(defaultDiff); // test values
     }
 
     void Update() {
