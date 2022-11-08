@@ -10710,7 +10710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973436449}
-  - component: {fileID: 1973436448}
+  - component: {fileID: 1973436450}
   m_Layer: 0
   m_Name: GEG Manager
   m_TagString: Untagged
@@ -10718,35 +10718,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1973436448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973436447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d026c622c39b5e439589fa51fb1597e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDifficultyChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11500000, guid: aadc3ab2d5a56124784388fd1d64032a, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  controller: {fileID: 0}
-  defaultDifficulty: 0
 --- !u!4 &1973436449
 Transform:
   m_ObjectHideFlags: 0
@@ -10762,6 +10733,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1973436450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973436447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325bac1cd3b062b4b90e01bcbfd5d0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDifficultyChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  defaultDiff: 0
 --- !u!1001 &8579161348913983257
 PrefabInstance:
   m_ObjectHideFlags: 0
