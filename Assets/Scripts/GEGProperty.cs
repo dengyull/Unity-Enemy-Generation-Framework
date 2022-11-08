@@ -1,17 +1,34 @@
 using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GEGFramework {
 
     [System.Serializable]
-    public abstract class GEGProperty<T> {
+    public abstract class GEGProperty<T> : ScriptableObject {
 
         public T value;
         public T baseValue;
+        public float diffWeight;
 
-        public string name { get; set; }
-        public bool enabled { get; set; }
-        public bool porportion { get; set; }
-        public float diffWeight { get; set; }
+        public string pName;
+        public bool diffEnabled;
+        public bool porportional;
+        
+        /// <summary>
+        /// Default constructor for GEGProperty<T>
+        /// </summary>
+        /// <param name="propName">Property name (e.g. health)</param>
+        /// <param name="value"> Current stored value</param>
+        /// <param name="baseValue"> Default property value</param>
+        public GEGProperty(string propName, T value, T baseValue) {
+            pName = propName;
+            this.value = value;
+            this.baseValue = baseValue;
+            this.diffWeight = 0f;
+            diffEnabled = false;
+            this.porportional = true;
+        }
 
         /// <summary>
         /// Default constructor for GEGProperty<T>
@@ -19,17 +36,17 @@ namespace GEGFramework {
         /// <param name="propName">Property name (e.g. health)</param>
         /// <param name="value"> Current stored value</param>
         /// <param name="baseValue"> Default property value</param>
-        /// <param name="diffWeight">Range(0,10); How important is this property (prop) compared to other props in difficulty evaluation?</param>
+        /// <param name="diffWeight">Range(0,10); How important is this property (prop) compared to other props 
+        ///                          in difficulty evaluation?</param>
         /// <param name="enabled">Include this property in difficulty evaluation?</param>
-        /// <param name="porportion">Whether the property value should be proportional to the typeDiff</param>
-        public GEGProperty(string propName, T value, T baseValue, float diffWeight = 0f,
-                           bool enabled = false, bool porportion = true) {
-            name = propName;
+        /// <param name="porportional">Whether the property value should be proportional to the difficulty level</param>
+        public GEGProperty(string propName, T value, T baseValue, float diffWeight, bool enabled, bool porportional) {
+            pName = propName;
             this.value = value;
             this.baseValue = baseValue;
             this.diffWeight = diffWeight;
-            this.enabled = enabled;
-            this.porportion = porportion;
+            diffEnabled = enabled;
+            this.porportional = porportional;
         }
 
         /// <summary>
@@ -37,10 +54,10 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="difficulty">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
-        public virtual void Update(int difficulty) { // Allow for override
+        public virtual void UpdateProperty(int difficulty) { // Allow for override
             switch (value, baseValue) {
                 case (int val, int baseVal):
-                    val = (int)(baseVal * diffWeight / 10 * difficulty / 10); // Will this.value be updated?
+                    val = (int)(baseVal * diffWeight / 10 * difficulty / 10); // Q: Will this.value be updated?
                     break;
                 case (float val, float baseVal):
                     val = (float)baseVal * diffWeight / 10f * difficulty / 10f;
@@ -52,6 +69,6 @@ namespace GEGFramework {
             }
         }
 
-        public override string ToString() => $"{value}";
+        public override string ToString() => value.ToString();
     }
 }

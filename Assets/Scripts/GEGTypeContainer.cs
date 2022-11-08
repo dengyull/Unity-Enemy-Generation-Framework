@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GEGFramework {
+    [System.Serializable]
     public enum GEGCharacterType {
         Player,
         Enemy
@@ -13,19 +15,29 @@ namespace GEGFramework {
         public GEGTypeContainerException(string message) : base(message) { }
     }
 
-    public class GEGTypeContainer {
-        public readonly GEGCharacterType type;
-        public readonly string name; // Name for this type of character, usually equals prefab's name
+    [CreateAssetMenu(fileName = "GEGTypeContainer", menuName = "GEG Framework/GEG Type Container")]
+    public class GEGTypeContainer : ScriptableObject {
+
         public GameObject prefab; // Prefab for this type of character
-        public float diffFactor { get; set; } // Only used when GEGTypeContainer.type is GEGCharacterType.Enemy
-        public List<GEGProperty<double>> defaultProperty { get; set; } // A default property list
+        [SerializeField] public GEGCharacterType type;
+        [SerializeField] public string typeName; // Name for this type of character, usually equals prefab's name
+
+        // Rename diffFactor to difficultyFactor in inspector:
+        [FormerlySerializedAs("diffFactor")]
+        [SerializeField] public float difficultyFactor; // Only used when GEGTypeContainer.type is GEGCharacterType.Enemy
+        public float diffFactor {
+            get { return difficultyFactor; }
+            set { difficultyFactor = value; }
+        }
+
+        [SerializeField] public List<GEGProperty<double>> defaultProperty; // A default property list
 
         /// <summary>
         /// Constructor for player type character
         /// </summary>
         /// <param name="playerName">Name of this container. This is usually the name of the player prefab</param>
         public GEGTypeContainer(string playerName) {
-            name = playerName;
+            typeName = playerName;
             diffFactor = -1f;
             type = GEGCharacterType.Player;
             defaultProperty = new List<GEGProperty<double>>();
@@ -39,7 +51,7 @@ namespace GEGFramework {
         public GEGTypeContainer(string enemyTypeName, float diffFactor) {
             if (diffFactor < 0 || diffFactor > 10)
                 throw new ArgumentOutOfRangeException("Param [diffFactor] must within the range of 0 to 10");
-            name = enemyTypeName;
+            typeName = enemyTypeName;
             type = GEGCharacterType.Enemy;
             this.diffFactor = diffFactor;
             defaultProperty = new List<GEGProperty<double>>();
@@ -52,7 +64,7 @@ namespace GEGFramework {
         /// <returns>True if the property is added to the list, otherwise false</returns>
         public void Add(GEGProperty<double> prop) {
             foreach (GEGProperty<double> p in defaultProperty) {
-                if (prop.name == p.name)
+                if (prop.pName == p.pName)
                     throw new GEGTypeContainerException("There is already a property with the same name " +
                         "in the container. Please use another name.");
             }
@@ -66,7 +78,7 @@ namespace GEGFramework {
         /// <returns>Desired GEGProperty object; or NULL if not found</returns>
         public GEGProperty<double> Find(string propName) {
             foreach (GEGProperty<double> prop in defaultProperty) {
-                if (prop.name == propName) return prop;
+                if (prop.pName == propName) return prop;
             }
             return null;
         }
