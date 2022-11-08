@@ -19,8 +19,8 @@ namespace GEGFramework {
     public class GEGTypeContainer : ScriptableObject {
 
         public GameObject prefab; // Prefab for this type of character
-        [SerializeField] public GEGCharacterType type;
-        [SerializeField] public string typeName; // Name for this type of character, usually equals prefab's name
+        public GEGCharacterType type; // type of character
+        public string typeName; // Name for this type of character, usually equals prefab's name
 
         // Rename diffFactor to difficultyFactor in inspector:
         [FormerlySerializedAs("diffFactor")]
@@ -29,8 +29,7 @@ namespace GEGFramework {
             get { return difficultyFactor; }
             set { difficultyFactor = value; }
         }
-
-        [SerializeField] public List<GEGProperty<double>> defaultProperty; // A default property list
+        public List<GEGProperty<double>> defaultProperty; // A default property list
 
         /// <summary>
         /// Constructor for player type character

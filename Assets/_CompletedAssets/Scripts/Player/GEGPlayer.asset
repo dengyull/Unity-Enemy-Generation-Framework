@@ -10,6 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aca71c616109d947aa6664d7f1c9e74, type: 3}
-  m_Name: GEGTypeContainer
+  m_Name: GEGPlayer
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
+  type: 0
+  typeName: 
+  difficultyFactor: 0
+  defaultProperty: []
