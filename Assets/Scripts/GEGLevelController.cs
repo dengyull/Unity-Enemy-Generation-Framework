@@ -32,7 +32,7 @@ namespace GEGFramework {
             for (int i = 0; i < enemyTypeData.Count; i++) {
                 foreach (GEGProperty<double> kvp in enemyTypeData[i].defaultProperty) {
                     if (kvp.diffEnabled) {
-                        kvp.Update(difflevel);
+                        kvp.UpdateProperty(difflevel);
                     }
                 }
             }
