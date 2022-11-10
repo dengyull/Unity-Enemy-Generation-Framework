@@ -61,7 +61,7 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="prop">Given property</param>
         /// <returns>True if the property is added to the list, otherwise false</returns>
-        public void Add(GEGProperty<double> prop) {
+        public void AddProperty(GEGProperty<double> prop) {
             foreach (GEGProperty<double> p in defaultProperty) {
                 if (prop.pName == p.pName)
                     throw new GEGTypeContainerException("There is already a property with the same name " +
@@ -75,7 +75,7 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="propName">Name of the desired property</param>
         /// <returns>Desired GEGProperty object; or NULL if not found</returns>
-        public GEGProperty<double> Find(string propName) {
+        public GEGProperty<double> FindProperty(string propName) {
             foreach (GEGProperty<double> prop in defaultProperty) {
                 if (prop.pName == propName) return prop;
             }

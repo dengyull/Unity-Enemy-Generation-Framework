@@ -1,13 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GEGFramework {
 
     [System.Serializable]
     public abstract class GEGProperty<T> : ScriptableObject {
 
-        public T value;
+        public List<T> value;
         public T baseValue;
         public float diffWeight;
 
@@ -19,11 +19,12 @@ namespace GEGFramework {
         /// Default constructor for GEGProperty<T>
         /// </summary>
         /// <param name="propName">Property name (e.g. health)</param>
-        /// <param name="value"> Current stored value</param>
+        /// <param name="value"> First value to be stored</param>
         /// <param name="baseValue"> Default property value</param>
-        public GEGProperty(string propName, T value, T baseValue) {
+        public GEGProperty(string propName, T firstValue, T baseValue) {
             pName = propName;
-            this.value = value;
+            this.value = new List<T>();
+            this.value.Add(firstValue);
             this.baseValue = baseValue;
             this.diffWeight = 0f;
             diffEnabled = false;
@@ -40,7 +41,7 @@ namespace GEGFramework {
         ///                          in difficulty evaluation?</param>
         /// <param name="enabled">Include this property in difficulty evaluation?</param>
         /// <param name="porportional">Whether the property value should be proportional to the difficulty level</param>
-        public GEGProperty(string propName, T value, T baseValue, float diffWeight, bool enabled, bool porportional) {
+        public GEGProperty(string propName, List<T> value, T baseValue, float diffWeight, bool enabled, bool porportional) {
             pName = propName;
             this.value = value;
             this.baseValue = baseValue;

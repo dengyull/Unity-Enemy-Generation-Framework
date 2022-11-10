@@ -33,7 +33,7 @@ namespace GEGFramework {
         /// <param name="lowDuration">Desired low difficulty duration</param>
         /// <param name="peakDuration">Desired peak duration</param>
         /// <returns></returns>
-        public int GetDifficulty(GEGPackedData data, int zeroDuration, int lowDuration, int peakDuration) {
+        public int GetDifficulty(int zeroDuration, int lowDuration, int peakDuration) {
 
             int newDiff = prevDiff; // New difficulty level to return
             numRounds++; // Means 10 seconds passed if GEGPackedData.diffEvalInterval = 10f
@@ -51,7 +51,7 @@ namespace GEGFramework {
             }
 
             for (int i = 0; i < GEGPackedData.playerData.Count; ++i) { // For each player do...
-                double currHealth = GEGPackedData.playerData[i].Find("health").value; // Get health property of this player
+                double currHealth = GEGPackedData.playerData[i].FindProperty("health").value; // Get health property of this player
                 // TODO: Assessing player conditions...
                 // TODO: Perhaps also obtain the targeted player (weaker player) here?
             }

@@ -6,10 +6,8 @@ namespace GEGFramework {
     /// Update enemy numbers, attributes and locations based on difficulty level
     /// </summary>
     public class GEGLevelController {
-        List<Transform> enemySpawnPoints;
         bool randomSpawn = true;
-
-        public GEGLevelController() { }
+        List<Transform> enemySpawnPoints;
 
         //List<GEGTypeContainer> enemyTypeData;// = packedData.enemyTypeData;
         /// <summary>
@@ -17,9 +15,10 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
-        public void RunExample(GEGPackedData data, int diffLevel) {
-            List<int> enemys = EnemyNumberGenerator(GEGPackedData.enemyTypeData, diffLevel);
-            EnemyPropertyGenerator(diffLevel, GEGPackedData.enemyTypeData);
+        public List<KeyValuePair<string, int>> RunExample(int diffLevel) {
+            List <KeyValuePair<string, int>> res = EnemyNumberGenerator(diffLevel);
+            EnemyPropertyGenerator(diffLevel);
+            return res;
         }
 
         /// <summary>
@@ -28,9 +27,9 @@ namespace GEGFramework {
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <param name="PropertyList">Dictionary contains all attributes with enable or not</param>
         /// <returns></returns>
-        void EnemyPropertyGenerator(int difflevel, List<GEGTypeContainer> enemyTypeData) {
-            for (int i = 0; i < enemyTypeData.Count; i++) {
-                foreach (GEGProperty<double> kvp in enemyTypeData[i].defaultProperty) {
+        void EnemyPropertyGenerator(int difflevel) {
+            for (int i = 0; i < GEGPackedData.enemyTypeData.Count; i++) {
+                foreach (GEGProperty<double> kvp in GEGPackedData.enemyTypeData[i].defaultProperty) {
                     if (kvp.diffEnabled) {
                         kvp.UpdateProperty(difflevel);
                     }
@@ -39,32 +38,28 @@ namespace GEGFramework {
         }
 
         /// <summary>
-        /// Helper functions, computational purposes
-        /// </summary>
-        /// <returns></returns>
-        private double EnemyNumberCal(float difficultyEnem, int difficulty, float baseValue, bool v) {
-            if (v) {
-                return difficultyEnem * difficulty / baseValue;
-            } else {
-                return difficultyEnem * baseValue * difficulty;
-            }
-        }
-
-        /// <summary>
         /// Generate enemy number.
         /// </summary>
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
-        List<int> EnemyNumberGenerator(List<GEGTypeContainer> enemies, int difflevel) {
-            enemies.Sort((a, b) => a.diffFactor.CompareTo(b.diffFactor));//sort enemy by diffFactor
-            List<int> re = new List<int>();
-            int t = Mathf.RoundToInt(enemies.Count * difflevel / 10);
-            for (int i = 0; i < t; i++) {
-                int ts = (int)EnemyNumberCal(enemies[i].diffFactor, difflevel, enemies[i].diffFactor, true);
-                re.Add(ts);
+        List<KeyValuePair<string, int>> EnemyNumberGenerator(int difflevel)
+        {
+            List<KeyValuePair<string, int>> results = new List<KeyValuePair<string, int>>();
+            List<KeyValuePair<string, float>> temp = new List<KeyValuePair<string, float>>();
+
+            foreach (GEGTypeContainer enemy in GEGPackedData.enemyTypeData) {
+                temp.Add(new KeyValuePair<string, float>(enemy.name, enemy.diffFactor));
             }
-            return re;
+            temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
+
+            int upperBound = Mathf.CeilToInt(GEGPackedData.enemyTypeData.Count * difflevel / 10);
+            for (int i = 0; i < upperBound; i++) {
+				int ts = (int) (difflevel * temp[upperBound-i-1].Value * 10); //* base
+                // int ts = (int)EnemyNumberCal(GEGPackedData.enemyTypeData[i].diffFactor, difflevel,
+                // GEGPackedData.enemyTypeData[i].diffFactor, true);
+                results.Add(new KeyValuePair<string, int>(GEGPackedData.enemyTypeData[i].name, ts));
+            }
+            return results;
         }
     }
-
 }

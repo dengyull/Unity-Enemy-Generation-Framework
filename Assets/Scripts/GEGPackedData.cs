@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GEGFramework {
     /// <summary>
@@ -17,11 +18,20 @@ namespace GEGFramework {
         /// Default GEGPackedData constructor
         /// </summary>
         public GEGPackedData() {
-            diffEvalInterval = 10f;
             waveInterval = 100f;
+            diffEvalInterval = 5f;
             playerData = new List<GEGTypeContainer>();
             enemyTypeData = new List<GEGTypeContainer>();
-            enemyTypeData.Add(new GEGTypeContainer("Enemy1", 1.5f)); // Test case
+
+            // Test cases
+            GEGTypeContainer dumPlayer = new GEGTypeContainer("Player1");
+            ScriptableObject propPHealth = ScriptableObject.CreateInstance<GEGProperty<double>>();
+            // dumPlayer.AddProperty();
+            playerData.Add(dumPlayer);
+
+            enemyTypeData.Add(new GEGTypeContainer("Enemy1", 2f));
+            enemyTypeData.Add(new GEGTypeContainer("Enemy2", 1.5f));
+            enemyTypeData.Add(new GEGTypeContainer("Enemy3", 1f));
         }
     }
 }
