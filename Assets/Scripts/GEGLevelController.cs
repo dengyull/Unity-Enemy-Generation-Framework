@@ -16,7 +16,7 @@ namespace GEGFramework {
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
         public List<KeyValuePair<string, int>> RunExample(int diffLevel) {
-            List <KeyValuePair<string, int>> res = EnemyNumberGenerator(diffLevel);
+            List<KeyValuePair<string, int>> res = EnemyNumberGenerator(diffLevel);
             EnemyPropertyGenerator(diffLevel);
             return res;
         }
@@ -42,8 +42,7 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
-        List<KeyValuePair<string, int>> EnemyNumberGenerator(int difflevel)
-        {
+        List<KeyValuePair<string, int>> EnemyNumberGenerator(int difflevel) {
             List<KeyValuePair<string, int>> results = new List<KeyValuePair<string, int>>();
             List<KeyValuePair<string, float>> temp = new List<KeyValuePair<string, float>>();
 
@@ -54,7 +53,7 @@ namespace GEGFramework {
 
             int upperBound = Mathf.CeilToInt(GEGPackedData.enemyTypeData.Count * difflevel / 10);
             for (int i = 0; i < upperBound; i++) {
-				int ts = (int) (difflevel * temp[upperBound-i-1].Value * 10); //* base
+                int ts = (int)(difflevel * temp[upperBound - i - 1].Value * 10); //* base
                 // int ts = (int)EnemyNumberCal(GEGPackedData.enemyTypeData[i].diffFactor, difflevel,
                 // GEGPackedData.enemyTypeData[i].diffFactor, true);
                 results.Add(new KeyValuePair<string, int>(GEGPackedData.enemyTypeData[i].name, ts));

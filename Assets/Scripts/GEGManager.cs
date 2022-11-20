@@ -23,7 +23,7 @@ public class GEGManager : MonoBehaviour {
     [SerializeField] List<GEGTypeContainer> playerData;
     [SerializeField] List<GEGTypeContainer> enemyData;
 
-    float spawnTimer;
+    float spawnTimer;   // countdown timer for spawner
     float diffEvalTimer; // countdown timer for difficulty evaluation
 
     void Start() {
@@ -38,30 +38,25 @@ public class GEGManager : MonoBehaviour {
         diffEvalTimer -= Time.deltaTime;
 
         spawnTimer -= Time.deltaTime; // timer countdown
-        if (spawnTimer <= 0f)
-        {
-            if (randomSpawn)
-            {
+        if (spawnTimer <= 0f) {
+            if (randomSpawn) {
                 int randEnemy = Random.Range(0, enemyPrefabs.Count);
                 int randSpawnPoint = Random.Range(0, enemySpawnPoints.Count);
                 Instantiate(enemyPrefabs[randEnemy], enemySpawnPoints[randSpawnPoint].position,
                     transform.rotation); // instantiate a random enemy at random position
-            }
-            else
-            {
+            } else {
                 Instantiate(enemyPrefabs[0], enemySpawnPoints[0].position, transform.rotation);
             }
             spawnTimer = spawnInterval; // reset spawn timer
         }
 
         if (diffEvalTimer <= 0) {
-            int newDiffLevel = scoreManager.GetDifficulty(3,5,3); // test values
-            List<int> res = controller.RunExample(newDiffLevel);
+            int newDiffLevel = scoreManager.GetDifficulty(3, 5, 3); // test values
+            List<KeyValuePair<string, int>> newNumEnemy = controller.RunExample(newDiffLevel);
             string s = "";
             Debug.Log("-------------------------");
-            for (int i = 0; i < res.Count; ++i)
-            {
-                s += res[i].ToString() + ",";
+            for (int i = 0; i < newNumEnemy.Count; ++i) {
+                s += newNumEnemy[i].ToString() + ",";
             }
             Debug.Log(s);
             Debug.Log(newDiffLevel);

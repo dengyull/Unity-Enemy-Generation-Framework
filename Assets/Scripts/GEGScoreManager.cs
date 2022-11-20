@@ -50,12 +50,6 @@ namespace GEGFramework {
                     break;
             }
 
-            for (int i = 0; i < GEGPackedData.playerData.Count; ++i) { // For each player do...
-                double currHealth = GEGPackedData.playerData[i].FindProperty("health").value; // Get health property of this player
-                // TODO: Assessing player conditions...
-                // TODO: Perhaps also obtain the targeted player (weaker player) here?
-            }
-
             // Cases for difficulty equals to 0
             if (prevDiff == 0) {
                 // Enough time to relax, so we set difficulty to very low level including 1, 2, 3. 

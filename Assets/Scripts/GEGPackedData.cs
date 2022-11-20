@@ -8,7 +8,7 @@ namespace GEGFramework {
     public class GEGPackedData {
         public static float waveInterval; // Time interval (in seconds) between each wave
         public static float diffEvalInterval; // Time interval (in seconds) between each difficulty score evaluation
-        public static List<GEGTypeContainer> playerData; // Packed data for each player
+        public static GEGTypeContainer playerData; // Packed data for players
         public static List<GEGTypeContainer> enemyTypeData; // Packed data for each type of enemy
 
         // Stores key-values <propertyName : (enabled?, proportion?, base value, weight)>
@@ -20,14 +20,12 @@ namespace GEGFramework {
         public GEGPackedData() {
             waveInterval = 100f;
             diffEvalInterval = 5f;
-            playerData = new List<GEGTypeContainer>();
+            playerData = new GEGTypeContainer("players");
             enemyTypeData = new List<GEGTypeContainer>();
 
             // Test cases
             GEGTypeContainer dumPlayer = new GEGTypeContainer("Player1");
             ScriptableObject propPHealth = ScriptableObject.CreateInstance<GEGProperty<double>>();
-            // dumPlayer.AddProperty();
-            playerData.Add(dumPlayer);
 
             enemyTypeData.Add(new GEGTypeContainer("Enemy1", 2f));
             enemyTypeData.Add(new GEGTypeContainer("Enemy2", 1.5f));
