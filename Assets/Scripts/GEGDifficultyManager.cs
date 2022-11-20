@@ -9,7 +9,6 @@ namespace GEGDifficultyManager {
     public class GEGDifficultyManager {
 
         int prevDiff; // Previous difficulty level
-        int numRounds; // Number of total rounds since the game began
         int currentRounds;  // Counting rounds for staying at the current difficulty level:
 
         /// <summary>
@@ -19,7 +18,6 @@ namespace GEGDifficultyManager {
         public GEGDifficultyManager(int defaultDiff) {
             if (defaultDiff < 0 || defaultDiff > 10)
                 throw new ArgumentOutOfRangeException("Default difficulty level must be between 0 and 10.");
-            numRounds = 0;
             currentRounds = 0;
             prevDiff = defaultDiff;
         }
@@ -35,8 +33,7 @@ namespace GEGDifficultyManager {
         public int GetDifficulty(GEGPackedData packedData, int zeroDuration, int lowDuration, int peakDuration) {
             
             int newDiff = prevDiff; // New difficulty level to return
-            numRounds++; // Means 10 seconds passed if GEGPackedData.diffEvalInterval = 10f
-            currentRounds++; 
+            currentRounds++; // Means 10 seconds passed if GEGPackedData.diffEvalInterval = 10f
 
 
             // Cases for difficulty equals to 0 where no enemy should show up
