@@ -8,8 +8,8 @@ namespace GEGFramework {
     public class GEGPackedData {
         public static float waveInterval; // Time interval (in seconds) between each wave
         public static float diffEvalInterval; // Time interval (in seconds) between each difficulty score evaluation
-        public static GEGTypeContainer playerData; // Packed data for players
-        public static List<GEGTypeContainer> enemyTypeData; // Packed data for each type of enemy
+        public static GEGCharacter playerData; // Packed data for players
+        public static List<GEGCharacter> enemyTypeData; // Packed data for each type of enemy
 
         // Stores key-values <propertyName : (enabled?, proportion?, base value, weight)>
         // public static Dictionary<string, (bool enabled, bool proportion, double baseVal, double weight)> dictProperty;
@@ -20,16 +20,16 @@ namespace GEGFramework {
         public GEGPackedData() {
             waveInterval = 100f;
             diffEvalInterval = 5f;
-            playerData = new GEGTypeContainer("players");
-            enemyTypeData = new List<GEGTypeContainer>();
+            playerData = new GEGCharacter("players");
+            enemyTypeData = new List<GEGCharacter>();
 
             // Test cases
-            GEGTypeContainer dumPlayer = new GEGTypeContainer("Player1");
+            GEGCharacter dumPlayer = new GEGCharacter("Player1");
             ScriptableObject propPHealth = ScriptableObject.CreateInstance<GEGProperty<double>>();
 
-            enemyTypeData.Add(new GEGTypeContainer("Enemy1", 2f));
-            enemyTypeData.Add(new GEGTypeContainer("Enemy2", 1.5f));
-            enemyTypeData.Add(new GEGTypeContainer("Enemy3", 1f));
+            enemyTypeData.Add(new GEGCharacter("Enemy1", 2f));
+            enemyTypeData.Add(new GEGCharacter("Enemy2", 1.5f));
+            enemyTypeData.Add(new GEGCharacter("Enemy3", 1f));
         }
     }
 }

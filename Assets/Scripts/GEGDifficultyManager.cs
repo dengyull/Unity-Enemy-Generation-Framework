@@ -2,7 +2,7 @@ using GEGFramework;
 using System;
 using Random = UnityEngine.Random;
 
-namespace GEGDifficultyManager {
+namespace GEGFramework {
     /// <summary>
     /// Responsible for computing a new difficulty level (score)
     /// </summary>
@@ -25,16 +25,15 @@ namespace GEGDifficultyManager {
         /// <summary>
         /// Returns a difficulty level (score) based on the inputs
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="packedData"></param>
         /// <param name="zeroDuration">Desired zero difficulty duration, counted in diffEval rounds</param>
         /// <param name="lowDuration">Desired low difficulty duration</param>
         /// <param name="peakDuration">Desired peak duration</param>
         /// <returns></returns>
         public int GetDifficulty(GEGPackedData packedData, int zeroDuration, int lowDuration, int peakDuration) {
-            
+
             int newDiff = prevDiff; // New difficulty level to return
             currentRounds++; // Means 10 seconds passed if GEGPackedData.diffEvalInterval = 10f
-
 
             // Cases for difficulty equals to 0 where no enemy should show up
             if (prevDiff == 0) {
@@ -46,9 +45,8 @@ namespace GEGDifficultyManager {
                 // Else not enough time to relax, so we continue 0 difficulty so do nothing
             }
 
-
             // Cases for low difficulty: from 1 to 6
-            else if (prevDiff > 0 && prevDiff < 7) { 
+            else if (prevDiff > 0 && prevDiff < 7) {
                 // Enough time for low level difficulty, so we switch to high level difficulty.
                 if (currentRounds > lowDuration) {
                     currentRounds = 0;
@@ -62,7 +60,7 @@ namespace GEGDifficultyManager {
             }
 
             // Cases for high difficulty: 7,8,9
-            else if (prevDiff >= 7) { 
+            else if (prevDiff >= 7) {
                 // enough peak time, go to relax mode
                 if (currentRounds > peakDuration) {
                     currentRounds = 0;

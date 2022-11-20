@@ -9,8 +9,8 @@ public class GEGManager : MonoBehaviour {
     public UnityEvent onDifficultyChanged; // triggered when new difficulty level is computed
 
     static GEGPackedData packedData;
-    static GEGScoreManager scoreManager;
-    static GEGLevelController controller;
+    static GEGDifficultyManager diffManager;
+    static GEGUpdater controller;
 
     [SerializeField, Range(0, 10)] int defaultDiff; // prompt for default difficulty level for this scene
     [SerializeField] float spawnInterval = 3f;
@@ -20,17 +20,17 @@ public class GEGManager : MonoBehaviour {
     [SerializeField] int minSpeed = 1, maxSpeed = 10;
     [SerializeField] float attackSpeed = 1f;
     [SerializeField] bool randomSpawn = false;
-    [SerializeField] List<GEGTypeContainer> playerData;
-    [SerializeField] List<GEGTypeContainer> enemyData;
+    [SerializeField] List<GEGCharacter> playerData;
+    [SerializeField] List<GEGCharacter> enemyData;
 
     float spawnTimer;   // countdown timer for spawner
     float diffEvalTimer; // countdown timer for difficulty evaluation
 
     void Start() {
         packedData = new GEGPackedData();
-        controller = new GEGLevelController();
+        controller = new GEGUpdater();
         diffEvalTimer = GEGPackedData.diffEvalInterval;
-        scoreManager = new GEGScoreManager(defaultDiff); // test values
+        diffManager = new GEGDifficultyManager(defaultDiff); // test values
         spawnTimer = spawnInterval; // init timer
     }
 
@@ -51,7 +51,7 @@ public class GEGManager : MonoBehaviour {
         }
 
         if (diffEvalTimer <= 0) {
-            int newDiffLevel = scoreManager.GetDifficulty(3, 5, 3); // test values
+            int newDiffLevel = diffManager.GetDifficulty(packedData, 3, 5, 3); // test values
             List<KeyValuePair<string, int>> newNumEnemy = controller.RunExample(newDiffLevel);
             string s = "";
             Debug.Log("-------------------------");

@@ -1,3 +1,6 @@
+
+// !!!!!!!!!!!!! [Deprecated File] !!!!!!!!!!!!!
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -14,7 +17,7 @@ using UnityEditor;
 //    }
 //}
 
-[CustomEditor(typeof(GEGController))]
+//[CustomEditor(typeof(GEGController))]
 public class GEGControllerEditor : Editor {
 
     #region SerializedProperties

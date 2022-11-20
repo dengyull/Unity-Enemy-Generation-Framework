@@ -11,12 +11,12 @@ namespace GEGFramework {
     }
 
     [Serializable]
-    public class GEGTypeContainerException : Exception {
-        public GEGTypeContainerException(string message) : base(message) { }
+    public class GEGCharacterException : Exception {
+        public GEGCharacterException(string message) : base(message) { }
     }
 
     [CreateAssetMenu(fileName = "GEGTypeContainer", menuName = "GEG Framework/GEG Type Container")]
-    public class GEGTypeContainer : ScriptableObject {
+    public class GEGCharacter : ScriptableObject {
 
         public GameObject prefab; // Prefab for this type of character
         public GEGCharacterType type; // type of character
@@ -35,7 +35,7 @@ namespace GEGFramework {
         /// Constructor for player type character
         /// </summary>
         /// <param name="playerName">Name of this container. This is usually the name of the player prefab</param>
-        public GEGTypeContainer(string playerName) {
+        public GEGCharacter(string playerName) {
             typeName = playerName;
             diffFactor = -1f;
             type = GEGCharacterType.Player;
@@ -47,7 +47,7 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="enemyTypeName">Name of this container. This is usually the name of the enemy prefab</param>
         /// <param name="diffFactor">Range(0,10); Indicating how much influence this type of enemy has on difficulty evaluation</param>
-        public GEGTypeContainer(string enemyTypeName, float diffFactor) {
+        public GEGCharacter(string enemyTypeName, float diffFactor) {
             if (diffFactor < 0 || diffFactor > 10)
                 throw new ArgumentOutOfRangeException("Param [diffFactor] must within the range of 0 to 10");
             typeName = enemyTypeName;
@@ -64,7 +64,7 @@ namespace GEGFramework {
         public void AddProperty(GEGProperty<double> prop) {
             foreach (GEGProperty<double> p in defaultProperty) {
                 if (prop.pName == p.pName)
-                    throw new GEGTypeContainerException("There is already a property with the same name " +
+                    throw new GEGCharacterException("There is already a property with the same name " +
                         "in the container. Please use another name.");
             }
             defaultProperty.Add(prop);

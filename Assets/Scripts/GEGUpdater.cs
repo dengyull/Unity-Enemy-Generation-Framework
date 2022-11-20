@@ -5,7 +5,7 @@ namespace GEGFramework {
     /// <summary>
     /// Update enemy numbers, attributes and locations based on difficulty level
     /// </summary>
-    public class GEGLevelController {
+    public class GEGUpdater {
         bool randomSpawn = true;
         List<Transform> enemySpawnPoints;
 
@@ -46,7 +46,7 @@ namespace GEGFramework {
             List<KeyValuePair<string, int>> results = new List<KeyValuePair<string, int>>();
             List<KeyValuePair<string, float>> temp = new List<KeyValuePair<string, float>>();
 
-            foreach (GEGTypeContainer enemy in GEGPackedData.enemyTypeData) {
+            foreach (GEGCharacter enemy in GEGPackedData.enemyTypeData) {
                 temp.Add(new KeyValuePair<string, float>(enemy.name, enemy.diffFactor));
             }
             temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
