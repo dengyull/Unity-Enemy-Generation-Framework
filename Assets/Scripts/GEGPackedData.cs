@@ -5,31 +5,28 @@ namespace GEGFramework {
     /// <summary>
     /// Packed data for GEG Framework.
     /// </summary>
-    public class GEGPackedData {
+    class GEGPackedData {
         public static float waveInterval; // Time interval (in seconds) between each wave
         public static float diffEvalInterval; // Time interval (in seconds) between each difficulty score evaluation
         public static GEGCharacter playerData; // Packed data for players
-        public static List<GEGCharacter> enemyTypeData; // Packed data for each type of enemy
-
-        // Stores key-values <propertyName : (enabled?, proportion?, base value, weight)>
-        // public static Dictionary<string, (bool enabled, bool proportion, double baseVal, double weight)> dictProperty;
+        public static List<IGEGCharacter> characters; // Packed data for each type of enemy
 
         /// <summary>
         /// Default GEGPackedData constructor
         /// </summary>
-        public GEGPackedData() {
-            waveInterval = 100f;
-            diffEvalInterval = 5f;
-            playerData = new GEGCharacter("players");
-            enemyTypeData = new List<GEGCharacter>();
+        public GEGPackedData(float waveInterval, float diffEvalInterval) {
+            GEGPackedData.waveInterval = waveInterval;
+            GEGPackedData.diffEvalInterval = diffEvalInterval;
+            characters = new List<IGEGCharacter>();
+        }
 
-            // Test cases
+        public void Test() { // Add test data
             GEGCharacter dumPlayer = new GEGCharacter("Player1");
-            ScriptableObject propPHealth = ScriptableObject.CreateInstance<GEGProperty<double>>();
+            ScriptableObject propPHealth = ScriptableObject.CreateInstance<GEGCharacterProperty<double>>();
 
-            enemyTypeData.Add(new GEGCharacter("Enemy1", 2f));
-            enemyTypeData.Add(new GEGCharacter("Enemy2", 1.5f));
-            enemyTypeData.Add(new GEGCharacter("Enemy3", 1f));
+            characters.Add(new GEGCharacter("Enemy1", 2f));
+            characters.Add(new GEGCharacter("Enemy2", 1.5f));
+            characters.Add(new GEGCharacter("Enemy3", 1f));
         }
     }
 }

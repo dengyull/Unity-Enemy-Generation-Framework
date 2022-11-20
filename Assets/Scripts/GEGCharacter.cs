@@ -4,23 +4,40 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace GEGFramework {
-    [System.Serializable]
-    public enum GEGCharacterType {
-        Player,
-        Enemy
+
+    interface IGEGCharacter {
+        string Name { get; set; } // Name for this type of character, usually equals prefab's name
     }
 
-    [Serializable]
-    public class GEGCharacterException : Exception {
-        public GEGCharacterException(string message) : base(message) { }
+    /// <summary>
+    /// Wrapper class for GEGCharacter
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class GEGCharacterInst<T> : IGEGCharacter {
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
+        public GEGCharacter characterSO;
+        public List<GEGCharacterProperty<T>> propSO;
     }
 
-    [CreateAssetMenu(fileName = "GEGTypeContainer", menuName = "GEG Framework/GEG Type Container")]
-    public class GEGCharacter : ScriptableObject {
+    [CreateAssetMenu(fileName = "GEGCharacter", menuName = "GEG Framework/Character")]
+    public class GEGCharacter : ScriptableObject, IGEGCharacter {
 
-        public GameObject prefab; // Prefab for this type of character
-        public GEGCharacterType type; // type of character
-        public string typeName; // Name for this type of character, usually equals prefab's name
+        public GameObject prefab;
+        public GEGCharacterType type;
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
 
         // Rename diffFactor to difficultyFactor in inspector:
         [FormerlySerializedAs("diffFactor")]
@@ -29,17 +46,15 @@ namespace GEGFramework {
             get { return difficultyFactor; }
             set { difficultyFactor = value; }
         }
-        public List<GEGProperty<double>> defaultProperty; // A default property list
 
         /// <summary>
         /// Constructor for player type character
         /// </summary>
         /// <param name="playerName">Name of this container. This is usually the name of the player prefab</param>
         public GEGCharacter(string playerName) {
-            typeName = playerName;
-            diffFactor = -1f;
+            _name = playerName;
             type = GEGCharacterType.Player;
-            defaultProperty = new List<GEGProperty<double>>();
+            diffFactor = -1f;
         }
 
         /// <summary>
@@ -47,39 +62,12 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="enemyTypeName">Name of this container. This is usually the name of the enemy prefab</param>
         /// <param name="diffFactor">Range(0,10); Indicating how much influence this type of enemy has on difficulty evaluation</param>
-        public GEGCharacter(string enemyTypeName, float diffFactor) {
+        public GEGCharacter(string enemyName, float diffFactor) {
             if (diffFactor < 0 || diffFactor > 10)
                 throw new ArgumentOutOfRangeException("Param [diffFactor] must within the range of 0 to 10");
-            typeName = enemyTypeName;
+            _name = enemyName;
             type = GEGCharacterType.Enemy;
             this.diffFactor = diffFactor;
-            defaultProperty = new List<GEGProperty<double>>();
-        }
-
-        /// <summary>
-        /// Add a given property to the default property list
-        /// </summary>
-        /// <param name="prop">Given property</param>
-        /// <returns>True if the property is added to the list, otherwise false</returns>
-        public void AddProperty(GEGProperty<double> prop) {
-            foreach (GEGProperty<double> p in defaultProperty) {
-                if (prop.pName == p.pName)
-                    throw new GEGCharacterException("There is already a property with the same name " +
-                        "in the container. Please use another name.");
-            }
-            defaultProperty.Add(prop);
-        }
-
-        /// <summary>
-        /// Search a property by property's name
-        /// </summary>
-        /// <param name="propName">Name of the desired property</param>
-        /// <returns>Desired GEGProperty object; or NULL if not found</returns>
-        public GEGProperty<double> FindProperty(string propName) {
-            foreach (GEGProperty<double> prop in defaultProperty) {
-                if (prop.pName == propName) return prop;
-            }
-            return null;
         }
     }
 }
