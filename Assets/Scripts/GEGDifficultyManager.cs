@@ -1,4 +1,3 @@
-using GEGFramework;
 using System;
 using Random = UnityEngine.Random;
 
@@ -6,7 +5,7 @@ namespace GEGFramework {
     /// <summary>
     /// Responsible for computing a new difficulty level (score)
     /// </summary>
-    public class GEGDifficultyManager {
+    class GEGDifficultyManager {
 
         int prevDiff; // Previous difficulty level
         int currentRounds;  // Counting rounds for staying at the current difficulty level:
