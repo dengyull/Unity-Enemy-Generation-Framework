@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
 using GEGFramework;
 
@@ -25,6 +23,10 @@ public class GEGManagerEditor : Editor {
     public override void OnInspectorGUI() {
         serializedObject.Update();
         EditorGUILayout.PropertyField(defaultDiff);
+        EditorGUILayout.PropertyField(spawnInterval);
+        EditorGUILayout.PropertyField(randomSpawn);
+        EditorGUILayout.PropertyField(enemySpawnPoints);
+        EditorGUILayout.PropertyField(characters);
         serializedObject.ApplyModifiedProperties();
     }
 }
