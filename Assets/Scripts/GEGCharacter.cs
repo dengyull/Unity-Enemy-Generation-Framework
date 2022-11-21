@@ -45,6 +45,7 @@ namespace GEGFramework {
         public GameObject prefab;
         public GEGCharacterType type;
         public List<GEGCharacterProperty> propSO;
+        public int nextWaveNum; // number of instances to spawn in next wave
 
         // Rename diffFactor to difficultyFactor in inspector:
         [FormerlySerializedAs("diffFactor")]
@@ -62,6 +63,7 @@ namespace GEGFramework {
             _name = playerName;
             type = GEGCharacterType.Player;
             diffFactor = -1f;
+            nextWaveNum = -1;
         }
 
         /// <summary>
@@ -75,6 +77,7 @@ namespace GEGFramework {
             _name = enemyName;
             type = GEGCharacterType.Enemy;
             this.diffFactor = diffFactor;
+            nextWaveNum = 0;
         }
     }
 }
