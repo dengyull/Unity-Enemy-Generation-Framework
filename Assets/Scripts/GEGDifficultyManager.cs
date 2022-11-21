@@ -10,6 +10,8 @@ namespace GEGFramework {
 
         int prevDiff; // Previous difficulty level
         int currentRounds;  // Counting rounds for staying at the current difficulty level:
+        Dictionary<string, List<int>> propertyScore;
+        Dictionary<string, List<int>> propertyLevelTable;
 
         /// <summary>
         /// GEGScoreManager constructor
@@ -132,32 +134,37 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
-        Dictionary<string, int> EnemyNumberGenerator(int difflevel)
+        void EnemyNumberGenerator(int difflevel)
         {
-            Dictionary<string, int> results = new Dictionary<string, int>();
             List<KeyValuePair<string, float>> temp = new List<KeyValuePair<string, float>>();
+            float totalDiffcult = 0;
             foreach (GEGCharacter character in GEGPackedData.characters)
             {
                 if (character.type == GEGCharacterType.Enemy)
                 {
                     temp.Add(new KeyValuePair<string, float>(character.Name, character.diffFactor));
+                    totalDiffcult += character.diffFactor;
                 }
             }
+            int upperBound = Mathf.CeilToInt(temp.Count * difflevel / 10);
             /*foreach (GEGTypeContainer enemy in GEGPackedData.enemyTypeData) {
                 temp.Add(new KeyValuePair<string, float>(enemy.name, enemy.diffFactor));
             }*/
             temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
 
-            int upperBound = Mathf.CeilToInt(temp.Count * difflevel / 10);
             for (int i = 0; i < upperBound; i++)
             {
-                int ts = (int)(difflevel * temp[upperBound - i - 1].Value * 10);
+                GEGPackedData.characters[upperBound - i - 1].nextWaveNum = (int)(difflevel * temp[upperBound - i - 1].Value * 10);
+                //int ts = (int)(difflevel * temp[upperBound - i - 1].Value * 10);
                 // int ts = (int)EnemyNumberCal(GEGPackedData.enemyTypeData[i].diffFactor, difflevel,
                 // GEGPackedData.enemyTypeData[i].diffFactor, true);
-                results.Add(temp[i].Key, ts);
             }
-            return results;
+
         }
+
+
+
+
     }
 
 }
