@@ -1,7 +1,7 @@
 using GEGFramework;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GEGHealth", menuName = "GEG Framework/GEG Property/Player Health")]
+[CreateAssetMenu(fileName = "GEGPlayerHealth", menuName = "GEG Framework/GEG Property/PlayerHealth")]
 public class GEGPlayerHealth : GEGCharacterProperty<double> {
-    public GEGPlayerHealth() : base("health", 100, 20, true) { }
+    public GEGPlayerHealth() : base("PlayerHealth", 100, 20, true) { }
 }
