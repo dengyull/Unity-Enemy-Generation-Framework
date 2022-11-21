@@ -155,11 +155,40 @@ namespace GEGFramework {
             for (int i = 0; i < upperBound; i++)
             {
                 GEGPackedData.characters[upperBound - i - 1].nextWaveNum = (int)(difflevel * temp[upperBound - i - 1].Value * 10);
-                //int ts = (int)(difflevel * temp[upperBound - i - 1].Value * 10);
-                // int ts = (int)EnemyNumberCal(GEGPackedData.enemyTypeData[i].diffFactor, difflevel,
-                // GEGPackedData.enemyTypeData[i].diffFactor, true);
             }
 
+        }
+        /// <summary>
+        /// Generate enemy number.
+        /// </summary>
+        /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
+        /// <returns></returns>
+        void EnemyNumberUpdate(int difflevel)
+        {
+            List<KeyValuePair<string, float>> temp = new List<KeyValuePair<string, float>>();
+            float totalDiffcult = 0;
+            foreach (GEGCharacter character in GEGPackedData.characters)
+            {
+                if (character.type == GEGCharacterType.Enemy)
+                {
+                    temp.Add(new KeyValuePair<string, float>(character.Name, character.diffFactor));
+                    totalDiffcult += character.diffFactor;
+                }
+            }
+            int upperBound = Mathf.CeilToInt(temp.Count * difflevel / 10);
+            temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
+            int tn = 0;
+            float totaldiffseed = difflevel * difflevel * Mathf.Log(difflevel, 2) + 1;
+            Debug.Log(upperBound - 1);
+            for (int i = 0; i < upperBound - 1; i++)
+            {
+                float a = Random.Range(temp[upperBound - i - 1].Value, totaldiffseed * 2 / 3);
+                tn = Mathf.FloorToInt(a / temp[upperBound - i - 1].Value);
+                GEGPackedData.characters[upperBound - i - 1].nextWaveNum = tn;
+                totaldiffseed = totaldiffseed - tn * temp[upperBound - i - 1].Value;
+            }
+            tn = Mathf.RoundToInt(totaldiffseed / temp[0].Value);
+            GEGPackedData.characters[0].nextWaveNum = tn;
         }
 
 
