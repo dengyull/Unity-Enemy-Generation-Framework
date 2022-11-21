@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 
 namespace GEGFramework {
-    public abstract class GEGCharacterProperty<T> : ScriptableObject {
+    public abstract class GEGCharacterProperty : ScriptableObject {
 
-        public T value;
+        public double value;
         public string propName;
         public float diffWeight;
         public bool diffEnabled;
@@ -15,7 +15,7 @@ namespace GEGFramework {
         /// <param name="propName"></param>
         /// <param name="value"></param>
         /// <param name="enabled"></param>
-        public GEGCharacterProperty(string propName, T value, float weight, bool enabled) {
+        public GEGCharacterProperty(string propName, double value, float weight, bool enabled) {
             this.propName = propName;
             this.value = value;
             diffWeight = weight;

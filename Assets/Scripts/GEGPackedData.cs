@@ -8,8 +8,7 @@ namespace GEGFramework {
     class GEGPackedData {
         public static float waveInterval; // Time interval (in seconds) between each wave
         public static float diffEvalInterval; // Time interval (in seconds) between each difficulty score evaluation
-        public static GEGCharacter playerData; // Packed data for players
-        public static List<IGEGCharacter> characters; // Packed data for each type of enemy
+        public static List<GEGCharacter> characters; // Data of each type of character (in GEGCharacterInst type)
 
         /// <summary>
         /// Default GEGPackedData constructor
@@ -17,12 +16,12 @@ namespace GEGFramework {
         public GEGPackedData(float waveInterval, float diffEvalInterval) {
             GEGPackedData.waveInterval = waveInterval;
             GEGPackedData.diffEvalInterval = diffEvalInterval;
-            characters = new List<IGEGCharacter>();
+            characters = new List<GEGCharacter>();
         }
 
         public void Test() { // Add test data
             GEGCharacter dumPlayer = new GEGCharacter("Player1");
-            ScriptableObject propPHealth = ScriptableObject.CreateInstance<GEGCharacterProperty<double>>();
+            ScriptableObject pHealth = ScriptableObject.CreateInstance<GEGCharacterProperty>();
 
             characters.Add(new GEGCharacter("Enemy1", 2f));
             characters.Add(new GEGCharacter("Enemy2", 1.5f));

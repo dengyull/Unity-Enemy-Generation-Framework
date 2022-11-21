@@ -5,39 +5,46 @@ using UnityEngine.Serialization;
 
 namespace GEGFramework {
 
-    interface IGEGCharacter {
-        string Name { get; set; } // Name for this type of character, usually equals prefab's name
-    }
+    /// <summary>
+    /// Character Interface
+    /// </summary>
+    //interface IGEGCharacter {
+    //    string Name { get; set; } // Name for this type of character, usually equals prefab's name
+    //}
 
     /// <summary>
     /// Wrapper class for GEGCharacter
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GEGCharacterInst<T> : IGEGCharacter {
+    //[Serializable]
+    //public class GEGCharacterInst<T> : IGEGCharacter {
+    //    private string _name;
+    //    public string Name {
+    //        get => _name;
+    //        set => _name = value;
+    //    }
+
+    //    public GEGCharacter characterSO;
+    //    public List<GEGCharacterProperty<T>> propSO;
+
+    //    public GEGCharacterInst(GEGCharacter characterSO) {
+    //        _name = characterSO.Name;
+    //        propSO = new List<GEGCharacterProperty<T>>();
+    //    }
+    //}
+
+    [CreateAssetMenu(fileName = "GEGCharacter", menuName = "GEG Framework/Character")]
+    public class GEGCharacter : ScriptableObject {
+        [SerializeField]
         private string _name;
-        public string Name
-        {
+        public string Name {
             get => _name;
             set => _name = value;
         }
-
-        public GEGCharacter characterSO;
-        public List<GEGCharacterProperty<T>> propSO;
-    }
-
-    [CreateAssetMenu(fileName = "GEGCharacter", menuName = "GEG Framework/Character")]
-    public class GEGCharacter : ScriptableObject, IGEGCharacter {
 
         public GameObject prefab;
         public GEGCharacterType type;
-
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
-
+        public List<GEGCharacterProperty> propSO;
 
         // Rename diffFactor to difficultyFactor in inspector:
         [FormerlySerializedAs("diffFactor")]

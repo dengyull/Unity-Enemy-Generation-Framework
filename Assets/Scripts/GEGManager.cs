@@ -4,19 +4,15 @@ using System.Collections.Generic;
 
 namespace GEGFramework {
     public class GEGManager : MonoBehaviour {
-        static GEGPackedData packedData;
-        static GEGDifficultyManager diffManager;
-        static GEGUpdater updater;
-
         [SerializeField, Range(0, 10)] int defaultDiff; // prompt for default difficulty level for this scene
         [SerializeField] float spawnInterval = 3f;
-
-        [SerializeField] int minHealth = 10, maxHealth = 100;
-        [SerializeField] int minSpeed = 1, maxSpeed = 10;
-        [SerializeField] float attackSpeed = 1f;
         [SerializeField] bool randomSpawn = false;
         [SerializeField] List<Transform> enemySpawnPoints;
-        [SerializeField] List<GEGCharacterInst<double>> characters;
+        [SerializeField] List<GEGCharacter> characters;
+
+        static GEGPackedData packedData;
+        static GEGDifficultyManager diffManager;
+        static GEGUpdater updater;        
 
         float spawnTimer;   // countdown timer for spawner
         float diffEvalTimer; // countdown timer for difficulty evaluation
