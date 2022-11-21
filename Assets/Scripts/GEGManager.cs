@@ -36,15 +36,16 @@ namespace GEGFramework {
             }
 
             if (diffEvalTimer <= 0) { // time to change difficulty
-                int newDiffLevel = diffManager.GetDifficulty(packedData, 3, 5, 3); // test values
-                List<KeyValuePair<string, int>> newNumEnemy = updater.RunExample(newDiffLevel);
+
+                //int newDiffLevel = diffManager.GetDifficulty(3, 5, 3); // test values
+                List<KeyValuePair<string, int>> newNumEnemy = diffManager.formulaUpdate(3, 5, 3);//previous methods idea.
                 string str = "";
                 Debug.Log("-------------------------");
                 for (int i = 0; i < newNumEnemy.Count; ++i) {
                     str += newNumEnemy[i].ToString() + ",";
                 }
                 Debug.Log(str);
-                Debug.Log(newDiffLevel);
+                //Debug.Log(newDiffLevel);
                 Debug.Log("-------------------------");
                 diffEvalTimer = GEGPackedData.diffEvalInterval;
             }
