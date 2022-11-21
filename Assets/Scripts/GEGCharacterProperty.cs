@@ -13,9 +13,10 @@ namespace GEGFramework {
         /// <summary>
         /// Default Constructor
         /// </summary>
-        /// <param name="propName"></param>
-        /// <param name="value"></param>
-        /// <param name="enabled"></param>
+        /// <param name="propName">Property name</param>
+        /// <param name="value">Property value</param>
+        /// <param name="importance">importance of the property</param>
+        /// <param name="enabled">enabled the property for difficulty evaluation or not</param>
         public GEGCharacterProperty(string propName, double value, float importance, bool enabled) {
             this.value = value;
             defaultValue = value;
@@ -25,6 +26,6 @@ namespace GEGFramework {
         }
 
         public override string ToString() => String.Format("{0}:\n\tcurrent value: {1}\n\tdiffWeight:{2}\n\tenabled:{3}",
-            propName, value, importance, diffEnabled);
+            propName, value, importance, diffEnabled);  
     }
 }
