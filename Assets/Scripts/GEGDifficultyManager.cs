@@ -22,20 +22,6 @@ namespace GEGFramework {
             prevDiff = defaultDiff;
         }
 
-        /// <summary>
-        /// previous solution.
-        /// </summary>
-        /// <param name="zeroDuration">Desired zero difficulty duration, counted in diffEval rounds</param>
-        /// <param name="lowDuration">Desired low difficulty duration</param>
-        /// <param name="peakDuration">Desired peak duration</param>
-        /// <returns>Enemy Number.</returns>
-        public Dictionary<string, int> formulaUpdate(int zeroDuration, int lowDuration, int peakDuration)
-        {
-            int Difficulty = GetDifficulty(3, 5, 3);
-            EnemyPropertyGenerator(Difficulty);
-            Dictionary<string, int> re = EnemyNumberGenerator(Difficulty);
-            return re;
-        }
 
         /// <summary>
         /// Returns a difficulty level (score) based on the inputs
