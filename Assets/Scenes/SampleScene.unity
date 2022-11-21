@@ -10745,7 +10745,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325bac1cd3b062b4b90e01bcbfd5d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDifficultyChanged:
-    m_PersistentCalls:
-      m_Calls: []
   defaultDiff: 0
+  spawnInterval: 3
+  randomSpawn: 0
+  enemySpawnPoints: []
+  characters:
+  - {fileID: 11400000, guid: f6d8f53cce830c949a00109a69406610, type: 2}

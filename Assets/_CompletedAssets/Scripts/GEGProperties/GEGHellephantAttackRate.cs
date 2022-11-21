@@ -1,7 +1,7 @@
 using GEGFramework;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GEGHellephantAttackRate", menuName = "GEG Framework/GEG Property/HellephantAttackRate")]
-public class GEGHellephantAttackRate : GEGCharacterProperty<double> {
+[CreateAssetMenu(fileName = "GEGHellephantAttackRate", menuName = "GEG Framework/GEG Property/Hellephant Attack Rate")]
+public class GEGHellephantAttackRate : GEGCharacterProperty {
     public GEGHellephantAttackRate() : base("HellephantAttackRate", 0.5, 10, true) { }
 }
