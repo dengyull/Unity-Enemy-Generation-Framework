@@ -38,9 +38,7 @@ namespace GEGFramework {
             waveTimer -= Time.deltaTime;
 
             if (waveTimer <= 0) { // time to start next wave
-                
-                Debug.Log("WaveTimer: " + waveTimer);
-                OnWaveStarted?.Invoke();
+                OnWaveStarted?.Invoke(); // broadcast event
                 waveTimer = waveInterval; // reset spawn timer
             }
 
