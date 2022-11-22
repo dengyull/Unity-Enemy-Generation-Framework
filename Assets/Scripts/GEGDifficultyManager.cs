@@ -110,8 +110,11 @@ namespace GEGFramework {
             foreach (GEGCharacter character in GEGPackedData.characters) {
                 if (character.type == GEGCharacterType.Enemy) {
                     foreach (GEGCharacterProperty prop in character.propSO) {
-                        if (prop.diffEnabled) {
+                        if (prop.diffEnabled)
+                        {
+                            Debug.Log("property" + prop.propName + "before : " + prop.value);
                             prop.value = prop.defaultValue + prop.defaultValue * difflevel / 10;
+                            Debug.Log("property" + prop.propName + "after: " + prop.value);
                             //results.Add();
                             //kvp.UpdateProperty(difflevel);
                         }
@@ -163,15 +166,21 @@ namespace GEGFramework {
             int upperBound = Mathf.CeilToInt(temp.Count * difflevel / 10);
             temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
             int tn = 0;
-            float totaldiffseed = difflevel * difflevel * Mathf.Log(difflevel, 2) + 1;
+            //float totaldiffseed = difflevel * difflevel * Mathf.Log(difflevel, 2) + 1;
+            float totaldiffseed = difflevel * totalDiffcult + 1;
             for (int i = 0; i < upperBound - 1; i++) {
                 float a = Random.Range(temp[upperBound - i - 1].Value, totaldiffseed * 2 / 3);
-                tn = Mathf.FloorToInt(a / temp[upperBound - i - 1].Value);
+                tn = Mathf.Max(Mathf.FloorToInt(a / temp[upperBound - i - 1].Value),10);
+                Debug.Log("number before: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
                 GEGPackedData.characters[upperBound - i - 1].nextWaveNum = tn;
+                Debug.Log("number after: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
                 totaldiffseed = totaldiffseed - tn * temp[upperBound - i - 1].Value;
             }
-            tn = Mathf.RoundToInt(totaldiffseed / temp[0].Value);
+            tn = Mathf.Max(Mathf.RoundToInt(totaldiffseed / temp[0].Value), 10);
+            //tn = Mathf.RoundToInt(totaldiffseed / temp[0].Value);
+            Debug.Log("number before: " + GEGPackedData.characters[0].nextWaveNum);
             GEGPackedData.characters[0].nextWaveNum = tn;
+            Debug.Log("number after: " + GEGPackedData.characters[0].nextWaveNum);
         }
     }
 }

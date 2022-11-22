@@ -35,8 +35,8 @@ namespace CompleteProject
         }
         void Start()
         {
-            attackDamage = (int)_character["ZomBearAttackDamage"].defaultValue;
-            timeBetweenAttacks = _character["ZomBearAttackRate"].defaultValue;
+            attackDamage = (int)_character["ZomBearAttackDamage"].value;
+            timeBetweenAttacks = _character["ZomBearAttackRate"].value;
         }
 
 
