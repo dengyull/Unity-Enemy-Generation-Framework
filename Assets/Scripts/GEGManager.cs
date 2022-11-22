@@ -18,7 +18,8 @@ namespace GEGFramework {
         float waveTimer;
         float diffEvalTimer; // countdown timer for difficulty evaluation
 
-        public static event Action onWaveStarted;
+        public static event Action OnWaveStarted;
+        public static event Action OnDiffChanged;
 
         void Start() {
             new GEGPackedData(waveInterval, diffEvalInterval);
@@ -31,22 +32,25 @@ namespace GEGFramework {
             // timers countdown:
             diffEvalTimer -= Time.deltaTime;
             waveTimer -= Time.deltaTime;
-            
 
-            if (waveInterval <= 0f) { // time to start next wave
-                // ...
-                onWaveStarted?.Invoke();
-                waveTimer = GEGPackedData.waveInterval; // reset spawn timer
+            if (waveTimer <= 0) { // time to start next wave
+                
+                Debug.Log("WaveTimer: " + waveTimer);
+                OnWaveStarted?.Invoke();
+                waveTimer = waveInterval; // reset spawn timer
             }
 
             if (diffEvalTimer <= 0) { // time to change difficulty
                 // ...
-                diffEvalTimer = GEGPackedData.diffEvalInterval;
+                diffEvalTimer = diffEvalInterval;
             }
         }
 
         public void UpdateData() {
-
+            GEGPackedData.randomSpawn = randomSpawn;
+            GEGPackedData.enemySpawnPoints = enemySpawnPoints;
+            GEGPackedData.waveInterval = waveInterval;
+            GEGPackedData.diffEvalInterval = diffEvalInterval;
         }
     }
 }

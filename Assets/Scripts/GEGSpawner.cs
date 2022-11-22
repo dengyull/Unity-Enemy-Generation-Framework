@@ -7,14 +7,15 @@ namespace GEGFramework {
     /// Realize output from GEGDifficultyManager
     /// </summary>
     class GEGSpawner : MonoBehaviour {
-        private void Start() {  
-            GEGManager.onWaveStarted += SpawnEnemies; // subscribe to difficulty changed event
+        private void OnEnable() {  
+            GEGManager.OnWaveStarted += SpawnEnemies; // subscribe to difficulty changed event
         }
 
         /// <summary>
         /// Spawn enemies after difficulty changed
         /// </summary>
         public void SpawnEnemies() {
+            Debug.Log("Start Spawning...");
             if (GEGPackedData.randomSpawn) {
                 List<(GameObject Prefab, int Num)> temp = new List<(GameObject, int)>();
 
@@ -38,6 +39,10 @@ namespace GEGFramework {
                     }
                 }
             }
+        }
+
+        private void OnDisable() {
+            GEGManager.OnWaveStarted -= SpawnEnemies; // subscribe to difficulty changed event
         }
     }
 }
