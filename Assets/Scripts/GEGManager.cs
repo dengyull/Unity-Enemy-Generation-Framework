@@ -14,12 +14,13 @@ namespace GEGFramework {
         [SerializeField] static GEGPackedData packedData;
         static GEGDifficultyManager diffManager;
 
+        int waveCounter;
         // countdown timer for each wave
         float waveTimer;
         float diffEvalTimer; // countdown timer for difficulty evaluation
 
-        public static event Action OnWaveStarted;
-        public static event Action OnDiffChanged;
+        public static event Action<int> OnNewWaveStart;
+        public static event Action<int> OnDiffChanged;
 
         void Start() {
             new GEGPackedData(waveInterval, diffEvalInterval);
@@ -30,6 +31,7 @@ namespace GEGFramework {
             diffManager = new GEGDifficultyManager(defaultDiff);
             diffEvalTimer = GEGPackedData.diffEvalInterval;
             waveTimer = GEGPackedData.waveInterval;
+            waveCounter = 0;
         }
 
         void Update() {
@@ -38,12 +40,13 @@ namespace GEGFramework {
             waveTimer -= Time.deltaTime;
 
             if (waveTimer <= 0) { // time to start next wave
-                OnWaveStarted?.Invoke(); // broadcast event
+                waveCounter++;
+                OnNewWaveStart?.Invoke(waveCounter); // broadcast event
                 waveTimer = waveInterval; // reset spawn timer
             }
 
             if (diffEvalTimer <= 0) { // time to change difficulty
-                // ...
+                OnDiffChanged?.Invoke(diffManager.formulaUpdate(3, 5, 3)); // test case
                 diffEvalTimer = diffEvalInterval;
             }
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZomBear
   m_EditorClassIdentifier: 
   _name: ZomBear
-  prefab: {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
+  prefab: {fileID: 8725513158572432570, guid: 3de560fcb286ccc42bad80286196cdd5, type: 3}
   type: 1
   propSO:
   - {fileID: 11400000, guid: 0d6d69a00b3dbdc4b9f40d0d645bfc88, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   _name: Player
-  prefab: {fileID: 100006, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+  prefab: {fileID: 4355667489580938530, guid: f4e36c0e254f6d5429589e1768986123, type: 3}
   type: 0
   propSO:
   - {fileID: 11400000, guid: 3ec84a3763c05c449886e6246bca99f4, type: 2}

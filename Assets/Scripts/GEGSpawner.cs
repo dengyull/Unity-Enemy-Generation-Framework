@@ -11,7 +11,7 @@ namespace GEGFramework {
         bool startSpawning = false;
 
         private void OnEnable() {
-            GEGManager.OnWaveStarted += () => startSpawning = true; // subscribe to difficulty changed event
+            GEGManager.OnNewWaveStart += () => startSpawning = true; // subscribe to difficulty changed event
         }
 
         private void Update() {
@@ -27,7 +27,7 @@ namespace GEGFramework {
                     List<(GameObject Prefab, int Num)> temp = new List<(GameObject, int)>();
 
                     foreach (GEGCharacter c in GEGPackedData.characters) {
-                        if (c.nextWaveNum > 0)
+                        if (c.nextWaveNum > 0 && c.type != GEGCharacterType.Player)
                             temp.Add((c.prefab, c.nextWaveNum));
                     }
 
