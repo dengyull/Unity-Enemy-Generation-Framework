@@ -11,7 +11,7 @@ namespace GEGFramework {
         bool startSpawning = false;
 
         private void OnEnable() {
-            GEGManager.OnNewWaveStart += () => startSpawning = true; // subscribe to difficulty changed event
+            GEGManager.OnNewWaveStart += (int _) => startSpawning = true; // subscribe to difficulty changed event
         }
 
         private void Update() {
