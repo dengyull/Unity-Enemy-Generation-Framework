@@ -179,12 +179,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400004}
+  - component: {fileID: 6010996359370722745}
   - component: {fileID: 19900000}
   - component: {fileID: 19800000}
   - component: {fileID: 8200000}
   - component: {fileID: 12000000}
   - component: {fileID: 11400000}
   - component: {fileID: 10800000}
+  - component: {fileID: 4038587406050144427}
   m_Layer: 0
   m_Name: GunBarrelEnd
   m_TagString: Untagged
@@ -208,6 +210,23 @@ Transform:
   m_Father: {fileID: 400006}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6010996359370722745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335c1e8e6bf3a6d4fae012ddae9526f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 0}
+  damagePerShot: 0
+  timeBetweenBullets: 0
+  range: 0
+  faceLight: {fileID: 0}
 --- !u!199 &19900000
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5343,6 +5362,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &4038587406050144427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -5354,7 +5393,7 @@ GameObject:
   - component: {fileID: 400006}
   - component: {fileID: 9500000}
   - component: {fileID: 5400000}
-  - component: {fileID: 8228319067273264752}
+  - component: {fileID: -1533290188673132894}
   - component: {fileID: 11400002}
   - component: {fileID: 13600000}
   - component: {fileID: 8200002}
@@ -5419,7 +5458,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &8228319067273264752
+--- !u!114 &-1533290188673132894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5428,16 +5467,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29cea58e7c54d943b8c81b74e734376, type: 3}
+  m_Script: {fileID: 11500000, guid: c32067ea884548644b13cf9baddd4573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _character: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07, type: 2}
-  startingHealth: 0
+  startingHealth: 100
   currentHealth: 0
   healthSlider: {fileID: 0}
   damageImage: {fileID: 0}
   deathClip: {fileID: 0}
-  flashSpeed: 0
+  flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
 --- !u!114 &11400002
 MonoBehaviour:

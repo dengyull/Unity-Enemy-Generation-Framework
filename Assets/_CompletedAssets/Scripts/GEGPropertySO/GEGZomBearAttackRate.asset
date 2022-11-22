@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aca71c616109d947aa6664d7f1c9e74, type: 3}
-  m_Name: ZomBunny
+  m_Script: {fileID: 11500000, guid: d57ca78175874524b9fb5e07931f50c4, type: 3}
+  m_Name: GEGZomBearAttackRate
   m_EditorClassIdentifier: 
-  _name: 
-  prefab: {fileID: 100002, guid: e5171f72421770240bd7c3989fe351e3, type: 3}
-  type: 0
-  propSO: []
-  nextWaveNum: 0
-  difficultyFactor: 0
+  value: 0.5
+  defaultValue: 0.5
+  propName: ZomBearAttackRate
+  importance: 10
+  diffEnabled: 1

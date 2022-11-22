@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   _name: Player
-  prefab: {fileID: 0}
+  prefab: {fileID: 100006, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
   type: 0
-  propSO: []
-  nextWaveNum: 0
-  difficultyFactor: 0
+  propSO:
+  - {fileID: 11400000, guid: 3ec84a3763c05c449886e6246bca99f4, type: 2}
+  - {fileID: 11400000, guid: 0ce6c3375ccca9640b6c187b4c7af17e, type: 2}
+  - {fileID: 11400000, guid: 89783b8f90db9ab4491bc6c4ea122d6d, type: 2}
+  - {fileID: 11400000, guid: 9e2fd56adfad8134a9f9316a057069e0, type: 2}
+  - {fileID: 11400000, guid: 57ab1c0a5a3fb6644bae531a3a5ba419, type: 2}
+  nextWaveNum: -1
+  difficultyFactor: -1

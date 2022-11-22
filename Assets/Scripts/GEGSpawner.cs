@@ -28,7 +28,6 @@ namespace GEGFramework {
                         int randCount = Random.Range(0, temp[i].Num); // spawne random number of enemies of this type
                         int randPoint = Random.Range(0, GEGPackedData.enemySpawnPoints.Count);
                         for (int j = 0; j < randCount; ++j) { // spawn [randCount] enemies
-                            
                             Instantiate(temp[i].Prefab, GEGPackedData.enemySpawnPoints[randPoint].position,
                                 temp[i].Prefab.transform.rotation);
                         }

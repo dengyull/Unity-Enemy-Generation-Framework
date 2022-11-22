@@ -22,13 +22,8 @@ namespace GEGFramework {
             characters = new List<GEGCharacter>();
         }
 
-        public void Test() { // Add test data
-            GEGCharacter dumPlayer = new GEGCharacter("Player1");
-            ScriptableObject pHealth = ScriptableObject.CreateInstance<GEGCharacterProperty>();
+        public void AddTestData() {
 
-            characters.Add(new GEGCharacter("Enemy1", 2f));
-            characters.Add(new GEGCharacter("Enemy2", 1.5f));
-            characters.Add(new GEGCharacter("Enemy3", 1f));
         }
     }
 }
