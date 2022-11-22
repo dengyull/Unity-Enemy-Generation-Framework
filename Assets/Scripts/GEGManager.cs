@@ -32,6 +32,7 @@ namespace GEGFramework {
             diffEvalTimer = GEGPackedData.diffEvalInterval;
             waveTimer = 1;
             waveCounter = 0;
+            OnDiffChanged?.Invoke(defaultDiff);
         }
 
         void Update() {
