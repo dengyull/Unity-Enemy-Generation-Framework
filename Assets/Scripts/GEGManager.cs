@@ -30,7 +30,7 @@ namespace GEGFramework {
 
             diffManager = new GEGDifficultyManager(defaultDiff);
             diffEvalTimer = GEGPackedData.diffEvalInterval;
-            waveTimer = GEGPackedData.waveInterval;
+            waveTimer = 1;
             waveCounter = 0;
         }
 
