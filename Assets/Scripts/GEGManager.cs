@@ -1,44 +1,52 @@
+using System;
 using UnityEngine;
-using GEGFramework;
 using System.Collections.Generic;
 
 namespace GEGFramework {
     public class GEGManager : MonoBehaviour {
         [SerializeField, Range(0, 10)] int defaultDiff; // prompt for default difficulty level for this scene
-        [SerializeField] float spawnInterval;
+        [SerializeField] float diffEvalInterval;
+        [SerializeField] float waveInterval;
         [SerializeField] bool randomSpawn;
         [SerializeField] List<Transform> enemySpawnPoints;
         [SerializeField] List<GEGCharacter> characters;
 
-        static GEGPackedData packedData;
+        [SerializeField] static GEGPackedData packedData;
         static GEGDifficultyManager diffManager;
-        static GEGUpdater updater;
 
-        float spawnTimer;   // countdown timer for spawner
+        // countdown timer for each wave
+        float waveTimer;
         float diffEvalTimer; // countdown timer for difficulty evaluation
 
+        public static event Action onWaveStarted;
+
         void Start() {
-            updater = new GEGUpdater();
-            packedData = new GEGPackedData(100f, 10f);
-            spawnInterval = 3f;
-            randomSpawn = true;
+            new GEGPackedData(waveInterval, diffEvalInterval);
+            diffManager = new GEGDifficultyManager(defaultDiff);
             diffEvalTimer = GEGPackedData.diffEvalInterval;
-            diffManager = new GEGDifficultyManager(defaultDiff); // test values
-            spawnTimer = spawnInterval; // init timer
+            waveTimer = GEGPackedData.waveInterval;
         }
 
         void Update() {
+            // timers countdown:
             diffEvalTimer -= Time.deltaTime;
-            spawnTimer -= Time.deltaTime; // timer countdown
+            waveTimer -= Time.deltaTime;
+            
 
-            if (spawnTimer <= 0f) { // time to spawn a enemy
+            if (waveInterval <= 0f) { // time to start next wave
                 // ...
-                spawnTimer = spawnInterval; // reset spawn timer
+                onWaveStarted?.Invoke();
+                waveTimer = GEGPackedData.waveInterval; // reset spawn timer
             }
 
             if (diffEvalTimer <= 0) { // time to change difficulty
                 // ...
+                diffEvalTimer = GEGPackedData.diffEvalInterval;
             }
+        }
+
+        public void UpdateData() {
+
         }
     }
 }

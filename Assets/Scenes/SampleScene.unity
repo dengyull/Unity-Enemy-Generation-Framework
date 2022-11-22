@@ -3695,7 +3695,7 @@ Transform:
   - {fileID: 745393711}
   - {fileID: 745350751}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &745353096
 MonoBehaviour:
@@ -4388,7 +4388,7 @@ Transform:
   - {fileID: 410087041}
   - {fileID: 1745783350}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177865304
 GameObject:
@@ -4490,7 +4490,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192309741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.668854, y: -1.48, z: -1.8384763}
+  m_LocalPosition: {x: 24.23, y: 0, z: -5.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5284,7 +5284,7 @@ Transform:
   - {fileID: 1255631554}
   - {fileID: 1255631556}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1255631560
 Transform:
@@ -10559,7 +10559,7 @@ RectTransform:
   - {fileID: 184560968}
   - {fileID: 2115234674}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10791,7 +10791,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1973436450
 MonoBehaviour:
@@ -10806,7 +10806,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDiff: 0
-  spawnInterval: 3
+  diffEvalInterval: 0
+  waveInterval: 0
   randomSpawn: 0
   enemySpawnPoints: []
   characters:
@@ -10877,7 +10878,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115234673
 GameObject:

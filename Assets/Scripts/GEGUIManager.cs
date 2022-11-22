@@ -1,10 +1,7 @@
-using GEGFramework;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace GEGFramework
 {
-    public class GEGUI : MonoBehaviour
+    public class GEGUIManager : MonoBehaviour
     {
         // The Text UI for updating the difficulty level on the screen
         public TMPro.TMP_Text diffifultyText;
@@ -19,7 +16,7 @@ namespace GEGFramework
         // Call this function to update difficulty on UI
         void UpdateDiffText(int currentDiff)
         {
-            diffifultyText.text = "Diff: " + currentDiff;
+            diffifultyText.text = "Difficulty Level: " + currentDiff;
         }
     }
 }
