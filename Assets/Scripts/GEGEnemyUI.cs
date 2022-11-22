@@ -1,10 +1,7 @@
 using CompleteProject;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GEGEnemyUI : MonoBehaviour
-{
+public class GEGEnemyUI : MonoBehaviour {
     // To make the UI stay the same angle
     Quaternion angle;
 
@@ -14,11 +11,10 @@ public class GEGEnemyUI : MonoBehaviour
     TMPro.TMP_Text rateText;
 
     // The health Script. Because it is used in update() so we store it as a class variable.
-    CompleteProject.EnemyHealth healthScript;
+    GEGEnemyHealth healthScript;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         //record the initial angle 
         angle = transform.rotation;
 
@@ -28,22 +24,20 @@ public class GEGEnemyUI : MonoBehaviour
         rateText = transform.Find("Rate").GetComponent<TMPro.TMP_Text>();
 
         // Find health Script
-        healthScript = transform.parent.GetComponent<CompleteProject.EnemyHealth>();
+        healthScript = transform.parent.GetComponent<GEGEnemyHealth>();
 
         // Update UI
-        hpText.text = ""+ healthScript.currentHealth;
-        damageText.text = "" + transform.parent.GetComponent<CompleteProject.EnemyAttack>().attackDamage;
-        rateText.text = "" + transform.parent.GetComponent<CompleteProject.EnemyAttack>().timeBetweenAttacks;
+        hpText.text = healthScript.currentHealth.ToString();
+        damageText.text = transform.parent.GetComponent<CompleteProject.EnemyAttack>().attackDamage.ToString();
+        rateText.text = transform.parent.GetComponent<CompleteProject.EnemyAttack>().timeBetweenAttacks.ToString();
     }
-    void Update()
-    {
+    void Update() {
         // Only health changes during gameplay
-        hpText.text = ""+ healthScript.currentHealth;
+        hpText.text = healthScript.currentHealth.ToString();
     }
 
     // remain the angle
-    void LateUpdate()
-    {
+    void LateUpdate() {
         transform.rotation = angle;
     }
 }
