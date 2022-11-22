@@ -4,8 +4,8 @@ using UnityEngine;
 namespace GEGFramework {
     public abstract class GEGCharacterProperty : ScriptableObject {
 
-        public double value; // template value to generate the property value in each instance
-        public double defaultValue;
+        public float value; // template value to generate the property value in each instance
+        public float defaultValue;
         public string propName;
         public float importance;
         public bool diffEnabled;
@@ -17,7 +17,7 @@ namespace GEGFramework {
         /// <param name="value">Property value</param>
         /// <param name="importance">importance of the property</param>
         /// <param name="enabled">enabled the property for difficulty evaluation or not</param>
-        public GEGCharacterProperty(string propName, double value, float importance, bool enabled) {
+        public GEGCharacterProperty(string propName, float value, float importance, bool enabled) {
             this.value = value;
             defaultValue = value;
             this.propName = propName;

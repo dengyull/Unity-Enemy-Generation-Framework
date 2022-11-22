@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aca71c616109d947aa6664d7f1c9e74, type: 3}
-  m_Name: ZomBear
+  m_Script: {fileID: 11500000, guid: 5e48f4858866fe34d8500404290a9f82, type: 3}
+  m_Name: GEGPlayerHealth
   m_EditorClassIdentifier: 
-  _name: ZomBear
-  prefab: {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
-  type: 1
-  propSO: []
-  nextWaveNum: 5
-  difficultyFactor: 20
+  value: 100
+  defaultValue: 100
+  propName: PlayerHealth
+  importance: 20
+  diffEnabled: 1

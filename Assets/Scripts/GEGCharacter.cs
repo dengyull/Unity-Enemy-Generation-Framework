@@ -79,5 +79,10 @@ namespace GEGFramework {
             this.diffFactor = diffFactor;
             nextWaveNum = 0;
         }
+
+        public GEGCharacterProperty this[string key] {
+            get => propSO.Find(item => item.propName == key);
+            set => propSO.Add(value);
+        }
     }
 }
