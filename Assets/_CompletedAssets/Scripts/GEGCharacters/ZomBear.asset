@@ -16,4 +16,5 @@ MonoBehaviour:
   prefab: {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
   type: 1
   propSO: []
+  nextWaveNum: 5
   difficultyFactor: 20
