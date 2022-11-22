@@ -170,13 +170,13 @@ namespace GEGFramework {
             float totaldiffseed = difflevel * totalDiffcult + 1;
             for (int i = 0; i < upperBound - 1; i++) {
                 float a = Random.Range(temp[upperBound - i - 1].Value, totaldiffseed * 2 / 3);
-                tn = Mathf.Max(Mathf.FloorToInt(a / temp[upperBound - i - 1].Value),10);
+                tn = Mathf.Min(Mathf.FloorToInt(a / temp[upperBound - i - 1].Value),10);
                 Debug.Log("number before: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
                 GEGPackedData.characters[upperBound - i - 1].nextWaveNum = tn;
                 Debug.Log("number after: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
                 totaldiffseed = totaldiffseed - tn * temp[upperBound - i - 1].Value;
             }
-            tn = Mathf.Max(Mathf.RoundToInt(totaldiffseed / temp[0].Value), 10);
+            tn = Mathf.Min(Mathf.RoundToInt(totaldiffseed / temp[0].Value), 10);
             //tn = Mathf.RoundToInt(totaldiffseed / temp[0].Value);
             Debug.Log("number before: " + GEGPackedData.characters[0].nextWaveNum);
             GEGPackedData.characters[0].nextWaveNum = tn;
