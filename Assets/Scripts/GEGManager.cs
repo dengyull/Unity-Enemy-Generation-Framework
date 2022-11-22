@@ -23,6 +23,10 @@ namespace GEGFramework {
 
         void Start() {
             new GEGPackedData(waveInterval, diffEvalInterval);
+            GEGPackedData.enemySpawnPoints = enemySpawnPoints;
+            GEGPackedData.characters = characters;
+            GEGPackedData.randomSpawn = randomSpawn;
+
             diffManager = new GEGDifficultyManager(defaultDiff);
             diffEvalTimer = GEGPackedData.diffEvalInterval;
             waveTimer = GEGPackedData.waveInterval;
@@ -51,6 +55,7 @@ namespace GEGFramework {
             GEGPackedData.enemySpawnPoints = enemySpawnPoints;
             GEGPackedData.waveInterval = waveInterval;
             GEGPackedData.diffEvalInterval = diffEvalInterval;
+            GEGPackedData.characters = characters;
         }
     }
 }
