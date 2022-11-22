@@ -28,8 +28,8 @@ public class GEGEnemyUI : MonoBehaviour {
 
         // Update UI
         hpText.text = healthScript.currentHealth.ToString();
-        damageText.text = transform.parent.GetComponent<CompleteProject.EnemyAttack>().attackDamage.ToString();
-        rateText.text = transform.parent.GetComponent<CompleteProject.EnemyAttack>().timeBetweenAttacks.ToString();
+        damageText.text = transform.parent.GetComponent<GEGEnemyAttack>().attackDamage.ToString();
+        rateText.text = transform.parent.GetComponent<GEGEnemyAttack>().timeBetweenAttacks.ToString();
     }
     void Update() {
         // Only health changes during gameplay
