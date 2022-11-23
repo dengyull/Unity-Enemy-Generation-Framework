@@ -156,50 +156,53 @@ namespace GEGFramework {
         /// <returns></returns>
         void EnemyNumberUpdate(int difflevel)
         {
-            List<KeyValuePair<string, float>> temp = new List<KeyValuePair<string, float>>();
+            List<KeyValuePair<int, float>> temp = new List<KeyValuePair<int, float>>();
             float totalDiffcult = 0;
-            foreach (GEGCharacter character in GEGPackedData.characters)
+
+            for (int i = 0; i < GEGPackedData.characters.Count; i++)
             {
-                if (character.type == GEGCharacterType.Enemy)
+                if (GEGPackedData.characters[i].type == GEGCharacterType.Enemy)
                 {
-                    temp.Add(new KeyValuePair<string, float>(character.Name, character.diffFactor));
+                    temp.Add(new KeyValuePair<int, float>(i, GEGPackedData.characters[i].diffFactor));
                 }
+
             }
             int upperBound = Mathf.CeilToInt((temp.Count * difflevel) / (float)10);
             for (int i = 0; i < upperBound; i++)
             {
                 totalDiffcult += temp[i].Value;
-
             }
             //Debug.Log("upperBound " + upperBound + ",temp.Count " + temp.Count+ ",diffcult level " + difflevel+",upperBound cal" + (temp.Count * difflevel)/10.0);
             temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
             int tn = 0;
-            //float totaldiffseed = difflevel * difflevel * Mathf.Log(difflevel, 2) + 1;
-            float totaldiffseed = difflevel * Mathf.Log(difflevel + 1, 2) * totalDiffcult + 1;
+            //float totaldiffseed = difflevel * difflevel * Mathf.Log(difflevel, 2) + 1;* Mathf.Log(difflevel + 1, 2)
+            float totaldiffseed = difflevel  * totalDiffcult + 1;
             int totalnumber = 0;
             for (int i = 0; i < upperBound - 1; i++)
             {
                 float a = Random.Range(temp[upperBound - i - 1].Value, totaldiffseed * 2 / 3);
                 tn = Mathf.Min(Mathf.FloorToInt(a / temp[upperBound - i - 1].Value), 5);
                 //Debug.Log("number before: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
-                GEGPackedData.characters[upperBound - i - 1].nextWaveNum = tn;
+                GEGPackedData.characters[temp[upperBound - i - 1].Key].nextWaveNum = tn;
+                //Debug.Log(temp[upperBound - i - 1].Key + " " + tn + " " + GEGPackedData.characters[temp[upperBound - i - 1].Key].nextWaveNum);
                 totalnumber += tn;
                 //Debug.Log("enemy "+(upperBound - i - 1) +" number : " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
                 totaldiffseed = totaldiffseed - tn * temp[upperBound - i - 1].Value;
             }
-            for (int i = Mathf.Max(upperBound-1,0); i < temp.Count; i++)
+            for (int i = Mathf.Max(upperBound,0); i < temp.Count; i++)
             {
-                GEGPackedData.characters[i].nextWaveNum = 0;
+                GEGPackedData.characters[temp[i].Key].nextWaveNum = 0;
             }
             //Debug.Log("totaldiffseed " + totaldiffseed + "temp[0].Value " + temp[0].Value);
             tn = Mathf.Min(Mathf.RoundToInt(totaldiffseed / temp[0].Value), 5);
             totalnumber += tn;
             //tn = Mathf.RoundToInt(totaldiffseed / temp[0].Value);
             //Debug.Log("number before: " + GEGPackedData.characters[0].nextWaveNum);
-            GEGPackedData.characters[0].nextWaveNum = tn;
+            GEGPackedData.characters[temp[0].Key].nextWaveNum = tn;
             //Debug.Log("enemy 0 number : " + GEGPackedData.characters[0].nextWaveNum);
             //Debug.Log("number after: " + GEGPackedData.characters[0].nextWaveNum);
             Debug.Log("diffcult level " + difflevel + ", enemy number total: " + totalnumber);
+            //Debug.Log("diffcult level " + difflevel + ", enemy number total: " + totalnumber + "totaldiffseed: " + totaldiffseed + " seed " + GEGPackedData.characters[1].nextWaveNum + " seed " + GEGPackedData.characters[2].nextWaveNum + " seed " + GEGPackedData.characters[3].nextWaveNum);
         }
     }
 }
