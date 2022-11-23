@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c815cac11980345b9d3fe89f00abb8, type: 3}
   m_Name: GEGPlayerSpeed
   m_EditorClassIdentifier: 
-  value: 6
-  defaultValue: 6
+  value: 10
+  defaultValue: 10
   propName: PlayerSpeed
   importance: 20
   diffEnabled: 1
