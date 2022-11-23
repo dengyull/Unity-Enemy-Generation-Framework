@@ -5717,12 +5717,12 @@ PrefabInstance:
     - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}
       propertyPath: waveInterval
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}
       propertyPath: diffEvalInterval
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}
