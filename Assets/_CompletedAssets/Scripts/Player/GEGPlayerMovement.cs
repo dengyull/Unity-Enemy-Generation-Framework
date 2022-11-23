@@ -33,7 +33,7 @@ namespace CompleteProject {
             anim = GetComponent<Animator>();
             playerRigidbody = GetComponent<Rigidbody>();
         }
-        void Start()
+        void OnEnable()
         {
             speed = _character["PlayerSpeed"].defaultValue;
         }

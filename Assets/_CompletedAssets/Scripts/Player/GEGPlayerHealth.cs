@@ -40,7 +40,7 @@ namespace CompleteProject
             playerShooting = GetComponentInChildren <PlayerShooting> ();
         }
 
-        void Start() {
+        void OnEnable() {
             startingHealth = _character["PlayerHealth"].defaultValue; // Set the initial health of the player.
             currentHealth = startingHealth;
         }

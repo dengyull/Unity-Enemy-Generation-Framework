@@ -13,8 +13,8 @@ namespace CompleteProject
             set => _character = value;
         }
 
-        public float timeBetweenAttacks;     // The time in seconds between each attack.
-        public int attackDamage;               // The amount of health taken away per attack.
+        public float timeBetweenAttacks = 2000;     // The time in seconds between each attack.
+        public int attackDamage = 200;               // The amount of health taken away per attack.
 
 
         Animator anim;                              // Reference to the animator component.
@@ -33,7 +33,7 @@ namespace CompleteProject
             enemyHealth = GetComponent<GEGEnemyHealth>();
             anim = GetComponent <Animator> ();
         }
-        void Start()
+        void OnEnable()
         {
             attackDamage = (int)_character["ZomBearAttackDamage"].value;
             timeBetweenAttacks = _character["ZomBearAttackRate"].value;

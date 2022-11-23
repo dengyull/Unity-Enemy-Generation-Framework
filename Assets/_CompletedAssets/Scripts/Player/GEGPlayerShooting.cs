@@ -45,7 +45,7 @@ namespace CompleteProject
 
             
         }
-        void Start()
+        void OnEnable()
         {
             damagePerShot = (int)_character["PlayerDamage"].defaultValue;
             timeBetweenBullets = _character["PlayerAttackRate"].defaultValue;
