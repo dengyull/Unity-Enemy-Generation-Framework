@@ -159,10 +159,14 @@ namespace GEGFramework {
             foreach (GEGCharacter character in GEGPackedData.characters) {
                 if (character.type == GEGCharacterType.Enemy) {
                     temp.Add(new KeyValuePair<string, float>(character.Name, character.diffFactor));
-                    totalDiffcult += character.diffFactor;
                 }
             }
-            int upperBound = Mathf.CeilToInt(temp.Count * difflevel / 10);
+                int upperBound = Mathf.CeilToInt(temp.Count * difflevel / 10);
+            for (int i = 0; i < upperBound; i++)
+            {
+                totalDiffcult += temp[i].Value;
+
+            }
             temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
             int tn = 0;
             //float totaldiffseed = difflevel * difflevel * Mathf.Log(difflevel, 2) + 1;
