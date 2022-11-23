@@ -35,7 +35,7 @@ namespace CompleteProject
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
         }
-        void Start()
+        void OnEnable()
         {
             startingHealth = (int)_character["ZomBearHealth"].value;
             // Setting the current health when the enemy first spawns.

@@ -32,7 +32,6 @@ namespace GEGFramework {
             diffEvalTimer = GEGPackedData.diffEvalInterval;
             waveTimer = 1;
             waveCounter = 0;
-            OnDiffChanged?.Invoke(defaultDiff);
         }
 
         void Update() {
@@ -47,7 +46,7 @@ namespace GEGFramework {
             }
 
             if (diffEvalTimer <= 0) { // time to change difficulty
-                OnDiffChanged?.Invoke(diffManager.formulaUpdate(3, 5, 3)); // test case
+                OnDiffChanged?.Invoke(diffManager.formulaUpdate(1, 3, 1)); // test case
                 diffEvalTimer = diffEvalInterval;
             }
         }
