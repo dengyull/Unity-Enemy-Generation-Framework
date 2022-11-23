@@ -21,6 +21,7 @@ namespace GEGFramework {
                 throw new ArgumentOutOfRangeException("Default difficulty level must be between 0 and 10.");
             currentRounds = 0;
             prevDiff = defaultDiff;
+            EnemyNumberUpdate(defaultDiff);
         }
 
         /// <summary>
@@ -111,9 +112,9 @@ namespace GEGFramework {
                 if (character.type == GEGCharacterType.Enemy) {
                     foreach (GEGCharacterProperty prop in character.propSO) {
                         if (prop.diffEnabled) {
-                            Debug.Log("property" + prop.propName + "before : " + prop.value);
+                            //Debug.Log("property" + prop.propName + "before : " + prop.value);
                             prop.value = prop.defaultValue + prop.defaultValue * difflevel / 10;
-                            Debug.Log("property" + prop.propName + "after: " + prop.value);
+                            //Debug.Log("property" + prop.propName + "after: " + prop.value);
                             //results.Add();
                             //kvp.UpdateProperty(difflevel);
                         }
@@ -153,37 +154,52 @@ namespace GEGFramework {
         /// </summary>
         /// <param name="difflevel">Difficulty level (from 0 to 10)</param>
         /// <returns></returns>
-        void EnemyNumberUpdate(int difflevel) {
+        void EnemyNumberUpdate(int difflevel)
+        {
             List<KeyValuePair<string, float>> temp = new List<KeyValuePair<string, float>>();
             float totalDiffcult = 0;
-            foreach (GEGCharacter character in GEGPackedData.characters) {
-                if (character.type == GEGCharacterType.Enemy) {
+            foreach (GEGCharacter character in GEGPackedData.characters)
+            {
+                if (character.type == GEGCharacterType.Enemy)
+                {
                     temp.Add(new KeyValuePair<string, float>(character.Name, character.diffFactor));
                 }
             }
-                int upperBound = Mathf.CeilToInt(temp.Count * difflevel / 10);
+            int upperBound = Mathf.CeilToInt((temp.Count * difflevel) / (float)10);
             for (int i = 0; i < upperBound; i++)
             {
                 totalDiffcult += temp[i].Value;
 
             }
+            //Debug.Log("upperBound " + upperBound + ",temp.Count " + temp.Count+ ",diffcult level " + difflevel+",upperBound cal" + (temp.Count * difflevel)/10.0);
             temp.Sort((a, b) => a.Value.CompareTo(b.Value)); //sort enemy by diffFactor
             int tn = 0;
             //float totaldiffseed = difflevel * difflevel * Mathf.Log(difflevel, 2) + 1;
-            float totaldiffseed = difflevel * totalDiffcult + 1;
-            for (int i = 0; i < upperBound - 1; i++) {
+            float totaldiffseed = difflevel * Mathf.Log(difflevel + 1, 2) * totalDiffcult + 1;
+            int totalnumber = 0;
+            for (int i = 0; i < upperBound - 1; i++)
+            {
                 float a = Random.Range(temp[upperBound - i - 1].Value, totaldiffseed * 2 / 3);
                 tn = Mathf.Min(Mathf.FloorToInt(a / temp[upperBound - i - 1].Value), 5);
-                Debug.Log("number before: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
+                //Debug.Log("number before: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
                 GEGPackedData.characters[upperBound - i - 1].nextWaveNum = tn;
-                Debug.Log("number after: " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
+                totalnumber += tn;
+                //Debug.Log("enemy "+(upperBound - i - 1) +" number : " + GEGPackedData.characters[upperBound - i - 1].nextWaveNum);
                 totaldiffseed = totaldiffseed - tn * temp[upperBound - i - 1].Value;
             }
+            for (int i = Mathf.Max(upperBound-1,0); i < temp.Count; i++)
+            {
+                GEGPackedData.characters[i].nextWaveNum = 0;
+            }
+            //Debug.Log("totaldiffseed " + totaldiffseed + "temp[0].Value " + temp[0].Value);
             tn = Mathf.Min(Mathf.RoundToInt(totaldiffseed / temp[0].Value), 5);
+            totalnumber += tn;
             //tn = Mathf.RoundToInt(totaldiffseed / temp[0].Value);
-            Debug.Log("number before: " + GEGPackedData.characters[0].nextWaveNum);
+            //Debug.Log("number before: " + GEGPackedData.characters[0].nextWaveNum);
             GEGPackedData.characters[0].nextWaveNum = tn;
-            Debug.Log("number after: " + GEGPackedData.characters[0].nextWaveNum);
+            //Debug.Log("enemy 0 number : " + GEGPackedData.characters[0].nextWaveNum);
+            //Debug.Log("number after: " + GEGPackedData.characters[0].nextWaveNum);
+            Debug.Log("diffcult level " + difflevel + ", enemy number total: " + totalnumber);
         }
     }
 }
