@@ -128,7 +128,7 @@ Transform:
   - {fileID: 8725513158572327068}
   - {fileID: 8725513158572327064}
   - {fileID: 8725513158572327070}
-  - {fileID: 4520608857875647243}
+  - {fileID: 4693906287386936475}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10221,7 +10221,7 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!1001 &8148670281964753277
+--- !u!1001 &1048656305667497709
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10231,7 +10231,7 @@ PrefabInstance:
     - target: {fileID: 5740270643734321781, guid: e7d7eca34b2cb294a8e03b88f776afd4,
         type: 3}
       propertyPath: m_Name
-      value: GEG Enemy Info
+      value: GEG Enemy Debug
       objectReference: {fileID: 0}
     - target: {fileID: 5740270643734321782, guid: e7d7eca34b2cb294a8e03b88f776afd4,
         type: 3}
@@ -10246,7 +10246,7 @@ PrefabInstance:
     - target: {fileID: 5740270643734321782, guid: e7d7eca34b2cb294a8e03b88f776afd4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 5740270643734321782, guid: e7d7eca34b2cb294a8e03b88f776afd4,
         type: 3}
@@ -10290,9 +10290,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7d7eca34b2cb294a8e03b88f776afd4, type: 3}
---- !u!4 &4520608857875647243 stripped
+--- !u!4 &4693906287386936475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5740270643734321782, guid: e7d7eca34b2cb294a8e03b88f776afd4,
     type: 3}
-  m_PrefabInstance: {fileID: 8148670281964753277}
+  m_PrefabInstance: {fileID: 1048656305667497709}
   m_PrefabAsset: {fileID: 0}

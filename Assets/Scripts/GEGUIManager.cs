@@ -7,13 +7,13 @@ namespace GEGFramework {
 
         // Start is called before the first frame update
         void Start() {
-            GEGManager.OnDiffChanged += UpdateDiffText;
+            GEGManager.OnDiffChanged += UpdateIntenText;
             GEGManager.OnNewWaveStart += UpdateWaveText;
         }
 
         // Call this function to update difficulty on UI
-        void UpdateDiffText(int currentDiff) {
-            diffifultyText.text = "Difficulty Level: " + currentDiff;
+        void UpdateIntenText(int currentDiff) {
+            diffifultyText.text = "Intensity: " + currentDiff;
         }
 
         void UpdateWaveText(int waveNum) {
