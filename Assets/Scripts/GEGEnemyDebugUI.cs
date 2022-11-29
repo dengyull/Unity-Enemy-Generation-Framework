@@ -1,14 +1,15 @@
 using CompleteProject;
 using UnityEngine;
+using TMPro;
 
-public class GEGEnemyUI : MonoBehaviour {
+public class GEGEnemyDebugUI : MonoBehaviour {
     // To make the UI stay the same angle
     Quaternion angle;
 
     // UI components that need to be updated
-    TMPro.TMP_Text hpText;
-    TMPro.TMP_Text damageText;
-    TMPro.TMP_Text rateText;
+    [SerializeField] TextMeshProUGUI hpText;
+    [SerializeField] TextMeshProUGUI damageText;
+    [SerializeField] TextMeshProUGUI rateText;
 
     // The health Script. Because it is used in update() so we store it as a class variable.
     GEGEnemyHealth healthScript;
@@ -18,22 +19,20 @@ public class GEGEnemyUI : MonoBehaviour {
         //record the initial angle 
         angle = transform.rotation;
 
-        // Find UI components
-        hpText = transform.Find("HP").GetComponent<TMPro.TMP_Text>();
-        damageText = transform.Find("Damage").GetComponent<TMPro.TMP_Text>();
-        rateText = transform.Find("Rate").GetComponent<TMPro.TMP_Text>();
-
         // Find health Script
         healthScript = transform.parent.GetComponent<GEGEnemyHealth>();
 
         // Update UI
-        hpText.text = healthScript.currentHealth.ToString();
-        damageText.text = transform.parent.GetComponent<GEGEnemyAttack>().attackDamage.ToString();
-        rateText.text = transform.parent.GetComponent<GEGEnemyAttack>().timeBetweenAttacks.ToString();
+        if (hpText && damageText && rateText) {
+            hpText.text = "HP: " + healthScript.currentHealth.ToString();
+            damageText.text = "Damage: " + transform.parent.GetComponent<GEGEnemyAttack>().attackDamage.ToString();
+            rateText.text = "AttackRate: " + transform.parent.GetComponent<GEGEnemyAttack>().timeBetweenAttacks.ToString();
+        }
     }
     void Update() {
         // Only health changes during gameplay
-        hpText.text = healthScript.currentHealth.ToString();
+        if (hpText && healthScript)
+            hpText.text = "HP: " + healthScript.currentHealth.ToString();
     }
 
     // remain the angle
