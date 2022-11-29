@@ -502,75 +502,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464159157}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &499733061
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572327066, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8725513158572432570, guid: 3de560fcb286ccc42bad80286196cdd5,
-        type: 3}
-      propertyPath: m_Name
-      value: GEG ZomBear
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3de560fcb286ccc42bad80286196cdd5, type: 3}
 --- !u!1 &732651290
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +531,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &738787935
 BoxCollider:
@@ -4585,7 +4516,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1278923216
 GameObject:
@@ -4713,10 +4644,10 @@ RectTransform:
   m_Father: {fileID: 1576885851}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0508885, y: 0.73065776}
-  m_AnchorMax: {x: 0.23433103, y: 0.814}
-  m_AnchoredPosition: {x: -23.6, y: 30.6}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -360, y: -35}
+  m_SizeDelta: {x: 130, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1362382328
 MonoBehaviour:
@@ -4802,7 +4733,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 15.514374}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5361,7 +5292,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1985628422
 GameObject:
@@ -5443,7 +5374,7 @@ GameObject:
   - component: {fileID: 2115234676}
   - component: {fileID: 2115234675}
   m_Layer: 5
-  m_Name: DifficultyText
+  m_Name: IntensityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5464,10 +5395,10 @@ RectTransform:
   m_Father: {fileID: 1576885851}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0508885, y: 0.8273155}
-  m_AnchorMax: {x: 0.23433103, y: 0.91413367}
-  m_AnchoredPosition: {x: -23.600006, y: 19.5}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -360, y: -65}
+  m_SizeDelta: {x: 130, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115234675
 MonoBehaviour:
@@ -5525,7 +5456,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -5553,7 +5484,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -30.168411, w: 17.187347}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5717,11 +5648,6 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultDiff
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
-      propertyPath: randomSpawn
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}

@@ -4,35 +4,6 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace GEGFramework {
-
-    /// <summary>
-    /// Character Interface
-    /// </summary>
-    //interface IGEGCharacter {
-    //    string Name { get; set; } // Name for this type of character, usually equals prefab's name
-    //}
-
-    /// <summary>
-    /// Wrapper class for GEGCharacter
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    //[Serializable]
-    //public class GEGCharacterInst<T> : IGEGCharacter {
-    //    private string _name;
-    //    public string Name {
-    //        get => _name;
-    //        set => _name = value;
-    //    }
-
-    //    public GEGCharacter characterSO;
-    //    public List<GEGCharacterProperty<T>> propSO;
-
-    //    public GEGCharacterInst(GEGCharacter characterSO) {
-    //        _name = characterSO.Name;
-    //        propSO = new List<GEGCharacterProperty<T>>();
-    //    }
-    //}
-
     [CreateAssetMenu(fileName = "GEGCharacter", menuName = "GEG Framework/Character")]
     public class GEGCharacter : ScriptableObject {
         [SerializeField]
