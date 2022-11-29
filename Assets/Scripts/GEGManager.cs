@@ -4,23 +4,20 @@ using System.Collections.Generic;
 
 namespace GEGFramework {
     public class GEGManager : MonoBehaviour {
-        
+
         public static event Action<int> OnNewWaveStart;
 
         [SerializeField] float maxWaveInterval;
         [SerializeField] bool randomSpawn;
         [SerializeField] List<GEGCharacter> characters;
         [SerializeField] List<Transform> enemySpawnPoints;
-        
+
         int waveCounter;
         float waveTimer; // countdown timer for each wave
 
         void Start() {
             new GEGPackedData(maxWaveInterval); // initialize GEGPackedData
-            GEGPackedData.enemySpawnPoints = enemySpawnPoints;
-            GEGPackedData.characters = characters;
-            GEGPackedData.randomSpawn = randomSpawn;
-
+            UpdatePackedData();
             waveTimer = 0;
             waveCounter = 0;
         }
@@ -36,11 +33,11 @@ namespace GEGFramework {
             }
         }
 
-        public void UpdateData() {
+        public void UpdatePackedData() {
+            GEGPackedData.maxWaveInterval = maxWaveInterval;
             GEGPackedData.randomSpawn = randomSpawn;
-            GEGPackedData.enemySpawnPoints = enemySpawnPoints;
-            GEGPackedData.waveInterval = maxWaveInterval;
             GEGPackedData.characters = characters;
+            GEGPackedData.enemySpawnPoints = enemySpawnPoints;
         }
     }
 }

@@ -5,8 +5,7 @@ using GEGFramework;
 public class GEGManagerEditor : Editor {
 
     #region SerializedProperties
-    SerializedProperty defaultDiff;
-    SerializedProperty spawnInterval;
+    SerializedProperty maxWaveInterval;
     SerializedProperty randomSpawn;
     SerializedProperty enemySpawnPoints;
     SerializedProperty characters;
@@ -15,23 +14,20 @@ public class GEGManagerEditor : Editor {
     GEGManager _target;
 
     private void OnEnable() {
-        defaultDiff = serializedObject.FindProperty("defaultDiff");
-        spawnInterval = serializedObject.FindProperty("spawnInterval");
+        maxWaveInterval = serializedObject.FindProperty("maxWaveInterval");
         randomSpawn = serializedObject.FindProperty("randomSpawn");
-        enemySpawnPoints = serializedObject.FindProperty("enemySpawnPoints");
         characters = serializedObject.FindProperty("characters");
+        enemySpawnPoints = serializedObject.FindProperty("enemySpawnPoints");
         _target = target as GEGManager;
     }
 
     public override void OnInspectorGUI() {
-        base.DrawDefaultInspector();
-        //serializedObject.Update();
-        //EditorGUILayout.PropertyField(defaultDiff);
-        //EditorGUILayout.PropertyField(spawnInterval);
-        //EditorGUILayout.PropertyField(randomSpawn);
-        //EditorGUILayout.PropertyField(enemySpawnPoints);
-        //EditorGUILayout.PropertyField(characters);
-        //serializedObject.ApplyModifiedProperties();
-        //_target.UpdateData();
+        serializedObject.Update();
+        EditorGUILayout.PropertyField(maxWaveInterval);
+        EditorGUILayout.PropertyField(randomSpawn);
+        EditorGUILayout.PropertyField(characters);
+        EditorGUILayout.PropertyField(enemySpawnPoints);
+        serializedObject.ApplyModifiedProperties();
+        _target.UpdatePackedData();
     }
 }
