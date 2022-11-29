@@ -12,24 +12,30 @@ namespace GEGFramework {
         [SerializeField] List<GEGCharacter> characters;
         [SerializeField] List<Transform> enemySpawnPoints;
 
+        GEGSpawner spawner;
         int waveCounter;
         float waveTimer; // countdown timer for each wave
 
         void Start() {
-            new GEGPackedData(maxWaveInterval); // initialize GEGPackedData
+            new GEGPackedData(); // initialize GEGPackedData
             UpdatePackedData();
-            waveTimer = 0;
+            spawner = gameObject.GetComponent<GEGSpawner>();
             waveCounter = 0;
+            waveTimer = 0;
         }
 
         void Update() {
             // timers countdown:
             waveTimer -= Time.deltaTime;
-
             if (waveTimer <= 0) { // time to start next wave
-                waveCounter++;
-                OnNewWaveStart?.Invoke(waveCounter); // broadcast event
-                waveTimer = maxWaveInterval; // reset spawn timer
+                if (!spawner.haveAliveEnemies()) {
+                    waveCounter++;
+                    OnNewWaveStart?.Invoke(waveCounter); // broadcast event
+                    waveTimer = maxWaveInterval; // reset spawn timer
+                }
+                waveTimer = 3f;
+                // player takes longer than expected...
+                Debug.Log("Poor skill");
             }
         }
 

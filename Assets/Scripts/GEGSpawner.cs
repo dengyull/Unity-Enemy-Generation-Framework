@@ -8,7 +8,7 @@ namespace GEGFramework {
     /// Realize output from GEGDifficultyManager
     /// </summary>
     class GEGSpawner : MonoBehaviour {
-        public string tagName = "Enemy";
+        public string enemyTag = "Enemy";
 
         int totalSpawn = 0; // total number of enemies to spawn in this wave
         bool startSpawning = false, spawning = false;
@@ -27,6 +27,12 @@ namespace GEGFramework {
             }
         }
 
+        public bool haveAliveEnemies() {
+            var enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+            if (enemies.Length == 0) return false;
+            return true;
+        }
+
         IEnumerator SpawnEnemies() {
             spawning = true;
             if (GEGPackedData.randomSpawn) {
@@ -43,13 +49,13 @@ namespace GEGFramework {
                     int randType = Random.Range(0, temp.Count);
                     float randSpawnInterval = Random.Range(0, waveInterval / totalSpawn);
                     int randPoint = Random.Range(0, GEGPackedData.enemySpawnPoints.Count - 1); // spawn at random spawn point
-                    
+
                     var inst = Instantiate(temp[randType].Prefab, GEGPackedData.enemySpawnPoints[randPoint].position,
                         temp[randType].Prefab.transform.rotation);
-                    inst.tag = tagName;
+                    inst.tag = enemyTag;
                     waveInterval -= randSpawnInterval;
                     yield return new WaitForSeconds(randSpawnInterval);
-                    
+
                     if (temp[randType].Num - 1 > 0) // if character[i] has more instances to be spawned
                         temp[randType] = (temp[randType].Prefab, temp[randType].Num - 1);
                     else // else remove this type of character from the list

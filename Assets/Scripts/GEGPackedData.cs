@@ -14,8 +14,10 @@ namespace GEGFramework {
         /// <summary>
         /// Default GEGPackedData constructor
         /// </summary>
-        public GEGPackedData(float waveInterval) {
-            GEGPackedData.maxWaveInterval = waveInterval;
+        public GEGPackedData() {
+            maxWaveInterval = 60;
+            randomSpawn = true;
+            enemySpawnPoints = new List<Transform>();
             characters = new List<GEGCharacter>();
         }
     }
