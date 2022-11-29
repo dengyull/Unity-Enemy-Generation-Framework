@@ -40,15 +40,15 @@ namespace GEGFramework {
             diffEvalTimer -= Time.deltaTime;
             waveTimer -= Time.deltaTime;
 
+            if (diffEvalTimer <= 0) { // time to change difficulty
+                OnDiffChanged?.Invoke(diffManager.formulaUpdate(1, 3, 1)); // test case
+                diffEvalTimer = diffEvalInterval;
+            }
+
             if (waveTimer <= 0) { // time to start next wave
                 waveCounter++;
                 OnNewWaveStart?.Invoke(waveCounter); // broadcast event
                 waveTimer = waveInterval; // reset spawn timer
-            }
-
-            if (diffEvalTimer <= 0) { // time to change difficulty
-                OnDiffChanged?.Invoke(diffManager.formulaUpdate(1, 3, 1)); // test case
-                diffEvalTimer = diffEvalInterval;
             }
         }
 
