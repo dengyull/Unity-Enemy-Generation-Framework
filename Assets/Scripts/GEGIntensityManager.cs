@@ -59,6 +59,8 @@ namespace GEGFramework
                     Debug.Log("Game in Relax Mode");
                     CurrentRelaxDuration = RelaxDuration;
                     EnemyNumberUpdate(0, 2);
+                    EnemyNumberUpdate(1, 0);
+                    EnemyNumberUpdate(2, 0);
                     EnemyPropertyChange("ZomBearHealth", 0, 100);
                     EnemyPropertyChange("ZomBearSpeed", 0, 4);
                     EnemyPropertyChange("ZomBearAttackDamage", 0, 10);
@@ -74,6 +76,7 @@ namespace GEGFramework
                     Debug.Log("Game in Medium Mode");
                     EnemyNumberUpdate(0, 2);
                     EnemyNumberUpdate(1, 2);
+                    EnemyNumberUpdate(2, 0);
                     EnemyPropertyChange("ZomBearHealth", 0, 120);
                     EnemyPropertyChange("ZomBearSpeed", 0, 6);
                     EnemyPropertyChange("ZomBearAttackDamage", 0, 20);
