@@ -20,12 +20,12 @@ namespace CompleteProject {
 
         public float startingHealth;                                // The amount of health the player starts the game with.
         public float currentHealth;                                 // The current health the player has.
-
+        public int summonCost = 50;                                 // Cost of summoning a bro to help you
 
         Animator anim;                                              // Reference to the Animator component.
         AudioSource playerAudio;                                    // Reference to the AudioSource component.
-        PlayerMovement playerMovement;                              // Reference to the player's movement.
-        PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
+        GEGPlayerMovement playerMovement;                              // Reference to the player's movement.
+        GEGPlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
 
@@ -33,8 +33,8 @@ namespace CompleteProject {
             // Setting up the references.
             anim = GetComponent<Animator>();
             playerAudio = GetComponent<AudioSource>();
-            playerMovement = GetComponent<PlayerMovement>();
-            playerShooting = GetComponentInChildren<PlayerShooting>();
+            playerMovement = GetComponent<GEGPlayerMovement>();
+            playerShooting = GetComponentInChildren<GEGPlayerShooting>();
         }
 
         void OnEnable() {
@@ -56,10 +56,26 @@ namespace CompleteProject {
                     damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
             }
 
+            if (Input.GetKeyDown(KeyCode.C) && gameObject.name == "GEG Player" 
+                && ScoreManager.score >= summonCost) {
+                SummonBros();
+            }
+
             // Reset the damaged flag.
             damaged = false;
         }
 
+        public void SummonBros() {
+            Transform broPos = GameObject.Find("GEG Player").transform;
+            if (broPos) {
+                int randRange = Random.Range(1, 4);
+                GameObject bro = Instantiate(gameObject, broPos.position, transform.rotation);
+                bro.transform.position = new Vector3(transform.position.x + randRange, transform.position.y,
+                    transform.position.z + randRange);
+                bro.name = "GEG Player (bro)";
+            }
+            ScoreManager.score -= summonCost;
+        }
 
         public void TakeDamage(int amount) {
             // Set the damaged flag so the screen will flash.

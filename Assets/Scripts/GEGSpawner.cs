@@ -28,7 +28,7 @@ namespace GEGFramework {
                 List<(GameObject Prefab, int Num)> temp = new List<(GameObject, int)>();
 
                 foreach (GEGCharacter c in GEGPackedData.characters) {
-                    if (c.nextWaveNum > 0) // c.type != GEGCharacterType.Player
+                    if (c.nextWaveNum > 0 && c.type != GEGCharacterType.Player)
                         temp.Add((c.prefab, c.nextWaveNum)); // populate temp array
                 }
 
