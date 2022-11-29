@@ -7,7 +7,7 @@ namespace GEGFramework {
     /// </summary>
     class GEGPackedData {
         public static bool randomSpawn;
-        public static float waveInterval; // Time interval (in seconds) between each wave
+        public static float maxWaveInterval; // Time interval (in seconds) between each wave
         public static List<Transform> enemySpawnPoints;
         public static List<GEGCharacter> characters; // Data of each type of character (in GEGCharacterInst type)
 
@@ -15,7 +15,7 @@ namespace GEGFramework {
         /// Default GEGPackedData constructor
         /// </summary>
         public GEGPackedData(float waveInterval) {
-            GEGPackedData.waveInterval = waveInterval;
+            GEGPackedData.maxWaveInterval = waveInterval;
             characters = new List<GEGCharacter>();
         }
     }
