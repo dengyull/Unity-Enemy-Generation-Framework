@@ -16,7 +16,7 @@ namespace GEGFramework {
         int waveCounter;
         float waveTimer; // countdown timer for each wave
 
-        void Start() {
+        void Awake() {
             new GEGPackedData(); // initialize GEGPackedData
             UpdatePackedData();
             spawner = gameObject.GetComponent<GEGSpawner>();
@@ -28,14 +28,14 @@ namespace GEGFramework {
             // timers countdown:
             waveTimer -= Time.deltaTime;
             if (waveTimer <= 0) { // time to start next wave
-                if (!spawner.haveAliveEnemies()) {
+                if (!spawner.HaveAliveEnemies()) {
                     waveCounter++;
                     OnNewWaveStart?.Invoke(waveCounter); // broadcast event
                     waveTimer = maxWaveInterval; // reset spawn timer
                 }
                 waveTimer = 3f;
                 // player takes longer than expected...
-                Debug.Log("Poor skill");
+                // Debug.Log("Poor skill");
             }
         }
 

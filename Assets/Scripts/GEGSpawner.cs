@@ -5,10 +5,12 @@ using Random = UnityEngine.Random;
 
 namespace GEGFramework {
     /// <summary>
-    /// Realize output from GEGDifficultyManager
+    /// Integrated spawner of GEG framework
     /// </summary>
     class GEGSpawner : MonoBehaviour {
-        public string enemyTag = "Enemy";
+
+        [TagSelector]
+        public string enemyTag = ""; // tag for all enemies in the scene
 
         int totalSpawn = 0; // total number of enemies to spawn in this wave
         bool startSpawning = false, spawning = false;
@@ -27,12 +29,20 @@ namespace GEGFramework {
             }
         }
 
-        public bool haveAliveEnemies() {
+        /// <summary>
+        /// Check if there is more than one enemy still alive in this wave
+        /// </summary>
+        /// <returns>True if there is more than one enemy alive</returns>
+        public bool HaveAliveEnemies() {
             var enemies = GameObject.FindGameObjectsWithTag(enemyTag);
             if (enemies.Length == 0) return false;
             return true;
         }
 
+        /// <summary>
+        /// Coroutine for spawning a wave of enemies
+        /// </summary>
+        /// <returns></returns>
         IEnumerator SpawnEnemies() {
             spawning = true;
             if (GEGPackedData.randomSpawn) {

@@ -10,6 +10,7 @@ namespace GEGFramework {
         // Start is called before the first frame update
         void Start() {
             GEGManager.OnNewWaveStart += UpdateWaveText;
+            //GEGIntensityManager.OnIntenityChanged += UpdateIntenText;
         }
 
         // Call this function to update difficulty on UI
