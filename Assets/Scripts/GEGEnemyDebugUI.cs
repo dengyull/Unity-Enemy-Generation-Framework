@@ -4,7 +4,7 @@ using TMPro;
 
 public class GEGEnemyDebugUI : MonoBehaviour {
     // To make the UI stay the same angle
-    Quaternion angle;
+    Quaternion fixedAngle;
 
     // UI components that need to be updated
     [SerializeField] TextMeshProUGUI hpText;
@@ -17,7 +17,7 @@ public class GEGEnemyDebugUI : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         //record the initial angle 
-        angle = transform.rotation;
+        fixedAngle = transform.rotation;
 
         // Find health Script
         healthScript = transform.parent.GetComponent<GEGEnemyHealth>();
@@ -37,6 +37,6 @@ public class GEGEnemyDebugUI : MonoBehaviour {
 
     // remain the angle
     void LateUpdate() {
-        transform.rotation = angle;
+        transform.rotation = fixedAngle;
     }
 }
