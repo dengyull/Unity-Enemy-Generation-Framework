@@ -26,10 +26,10 @@ namespace GEGFramework
         float DecreaseIntensityTimer;
 
         public int RelaxDuration;
-        int CurrentRelaxDuration;
+        int LeftRelaxDuration;
         public int PeakDuration;
-        int CurrentPeakDuration;
-        public float PeakIntensity;
+        int LeftPeakDuration;
+        public float PeakThreshold;
 
         int WaveNumber;
 
@@ -54,7 +54,7 @@ namespace GEGFramework
             DecreaseIntensityTimer = 0;
             IncreaseIntensityTimer = 0;
             OnIntensityChanged?.Invoke(intensity);
-            CurrentRelaxDuration = RelaxDuration;
+            LeftRelaxDuration = RelaxDuration;
             GameStatus = GEGGameStatus.Relax;
             mulvalue = 1;
             WaveNumber = 0;
@@ -62,8 +62,8 @@ namespace GEGFramework
             CouldChange = true;
             GEGManager.OnNewWaveStart += (int _) => {
                 CouldChange = true;
-                CurrentPeakDuration--;
-                CurrentRelaxDuration--;
+                LeftPeakDuration--;
+                LeftRelaxDuration--;
             };
 
 
@@ -83,18 +83,18 @@ namespace GEGFramework
             //Debug.Log("Intensity " + intensity);
             if (GameStatus == GEGGameStatus.High)
             {
-                if ((CurrentPeakDuration <= 0)&& CouldChange)
+                if ((LeftPeakDuration <= 0)&& CouldChange)
                 {
                     GameStatus = GEGGameStatus.Relax;
                     Debug.Log("Game in Relax Mode");
-                    CurrentRelaxDuration = RelaxDuration;
+                    LeftRelaxDuration = RelaxDuration;
                     CouldChange = false;
                     RelaxM();
                 }
             }
             else if (GameStatus == GEGGameStatus.Relax)
             {
-                if ((CurrentRelaxDuration <= 0)&& CouldChange)
+                if ((LeftRelaxDuration <= 0)&& CouldChange)
                 {
                     GameStatus = GEGGameStatus.Medium;
                     Debug.Log("Game in Medium Mode");
@@ -108,12 +108,12 @@ namespace GEGFramework
                 
                 MediumExpectTimer -= Time.deltaTime;
                 //intensity = intensity + IncreaseIntensitivePerSecond * Time.deltaTime;
-                if ((intensity >= PeakIntensity)&& CouldChange)
+                if ((intensity >= PeakThreshold) && CouldChange)
                 {
                     GameStatus = GEGGameStatus.High;
                     Debug.Log("Game in High Mode");
                     CouldChange = false;
-                    CurrentPeakDuration = PeakDuration;
+                    LeftPeakDuration = PeakDuration;
                     HighM();
                 }
                 else
@@ -123,7 +123,7 @@ namespace GEGFramework
                         GameStatus = GEGGameStatus.High;
                         Debug.Log("a long time, Game in High Mode");
                         CouldChange = false;
-                        CurrentPeakDuration = PeakDuration;
+                        LeftPeakDuration = PeakDuration;
                         HighM();
                     }
                 }
