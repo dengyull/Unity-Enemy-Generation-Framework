@@ -6,12 +6,13 @@ using UnityEngine.EventSystems;
 
 namespace GEGFramework
 {
-    public interface ICustomMessageTarget : IEventSystemHandler
+    /*public interface ICustomMessageTarget : IEventSystemHandler
     {
         void IntensityIncrease(float i);
-    }
-    public class GEGIntensityManager : MonoBehaviour, ICustomMessageTarget
+    }*/
+    public class GEGIntensityManager : MonoBehaviour
     {
+        public static event Action<float> OnIntensityChanged;
         public float intensity;
         //public float IncreaseIntensitivePerSecond;
         public float DecreaseIntensitivePerSecond;
@@ -40,7 +41,7 @@ namespace GEGFramework
             High
         }
 
-        public static event Action<float> intensityIncrease;
+        //public static event Action<float> intensityIncrease;
 
         public float MediumExpectTime;
         float MediumExpectTimer;
@@ -65,9 +66,9 @@ namespace GEGFramework
             };
 
 
-            intensityIncrease += (float n) => {
+            /*intensityIncrease += (float n) => {
                 IntensityIncrease(n);
-            };
+            };*/
 
             yield return new WaitForSeconds(1);
             RelaxM();
@@ -95,7 +96,7 @@ namespace GEGFramework
                 {
                     GameStatus = GEGGameStatus.Medium;
                     Debug.Log("Game in Medium Mode");
-                    intensityIncrease?.Invoke(20);
+                    //intensityIncrease?.Invoke(20);
                     CouldChange = false;
                     MediumM();
                 } 
@@ -165,12 +166,14 @@ namespace GEGFramework
                 //Debug.Log("mulvalue 147 " + mulvalue);
                 mulvalue += (float)0.1;
                 EnemyPropertyIncrease();
-                intensity -= Time.deltaTime;
+                intensity -= DecreaseIntensitivePerSecond * Time.deltaTime;
+                OnIntensityChanged?.Invoke(intensity);
                 DecreaseIntensityTimer = 1;
             }
             else if (DecreaseIntensityTimer >= 1)
             {
                 intensity -= DecreaseIntensitivePerSecond * Time.deltaTime;
+                OnIntensityChanged?.Invoke(intensity);
             }
         }
 
@@ -222,7 +225,8 @@ namespace GEGFramework
         public void IntensityIncrease(float i)
         {
             intensity += i;
-            if(GameStatus != GEGGameStatus.Medium)
+            OnIntensityChanged?.Invoke(intensity);
+            if (GameStatus != GEGGameStatus.Medium)
             {
                 IncreaseIntensityTimer++;
             }
