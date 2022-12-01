@@ -7,10 +7,17 @@ namespace GEGFramework {
 
         public static event Action<int> OnNewWaveStart;
 
-        [SerializeField] float maxWaveInterval;
-        [SerializeField] bool randomSpawn;
-        [SerializeField] List<GEGCharacter> characters;
-        [SerializeField] List<Transform> enemySpawnPoints;
+        [Tooltip("Expected time of completion (in seconds) for each wave"), SerializeField]
+        float expectWaveTime;
+
+        [Tooltip("Enable default spawning algorithm (randomly generated)"), SerializeField]
+        bool defaultSpawning;
+
+        [Tooltip("A list of GEGCharacter scriptable objects"), SerializeField]
+        List<GEGCharacter> characters;
+
+        [Tooltip("A list of Transform objects indicating possible spawn points"), SerializeField]
+        List<Transform> enemySpawnPoints;
 
         GEGSpawner spawner;
         int waveCounter;
@@ -31,7 +38,7 @@ namespace GEGFramework {
                 if (!spawner.HaveAliveEnemies()) {
                     waveCounter++;
                     OnNewWaveStart?.Invoke(waveCounter); // broadcast event
-                    waveTimer = maxWaveInterval; // reset spawn timer
+                    waveTimer = expectWaveTime; // reset spawn timer
                 }
                 waveTimer = 3f;
                 // player takes longer than expected...
@@ -40,8 +47,8 @@ namespace GEGFramework {
         }
 
         public void UpdatePackedData() {
-            GEGPackedData.maxWaveInterval = maxWaveInterval;
-            GEGPackedData.randomSpawn = randomSpawn;
+            GEGPackedData.maxWaveInterval = expectWaveTime;
+            GEGPackedData.randomSpawn = defaultSpawning;
             GEGPackedData.characters = characters;
             GEGPackedData.enemySpawnPoints = enemySpawnPoints;
         }

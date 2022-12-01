@@ -15,10 +15,6 @@ MonoBehaviour:
   _name: ZomBear
   prefab: {fileID: 8725513158572432570, guid: 3de560fcb286ccc42bad80286196cdd5, type: 3}
   type: 1
-  propSO:
-  - {fileID: 11400000, guid: 0d6d69a00b3dbdc4b9f40d0d645bfc88, type: 2}
-  - {fileID: 11400000, guid: f1e2aed85ced79c4ab5c2acc31817d55, type: 2}
-  - {fileID: 11400000, guid: 43479b86f41ad6843b80882f303c1a77, type: 2}
-  - {fileID: 11400000, guid: d1931b6815669e440a5659c40eb548fe, type: 2}
-  nextWaveNum: 3
+  propSO: []
+  nextWaveNum: 2
   difficultyFactor: 20

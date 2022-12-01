@@ -1,31 +1,34 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.SceneManagement;
 using GEGFramework;
 
 namespace CompleteProject {
     public class GEGPlayerHealth : MonoBehaviour, IGEGController {
-        public GEGCharacter _character;
-        public GEGCharacter Character {
-            get => _character;
-            set => _character = value;
-        }
+
+        [field: SerializeField]
+        public GEGCharacter Character { get; set; }
+
+        [field: SerializeField]
+        public float Scaler { get; set; }
+
+        [field: SerializeField]
+        public bool Proportional { get; set; }
 
         public Slider healthSlider;                                 // Reference to the UI's health bar.
         public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
         public AudioClip deathClip;                                 // The audio clip to play when the player dies.
-        public float flashSpeed = 5f;                                    // The speed the damageImage will fade at.
+        public int summonCost = 50;                                 // Cost of summoning a bro to help you
+        public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
         public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
-        public float startingHealth;                                // The amount of health the player starts the game with.
+        [HideInInspector]
         public float currentHealth;                                 // The current health the player has.
-        public int summonCost = 50;                                 // Cost of summoning a bro to help you
 
         Animator anim;                                              // Reference to the Animator component.
         AudioSource playerAudio;                                    // Reference to the AudioSource component.
-        GEGPlayerMovement playerMovement;                              // Reference to the player's movement.
-        GEGPlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
+        GEGPlayerMovement playerMovement;                           // Reference to the player's movement.
+        GEGPlayerShooting playerShooting;                           // Reference to the PlayerShooting script.
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
 
@@ -37,11 +40,9 @@ namespace CompleteProject {
             playerShooting = GetComponentInChildren<GEGPlayerShooting>();
         }
 
-        void OnEnable() {
-            startingHealth = _character["PlayerHealth"].defaultValue; // Set the initial health of the player.
-            currentHealth = startingHealth;
+        void Start() {
+            currentHealth = Character["PlayerHealth"].value;
         }
-
 
         void Update() {
             // If the player has just been damaged...
@@ -56,7 +57,7 @@ namespace CompleteProject {
                     damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
             }
 
-            if (Input.GetKeyDown(KeyCode.C) && gameObject.name == "GEG Player" 
+            if (Input.GetKeyDown(KeyCode.C) && gameObject.name == "GEG Player"
                 && ScoreManager.score >= summonCost) {
                 SummonBros();
             }
@@ -83,6 +84,8 @@ namespace CompleteProject {
 
             // Reduce the current health by the damage amount.
             currentHealth -= amount;
+
+            IGEGController.valueChanged?.Invoke(amount); // Invoke this event for intensity calculation
 
             // Set the health bar's value to the current health.
             if (healthSlider != null)

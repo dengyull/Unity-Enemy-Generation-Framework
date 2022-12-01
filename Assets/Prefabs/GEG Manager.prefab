@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8170618343774549857}
   - component: {fileID: 8170618343774549858}
   - component: {fileID: 4793115993197720413}
+  - component: {fileID: 4642523825903626000}
   - component: {fileID: 8170618343774549859}
   m_Layer: 0
   m_Name: GEG Manager
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325bac1cd3b062b4b90e01bcbfd5d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaveInterval: 10
+  maxWaveInterval: 30
   randomSpawn: 1
   characters: []
   enemySpawnPoints: []
@@ -62,6 +63,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadc3ab2d5a56124784388fd1d64032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyTag: Enemy
+--- !u!114 &4642523825903626000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170618343774549855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49ee9113e0ecff44a4308078755d925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0
+  DecreaseIntensitivePerSecond: 0
+  DecreaseIntensityInterval: 0
+  IncreaseIntensityInterval: 0
+  RelaxDuration: 0
+  PeakDuration: 0
+  PeakIntensity: 0
+  GameStatus: 0
+  MediumExpectTime: 0
+  CouldChange: 0
 --- !u!114 &8170618343774549859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,5 +98,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19e8f13e257518479f6a04d857d7e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffifultyText: {fileID: 0}
+  intensityText: {fileID: 0}
   waveText: {fileID: 0}

@@ -5657,6 +5657,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4355667489594439306, guid: f4e36c0e254f6d5429589e1768986123,
         type: 3}
+      propertyPath: _scaler
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355667489594439306, guid: f4e36c0e254f6d5429589e1768986123,
+        type: 3}
+      propertyPath: _character
+      value: 
+      objectReference: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
+        type: 2}
+    - target: {fileID: 4355667489594439306, guid: f4e36c0e254f6d5429589e1768986123,
+        type: 3}
       propertyPath: damageImage
       value: 
       objectReference: {fileID: 184560969}
@@ -5665,6 +5676,17 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 995464970}
+    - target: {fileID: 4355667489594439306, guid: f4e36c0e254f6d5429589e1768986123,
+        type: 3}
+      propertyPath: _proportional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355667489594439306, guid: f4e36c0e254f6d5429589e1768986123,
+        type: 3}
+      propertyPath: <Character>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4e36c0e254f6d5429589e1768986123, type: 3}
 --- !u!1001 &8170618345559209792
@@ -5674,6 +5696,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: PeakDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: PeakIntensity
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: RelaxDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: MediumExpectTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: DecreaseIntensityInterval
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: DecreaseIntensitivePerSecond
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8170618343774549855, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}
       propertyPath: m_Name
@@ -5743,11 +5795,6 @@ PrefabInstance:
         type: 3}
       propertyPath: waveInterval
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
-      propertyPath: maxWaveInterval
-      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}

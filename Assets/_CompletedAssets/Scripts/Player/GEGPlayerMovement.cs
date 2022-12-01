@@ -4,14 +4,16 @@ using GEGFramework;
 
 
 namespace CompleteProject {
-    public class GEGPlayerMovement : MonoBehaviour, IGEGController
-    {
-        public GEGCharacter _character;
-        public GEGCharacter Character
-        {
-            get => _character;
-            set => _character = value;
-        }
+    public class GEGPlayerMovement : MonoBehaviour, IGEGController {
+        [field: SerializeField]
+        public GEGCharacter Character { get; set; }
+
+        [field: SerializeField]
+        public float Scaler { get; set; }
+
+        [field: SerializeField]
+        public bool Proportional { get; set; }
+
         public float speed;            // The speed that the player will move at.
 
 
@@ -33,9 +35,9 @@ namespace CompleteProject {
             anim = GetComponent<Animator>();
             playerRigidbody = GetComponent<Rigidbody>();
         }
-        void OnEnable()
-        {
-            speed = _character["PlayerSpeed"].defaultValue;
+
+        void OnEnable() {
+            speed = Character["PlayerSpeed"].value;
         }
 
         void FixedUpdate() {
