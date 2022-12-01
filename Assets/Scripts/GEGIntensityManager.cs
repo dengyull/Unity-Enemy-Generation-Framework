@@ -108,7 +108,7 @@ namespace GEGFramework
                 
                 MediumExpectTimer -= Time.deltaTime;
                 //intensity = intensity + IncreaseIntensitivePerSecond * Time.deltaTime;
-                if ((intensity >= PeakThreshold) && CouldChange)
+                if ((intensity >= peakThreshold) && CouldChange)
                 {
                     GameStatus = GEGGameStatus.High;
                     Debug.Log("Game in High Mode");
@@ -170,7 +170,7 @@ namespace GEGFramework
             if (DecreaseIntensityTimer >= 3)
             {
                 //Debug.Log("mulvalue 147 " + mulvalue);
-                mulvalue += 0.1f;
+                mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
                 EnemyPropertyIncrease();
                 DecreaseIntensityTimer = 1;
                 if(intensity - DecreaseIntensitivePerSecond * Time.deltaTime<=0){
@@ -275,7 +275,7 @@ namespace GEGFramework
                 {
                     foreach (GEGCharacterProperty prop in character.properties)
                     {
-                        if (prop.diffEnabled)
+                        if (prop.enabled)
                         {
                             //Debug.Log("Property Increase");
                             prop.value = prop.value + prop.value * 0.1f;
@@ -300,7 +300,7 @@ namespace GEGFramework
                     {
                         foreach (GEGCharacterProperty prop in character.properties)
                         {
-                            if (prop.diffEnabled && (prop.propName == propName))
+                            if (prop.enabled && (prop.propertyName == propName))
                             {
                                 //Debug.Log("Property Change" + propName + " index "+ index + " from "+ prop.value + " to "+ value) ;
                                 prop.value = value * mulvalue;
@@ -328,7 +328,7 @@ namespace GEGFramework
                 {
                     foreach (GEGCharacterProperty prop in character.properties)
                     {
-                        if (prop.diffEnabled)
+                        if (prop.enabled)
                         {
                             //Debug.Log("Property Decrease");
                             prop.value = prop.value + prop.value * 0.1f;
@@ -356,7 +356,7 @@ namespace GEGFramework
                     temp.Add(new KeyValuePair<int, float>(i, GEGPackedData.characters[i].diffFactor));
                 }
             }
-            GEGPackedData.characters[temp[indexs].Key].nextWaveNum = number;
+            GEGPackedData.characters[temp[indexs].Key].numNextWave = number;
         }
 
     }
