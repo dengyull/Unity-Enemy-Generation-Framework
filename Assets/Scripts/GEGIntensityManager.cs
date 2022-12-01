@@ -139,7 +139,7 @@ namespace GEGFramework
 
             if (IncreaseIntensityTimer > 3)
             {
-                mulvalue += 0.1f;
+                mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
                 //Debug.Log("mulvalue 118 " + mulvalue);
                 EnemyPropertyIncrease();
                 IncreaseIntensityTimer = 0;
@@ -257,7 +257,7 @@ namespace GEGFramework
             CurrentIncreaseIntensityInterval = 0;
             if (IncreaseIntensityTimer > 3)
             {
-                mulvalue -= 0.1f;
+                mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
                 EnemyPropertyDecrease();
                 IncreaseIntensityTimer = 0;
             }
