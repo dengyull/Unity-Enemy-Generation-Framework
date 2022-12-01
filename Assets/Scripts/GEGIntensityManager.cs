@@ -16,24 +16,24 @@ namespace GEGFramework
         [Range(0, 100)]
         public float intensity;
         //public float IncreaseIntensitivePerSecond;
-        public float DecreaseIntensitivePerSecond;
+        public float decreaseIntensitivePerSecond;
 
-        public float DecreaseIntensityInterval;
-        float CurrentDecreaseIntensityInterval;
-        public float IncreaseIntensityInterval;
-        float CurrentIncreaseIntensityInterval;
-        float IncreaseIntensityTimer;
-        float DecreaseIntensityTimer;
+        public float decreaseIntensityInterval;
+        float currentDecreaseIntensityInterval;
+        public float increaseIntensityInterval;
+        float currentIncreaseIntensityInterval;
+        float increaseIntensityTimer;
+        float decreaseIntensityTimer;
 
-        public int RelaxDuration;
-        int LeftRelaxDuration;
-        public int PeakDuration;
-        int LeftPeakDuration;
+        public int relaxDuration;
+        int leftRelaxDuration;
+        public int peakDuration;
+        int leftPeakDuration;
         public float peakThreshold;
 
-        int WaveNumber;
+        int waveNumber;
 
-        public float mulvalue;
+        float mulvalue;
         public GEGGameStatus GameStatus;
         public enum GEGGameStatus
         {
@@ -44,26 +44,26 @@ namespace GEGFramework
 
         //public static event Action<float> intensityIncrease;
 
-        public float MediumExpectTime;
-        float MediumExpectTimer;
-        public bool CouldChange;
+        public float mediumExpectTime;
+        float mediumExpectTimer;
+        bool couldChange;
 
         // Start is called before the first frame update
         IEnumerator Start()
         {
-            DecreaseIntensityTimer = 0;
-            IncreaseIntensityTimer = 0;
+            decreaseIntensityTimer = 0;
+            increaseIntensityTimer = 0;
             OnIntensityChanged?.Invoke(intensity);
-            LeftRelaxDuration = RelaxDuration;
+            leftRelaxDuration = relaxDuration;
             GameStatus = GEGGameStatus.Relax;
             mulvalue = 1;
-            WaveNumber = 0;
-            MediumExpectTimer = MediumExpectTime;
-            CouldChange = true;
+            waveNumber = 0;
+            mediumExpectTimer = mediumExpectTime;
+            couldChange = true;
             GEGManager.OnNewWaveStart += (int _) => {
-                CouldChange = true;
-                LeftPeakDuration--;
-                LeftRelaxDuration--;
+                couldChange = true;
+                leftPeakDuration--;
+                leftRelaxDuration--;
             };
 
 
@@ -83,47 +83,47 @@ namespace GEGFramework
             //Debug.Log("Intensity " + intensity);
             if (GameStatus == GEGGameStatus.High)
             {
-                if ((LeftPeakDuration <= 0)&& CouldChange)
+                if ((leftPeakDuration <= 0)&& couldChange)
                 {
                     GameStatus = GEGGameStatus.Relax;
                     Debug.Log("Game in Relax Mode");
-                    LeftRelaxDuration = RelaxDuration;
-                    CouldChange = false;
+                    leftRelaxDuration = relaxDuration;
+                    couldChange = false;
                     StartRelaxMode();
                 }
             }
             else if (GameStatus == GEGGameStatus.Relax)
             {
-                if ((LeftRelaxDuration <= 0)&& CouldChange)
+                if ((leftRelaxDuration <= 0)&& couldChange)
                 {
                     GameStatus = GEGGameStatus.Medium;
                     Debug.Log("Game in Medium Mode");
                     //intensityIncrease?.Invoke(20);
-                    CouldChange = false;
+                    couldChange = false;
                     StartMediumMode();
                 } 
             }
             else if (GameStatus == GEGGameStatus.Medium)
             {
                 
-                MediumExpectTimer -= Time.deltaTime;
+                mediumExpectTimer -= Time.deltaTime;
                 //intensity = intensity + IncreaseIntensitivePerSecond * Time.deltaTime;
-                if ((intensity >= peakThreshold) && CouldChange)
+                if ((intensity >= peakThreshold) && couldChange)
                 {
                     GameStatus = GEGGameStatus.High;
                     Debug.Log("Game in High Mode");
-                    CouldChange = false;
-                    LeftPeakDuration = PeakDuration;
+                    couldChange = false;
+                    leftPeakDuration = peakDuration;
                     StartHighMode();
                 }
                 else
                 {
-                    if (MediumExpectTimer <= 0 && CouldChange)
+                    if (mediumExpectTimer <= 0 && couldChange)
                     {
                         GameStatus = GEGGameStatus.High;
                         Debug.Log("a long time, Game in High Mode");
-                        CouldChange = false;
-                        LeftPeakDuration = PeakDuration;
+                        couldChange = false;
+                        leftPeakDuration = peakDuration;
                         StartHighMode();
                     }
                 }
@@ -137,58 +137,58 @@ namespace GEGFramework
                 IntensityIncrease(5*Time.deltaTime);
             }
 
-            if (IncreaseIntensityTimer > 3)
+            if (increaseIntensityTimer > 3)
             {
                 mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
                 //Debug.Log("mulvalue 118 " + mulvalue);
                 EnemyPropertyIncrease();
-                IncreaseIntensityTimer = 0;
-                CurrentDecreaseIntensityInterval = 0;
-                DecreaseIntensityTimer = 0;
+                increaseIntensityTimer = 0;
+                currentDecreaseIntensityInterval = 0;
+                decreaseIntensityTimer = 0;
             }
 
             //Only Intensity Increase = 0, we will start decrease Intensity timer
-            if (IncreaseIntensityTimer == 0)
+            if (increaseIntensityTimer == 0)
             {
-                CurrentDecreaseIntensityInterval += Time.deltaTime;
-                if (CurrentDecreaseIntensityInterval >= DecreaseIntensityInterval)
+                currentDecreaseIntensityInterval += Time.deltaTime;
+                if (currentDecreaseIntensityInterval >= decreaseIntensityInterval)
                 {
-                    DecreaseIntensityTimer++;
-                    CurrentDecreaseIntensityInterval = 0;
+                    decreaseIntensityTimer++;
+                    currentDecreaseIntensityInterval = 0;
                 }
             }
             else
             {
-                CurrentIncreaseIntensityInterval += Time.deltaTime;
-                if (CurrentIncreaseIntensityInterval >= IncreaseIntensityInterval)
+                currentIncreaseIntensityInterval += Time.deltaTime;
+                if (currentIncreaseIntensityInterval >= increaseIntensityInterval)
                 {
-                    CurrentIncreaseIntensityInterval = 0;
-                    IncreaseIntensityTimer = 0;
+                    currentIncreaseIntensityInterval = 0;
+                    increaseIntensityTimer = 0;
                 }
             }
             //The Intensity value does not increase for a long time, increase the attributes of the enemy
-            if (DecreaseIntensityTimer >= 3)
+            if (decreaseIntensityTimer >= 3)
             {
                 //Debug.Log("mulvalue 147 " + mulvalue);
                 mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
                 EnemyPropertyIncrease();
-                DecreaseIntensityTimer = 1;
-                if(intensity - DecreaseIntensitivePerSecond * Time.deltaTime<=0){
+                decreaseIntensityTimer = 1;
+                if(intensity - decreaseIntensitivePerSecond * Time.deltaTime<=0){
 
                 } else {
-                    intensity = intensity - DecreaseIntensitivePerSecond * Time.deltaTime;
+                    intensity = intensity - decreaseIntensitivePerSecond * Time.deltaTime;
                     OnIntensityChanged?.Invoke(intensity);
                 }
-                //intensity = Mathf.Clamp(intensity - DecreaseIntensitivePerSecond * Time.deltaTime, 0, 100);
+                //intensity = Mathf.Clamp(intensity - decreaseIntensitivePerSecond * Time.deltaTime, 0, 100);
                 
                 
             }
-            else if (DecreaseIntensityTimer >= 1)
+            else if (decreaseIntensityTimer >= 1)
             {
-                if(intensity - DecreaseIntensitivePerSecond * Time.deltaTime<=0){
+                if(intensity - decreaseIntensitivePerSecond * Time.deltaTime<=0){
 
                 } else {
-                    intensity = intensity - DecreaseIntensitivePerSecond * Time.deltaTime;
+                    intensity = intensity - decreaseIntensitivePerSecond * Time.deltaTime;
                     OnIntensityChanged?.Invoke(intensity);
                 }
             }
@@ -241,25 +241,25 @@ namespace GEGFramework
 
         public void IntensityIncrease(float i)
         {
-            if(intensity - DecreaseIntensitivePerSecond * Time.deltaTime<=0){
+            if(intensity - decreaseIntensitivePerSecond * Time.deltaTime<=0){
 
                 } else {
-                    intensity = intensity - DecreaseIntensitivePerSecond * Time.deltaTime;
+                    intensity = intensity - decreaseIntensitivePerSecond * Time.deltaTime;
                     OnIntensityChanged?.Invoke(intensity);
                 }
         
             if (GameStatus != GEGGameStatus.Medium)
             {
-                IncreaseIntensityTimer++;
+                increaseIntensityTimer++;
             }
-            CurrentDecreaseIntensityInterval = 0;
-            DecreaseIntensityTimer = 0;
-            CurrentIncreaseIntensityInterval = 0;
-            if (IncreaseIntensityTimer > 3)
+            currentDecreaseIntensityInterval = 0;
+            decreaseIntensityTimer = 0;
+            currentIncreaseIntensityInterval = 0;
+            if (increaseIntensityTimer > 3)
             {
                 mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
                 EnemyPropertyDecrease();
-                IncreaseIntensityTimer = 0;
+                increaseIntensityTimer = 0;
             }
         }
 
@@ -347,16 +347,18 @@ namespace GEGFramework
         /// <returns></returns>
         void EnemyNumberUpdate(int indexs, int number)
         {
-            List<KeyValuePair<int, float>> temp = new List<KeyValuePair<int, float>>();
-            
+            int t = 0;
             for (int i = 0; i < GEGPackedData.characters.Count; i++)
             {
                 if (GEGPackedData.characters[i].type == GEGCharacterType.Enemy)
                 {
-                    temp.Add(new KeyValuePair<int, float>(i, GEGPackedData.characters[i].diffFactor));
+                    if (t == indexs)
+                    {
+                        GEGPackedData.characters[i].numNextWave = number;
+                    }
+                    t++;
                 }
             }
-            GEGPackedData.characters[temp[indexs].Key].numNextWave = number;
         }
 
     }
