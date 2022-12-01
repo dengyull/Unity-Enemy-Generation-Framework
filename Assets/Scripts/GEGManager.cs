@@ -40,7 +40,6 @@ namespace GEGFramework {
                     OnNewWaveStart?.Invoke(waveCounter); // broadcast event
                     waveTimer = expectWaveTime; // reset spawn timer
                 }
-                waveTimer = 3f;
                 // player takes longer than expected...
                 // Debug.Log("Poor skill");
             }

@@ -29,8 +29,8 @@ namespace CompleteProject {
         }
 
         void OnEnable() {
-            nav.speed = Character["ZomBearSpeed"].value;
-            nav.acceleration = nav.speed / 10;
+            nav.speed = Character["EnemySpeed"].value;
+            nav.acceleration = Mathf.Clamp(nav.speed / 10, 8, 15);
         }
 
         void Update() {

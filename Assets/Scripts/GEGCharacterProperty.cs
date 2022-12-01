@@ -7,7 +7,8 @@ namespace GEGFramework {
 
         public string propertyName;
         public bool enabled;
-        public float value; // template value to generate the property value in each instance
+        public float value;
+        public float defaultValue;
         public float importance;
 
         public override string ToString() => String.Format("{0}({1}):{2}", propertyName, value, importance);

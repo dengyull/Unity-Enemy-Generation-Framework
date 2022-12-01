@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aca71c616109d947aa6664d7f1c9e74, type: 3}
   m_Name: ZomBunney
   m_EditorClassIdentifier: 
-  _name: ZomBunny
   prefab: {fileID: 6935001879544263520, guid: 3cbbf6fa96158ed4ebf2ad3d6ab66ee1, type: 3}
   type: 1
-  propSO: []
-  nextWaveNum: 2
-  difficultyFactor: 20
+  properties:
+  - {fileID: 11400000, guid: b3ab28b28bad143838a9a3ad084b5765, type: 2}
+  - {fileID: 11400000, guid: 9dfe3224683b3d44da85b32acc11a476, type: 2}
+  - {fileID: 11400000, guid: 10006e5a45b3446dd8255941afcfdd52, type: 2}
+  - {fileID: 11400000, guid: 8e41f615e86cc495db8b989000ae1f41, type: 2}
+  numNextWave: 0

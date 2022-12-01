@@ -34,8 +34,8 @@ namespace CompleteProject {
         }
 
         void OnEnable() {
-            attackDamage = (int)Character["ZomBearAttackDamage"].value;
-            timeBetweenAttacks = Character["ZomBearAttackRate"].value;
+            attackDamage = (int)Character["EnemyDamage"].value;
+            timeBetweenAttacks = Character["EnemyAttackRate"].value;
         }
 
 

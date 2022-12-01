@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aca71c616109d947aa6664d7f1c9e74, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  _name: Player
   prefab: {fileID: 4355667489580938530, guid: f4e36c0e254f6d5429589e1768986123, type: 3}
   type: 0
-  propSO:
-  - {fileID: 11400000, guid: 3ec84a3763c05c449886e6246bca99f4, type: 2}
-  - {fileID: 11400000, guid: 0ce6c3375ccca9640b6c187b4c7af17e, type: 2}
-  - {fileID: 11400000, guid: 89783b8f90db9ab4491bc6c4ea122d6d, type: 2}
-  - {fileID: 11400000, guid: 9e2fd56adfad8134a9f9316a057069e0, type: 2}
-  - {fileID: 11400000, guid: 57ab1c0a5a3fb6644bae531a3a5ba419, type: 2}
-  nextWaveNum: 0
-  difficultyFactor: -1
+  properties:
+  - {fileID: 11400000, guid: 61cfcfac14a0a634fb5e82ef976412a0, type: 2}
+  - {fileID: 11400000, guid: 64373c56a02c4ec4f9ec50bb78cfc41b, type: 2}
+  - {fileID: 11400000, guid: ffc5cd3ca7c27384eaeb9c5ac82ebdff, type: 2}
+  - {fileID: 11400000, guid: 524073afef54cf24ba292490ffffbf03, type: 2}
+  - {fileID: 11400000, guid: e0cffdc6c2a1abd4f8f32d708ee45d22, type: 2}
+  numNextWave: 0

@@ -49,7 +49,7 @@ namespace GEGFramework
         bool couldChange;
 
         // Start is called before the first frame update
-        IEnumerator Start()
+        void Start()
         {
             decreaseIntensityTimer = 0;
             increaseIntensityTimer = 0;
@@ -60,7 +60,8 @@ namespace GEGFramework
             waveNumber = 0;
             mediumExpectTimer = mediumExpectTime;
             couldChange = true;
-            GEGManager.OnNewWaveStart += (int _) => {
+            GEGManager.OnNewWaveStart += (int _) =>
+            {
                 couldChange = true;
                 leftPeakDuration--;
                 leftRelaxDuration--;
@@ -70,8 +71,6 @@ namespace GEGFramework
             /*intensityIncrease += (float n) => {
                 IntensityIncrease(n);
             };*/
-
-            yield return new WaitForSeconds(1);
             StartRelaxMode();
 
         }
@@ -80,10 +79,15 @@ namespace GEGFramework
         // Update is called once per frame
         void Update()
         {
+            if (Input.GetKey(KeyCode.Q))
+            {
+                IntensityIncrease(5 * Time.deltaTime);
+                OnIntensityChanged?.Invoke(intensity);
+            }
             //Debug.Log("Intensity " + intensity);
             if (GameStatus == GEGGameStatus.High)
             {
-                if ((leftPeakDuration <= 0)&& couldChange)
+                if ((leftPeakDuration <= 0) && couldChange)
                 {
                     GameStatus = GEGGameStatus.Relax;
                     Debug.Log("Game in Relax Mode");
@@ -94,18 +98,18 @@ namespace GEGFramework
             }
             else if (GameStatus == GEGGameStatus.Relax)
             {
-                if ((leftRelaxDuration <= 0)&& couldChange)
+                if ((leftRelaxDuration <= 0) && couldChange)
                 {
                     GameStatus = GEGGameStatus.Medium;
                     Debug.Log("Game in Medium Mode");
                     //intensityIncrease?.Invoke(20);
                     couldChange = false;
                     StartMediumMode();
-                } 
+                }
             }
             else if (GameStatus == GEGGameStatus.Medium)
             {
-                
+
                 mediumExpectTimer -= Time.deltaTime;
                 //intensity = intensity + IncreaseIntensitivePerSecond * Time.deltaTime;
                 if ((intensity >= peakThreshold) && couldChange)
@@ -127,19 +131,11 @@ namespace GEGFramework
                         StartHighMode();
                     }
                 }
-            } else
-            {
-
-
-            }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                IntensityIncrease(5*Time.deltaTime);
             }
 
             if (increaseIntensityTimer > 3)
             {
-                mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
+                mulvalue = Mathf.Clamp(mulvalue + 0.1f, 0.5f, 3f);
                 //Debug.Log("mulvalue 118 " + mulvalue);
                 EnemyPropertyIncrease();
                 increaseIntensityTimer = 0;
@@ -170,24 +166,30 @@ namespace GEGFramework
             if (decreaseIntensityTimer >= 3)
             {
                 //Debug.Log("mulvalue 147 " + mulvalue);
-                mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
+                mulvalue = Mathf.Clamp(mulvalue + 0.1f, 0.5f, 3f);
                 EnemyPropertyIncrease();
                 decreaseIntensityTimer = 1;
-                if(intensity - decreaseIntensitivePerSecond * Time.deltaTime<=0){
+                if (intensity - decreaseIntensitivePerSecond * Time.deltaTime <= 0)
+                {
 
-                } else {
+                }
+                else
+                {
                     intensity = intensity - decreaseIntensitivePerSecond * Time.deltaTime;
                     OnIntensityChanged?.Invoke(intensity);
                 }
                 //intensity = Mathf.Clamp(intensity - decreaseIntensitivePerSecond * Time.deltaTime, 0, 100);
-                
-                
+
+
             }
             else if (decreaseIntensityTimer >= 1)
             {
-                if(intensity - decreaseIntensitivePerSecond * Time.deltaTime<=0){
+                if (intensity - decreaseIntensitivePerSecond * Time.deltaTime <= 0)
+                {
 
-                } else {
+                }
+                else
+                {
                     intensity = intensity - decreaseIntensitivePerSecond * Time.deltaTime;
                     OnIntensityChanged?.Invoke(intensity);
                 }
@@ -199,10 +201,10 @@ namespace GEGFramework
             EnemyNumberUpdate(0, 2);
             EnemyNumberUpdate(1, 0);
             EnemyNumberUpdate(2, 0);
-            EnemyPropertyChange("ZomBearHealth", 0, 100);
-            EnemyPropertyChange("ZomBearSpeed", 0, 4);
-            EnemyPropertyChange("ZomBearAttackDamage", 0, 10);
-            EnemyPropertyChange("ZomBearAttackRate", 0, 0.7f);
+            EnemyPropertyChange("EnemyHealth", 0, 100);
+            EnemyPropertyChange("EnemySpeed", 0, 4);
+            EnemyPropertyChange("EnemyDamage", 0, 10);
+            EnemyPropertyChange("EnemyAttackRate", 0, 0.7f);
         }
         void StartMediumMode()
         {
@@ -210,14 +212,15 @@ namespace GEGFramework
             EnemyNumberUpdate(0, 2);
             EnemyNumberUpdate(1, 2);
             EnemyNumberUpdate(2, 0);
-            EnemyPropertyChange("ZomBearHealth", 0, 120);
-            EnemyPropertyChange("ZomBearSpeed", 0, 6);
-            EnemyPropertyChange("ZomBearAttackDamage", 0, 20);
-            EnemyPropertyChange("ZomBearAttackRate", 0, 0.8f);
-            EnemyPropertyChange("ZomBearHealth", 1, 100);
-            EnemyPropertyChange("ZomBearSpeed", 1, 8);
-            EnemyPropertyChange("ZomBearAttackDamage", 1, 20);
-            EnemyPropertyChange("ZomBearAttackRate", 0, 1f);
+            EnemyPropertyChange("EnemyHealth", 0, 120);
+            EnemyPropertyChange("EnemySpeed", 0, 6);
+            EnemyPropertyChange("EnemyDamage", 0, 20);
+            EnemyPropertyChange("EnemyAttackRate", 0, 0.8f);
+
+            //EnemyPropertyChange("EnemyHealth", 1, 100);
+            //EnemyPropertyChange("EnemySpeed", 1, 8);
+            //EnemyPropertyChange("EnemyDamage", 1, 20);
+            //EnemyPropertyChange("EnemyAttackRate", 0, 1f);
         }
 
         void StartHighMode()
@@ -225,29 +228,30 @@ namespace GEGFramework
             EnemyNumberUpdate(0, 2);
             EnemyNumberUpdate(1, 2);
             EnemyNumberUpdate(2, 1);
-            EnemyPropertyChange("ZomBearHealth", 0, 150);
-            EnemyPropertyChange("ZomBearSpeed", 0, 8);
-            EnemyPropertyChange("ZomBearAttackDamage", 0, 30);
-            EnemyPropertyChange("ZomBearAttackRate", 0, 1f);
-            EnemyPropertyChange("ZomBearHealth", 1, 120);
-            EnemyPropertyChange("ZomBearSpeed", 1, 8);
-            EnemyPropertyChange("ZomBearAttackDamage", 1, 25);
-            EnemyPropertyChange("ZomBearAttackRate", 1, 1.5f);
-            EnemyPropertyChange("ZomBearHealth", 2, 150);
-            EnemyPropertyChange("ZomBearSpeed", 2, 15);
-            EnemyPropertyChange("ZomBearAttackDamage", 2, 30);
-            EnemyPropertyChange("ZomBearAttackRate", 2, 2f);
+            EnemyPropertyChange("EnemyHealth", 0, 150);
+            EnemyPropertyChange("EnemySpeed", 0, 8);
+            EnemyPropertyChange("EnemyDamage", 0, 30);
+            EnemyPropertyChange("EnemyAttackRate", 0, 1f);
+
+            //EnemyPropertyChange("EnemyHealth", 1, 120);
+            //EnemyPropertyChange("EnemySpeed", 1, 8);
+            //EnemyPropertyChange("EnemyDamage", 1, 25);
+            //EnemyPropertyChange("EnemyAttackRate", 1, 1.5f);
+
+            //EnemyPropertyChange("EnemyHealth", 2, 150);
+            //EnemyPropertyChange("EnemySpeed", 2, 15);
+            //EnemyPropertyChange("EnemyDamage", 2, 30);
+            //EnemyPropertyChange("EnemyAttackRate", 2, 2f);
         }
 
         public void IntensityIncrease(float i)
         {
-            if(intensity - decreaseIntensitivePerSecond * Time.deltaTime<=0){
+            if (intensity + i <= 100)
+            {
+                intensity = intensity + i;
+                OnIntensityChanged?.Invoke(intensity);
+            }
 
-                } else {
-                    intensity = intensity - decreaseIntensitivePerSecond * Time.deltaTime;
-                    OnIntensityChanged?.Invoke(intensity);
-                }
-        
             if (GameStatus != GEGGameStatus.Medium)
             {
                 increaseIntensityTimer++;
@@ -257,7 +261,7 @@ namespace GEGFramework
             currentIncreaseIntensityInterval = 0;
             if (increaseIntensityTimer > 3)
             {
-                mulvalue += Mathf.Clamp(0.1f,0.5f,3f);
+                mulvalue = Mathf.Clamp(mulvalue + 0.1f, 0.5f, 3f);
                 EnemyPropertyDecrease();
                 increaseIntensityTimer = 0;
             }
@@ -296,7 +300,7 @@ namespace GEGFramework
             {
                 if (character.type == GEGCharacterType.Enemy)
                 {
-                    if(i == index)
+                    if (i == index)
                     {
                         foreach (GEGCharacterProperty prop in character.properties)
                         {
@@ -306,7 +310,8 @@ namespace GEGFramework
                                 prop.value = value * mulvalue;
                             }
                         }
-                    } else
+                    }
+                    else
                     {
                         i++;
                     }

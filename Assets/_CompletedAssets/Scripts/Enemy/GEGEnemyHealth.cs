@@ -38,7 +38,7 @@ namespace CompleteProject {
         }
 
         void OnEnable() {
-            startingHealth = (int)Character["ZomBearHealth"].value;
+            startingHealth = (int)Character["EnemyHealth"].value;
             // Setting the current health when the enemy first spawns.
             currentHealth = startingHealth;
         }

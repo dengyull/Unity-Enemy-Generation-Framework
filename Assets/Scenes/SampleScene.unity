@@ -5655,6 +5655,12 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4355667489594439305, guid: f4e36c0e254f6d5429589e1768986123,
+        type: 3}
+      propertyPath: <Character>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
+        type: 2}
     - target: {fileID: 4355667489594439306, guid: f4e36c0e254f6d5429589e1768986123,
         type: 3}
       propertyPath: _scaler
@@ -5682,6 +5688,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4355667489594439306, guid: f4e36c0e254f6d5429589e1768986123,
+        type: 3}
+      propertyPath: <Character>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
+        type: 2}
+    - target: {fileID: 8005475813845941821, guid: f4e36c0e254f6d5429589e1768986123,
         type: 3}
       propertyPath: <Character>k__BackingField
       value: 
@@ -5795,6 +5807,16 @@ PrefabInstance:
         type: 3}
       propertyPath: waveInterval
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: expectWaveTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: defaultSpawning
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170618343774549858, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}

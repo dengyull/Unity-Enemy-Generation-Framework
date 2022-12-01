@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb41d8a4b25f7b47a8965345a7e5170, type: 3}
   m_Name: Player Damage
   m_EditorClassIdentifier: 
-  propName: PlayerDamage
+  propertyName: PlayerDamage
   enabled: 1
   value: 20
   importance: 30

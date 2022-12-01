@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325bac1cd3b062b4b90e01bcbfd5d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaveInterval: 30
-  randomSpawn: 1
+  expectWaveTime: 0
+  defaultSpawning: 0
   characters: []
   enemySpawnPoints: []
 --- !u!114 &4793115993197720413
@@ -77,15 +77,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 0
-  DecreaseIntensitivePerSecond: 0
-  DecreaseIntensityInterval: 0
-  IncreaseIntensityInterval: 0
-  RelaxDuration: 0
-  PeakDuration: 0
-  PeakIntensity: 0
+  decreaseIntensitivePerSecond: 1
+  decreaseIntensityInterval: 10
+  increaseIntensityInterval: 0
+  relaxDuration: 2
+  peakDuration: 3
+  peakThreshold: 60
   GameStatus: 0
-  MediumExpectTime: 0
-  CouldChange: 0
+  mediumExpectTime: 120
 --- !u!114 &8170618343774549859
 MonoBehaviour:
   m_ObjectHideFlags: 0
