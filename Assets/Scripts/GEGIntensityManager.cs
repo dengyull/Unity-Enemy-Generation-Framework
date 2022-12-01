@@ -29,7 +29,7 @@ namespace GEGFramework
         int LeftRelaxDuration;
         public int PeakDuration;
         int LeftPeakDuration;
-        public float PeakThreshold;
+        public float peakThreshold;
 
         int WaveNumber;
 
@@ -72,7 +72,7 @@ namespace GEGFramework
             };*/
 
             yield return new WaitForSeconds(1);
-            RelaxM();
+            StartRelaxMode();
 
         }
 
@@ -172,14 +172,25 @@ namespace GEGFramework
                 //Debug.Log("mulvalue 147 " + mulvalue);
                 mulvalue += 0.1f;
                 EnemyPropertyIncrease();
-                intensity = Mathf.Clamp(intensity - DecreaseIntensitivePerSecond * Time.deltaTime, 0, 100);
-                OnIntensityChanged?.Invoke(intensity);
                 DecreaseIntensityTimer = 1;
+                if(intensity - DecreaseIntensitivePerSecond * Time.deltaTime<=0){
+
+                } else {
+                    intensity = intensity - DecreaseIntensitivePerSecond * Time.deltaTime;
+                    OnIntensityChanged?.Invoke(intensity);
+                }
+                //intensity = Mathf.Clamp(intensity - DecreaseIntensitivePerSecond * Time.deltaTime, 0, 100);
+                
+                
             }
             else if (DecreaseIntensityTimer >= 1)
             {
-                intensity = Mathf.Clamp(intensity - DecreaseIntensitivePerSecond * Time.deltaTime, 0, 100);
-                OnIntensityChanged?.Invoke(intensity);
+                if(intensity - DecreaseIntensitivePerSecond * Time.deltaTime<=0){
+
+                } else {
+                    intensity = intensity - DecreaseIntensitivePerSecond * Time.deltaTime;
+                    OnIntensityChanged?.Invoke(intensity);
+                }
             }
         }
 
@@ -230,8 +241,13 @@ namespace GEGFramework
 
         public void IntensityIncrease(float i)
         {
-            intensity = Mathf.Clamp(intensity + i, 0, 100);
-            OnIntensityChanged?.Invoke(intensity);
+            if(intensity - DecreaseIntensitivePerSecond * Time.deltaTime<=0){
+
+                } else {
+                    intensity = intensity - DecreaseIntensitivePerSecond * Time.deltaTime;
+                    OnIntensityChanged?.Invoke(intensity);
+                }
+        
             if (GameStatus != GEGGameStatus.Medium)
             {
                 IncreaseIntensityTimer++;
@@ -257,7 +273,7 @@ namespace GEGFramework
             {
                 if (character.type == GEGCharacterType.Enemy)
                 {
-                    foreach (GEGCharacterProperty prop in character.propSO)
+                    foreach (GEGCharacterProperty prop in character.properties)
                     {
                         if (prop.diffEnabled)
                         {
@@ -282,7 +298,7 @@ namespace GEGFramework
                 {
                     if(i == index)
                     {
-                        foreach (GEGCharacterProperty prop in character.propSO)
+                        foreach (GEGCharacterProperty prop in character.properties)
                         {
                             if (prop.diffEnabled && (prop.propName == propName))
                             {
@@ -310,7 +326,7 @@ namespace GEGFramework
             {
                 if (character.type == GEGCharacterType.Enemy)
                 {
-                    foreach (GEGCharacterProperty prop in character.propSO)
+                    foreach (GEGCharacterProperty prop in character.properties)
                     {
                         if (prop.diffEnabled)
                         {
