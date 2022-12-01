@@ -89,7 +89,7 @@ namespace GEGFramework
                     Debug.Log("Game in Relax Mode");
                     LeftRelaxDuration = RelaxDuration;
                     CouldChange = false;
-                    RelaxM();
+                    StartRelaxMode();
                 }
             }
             else if (GameStatus == GEGGameStatus.Relax)
@@ -100,7 +100,7 @@ namespace GEGFramework
                     Debug.Log("Game in Medium Mode");
                     //intensityIncrease?.Invoke(20);
                     CouldChange = false;
-                    MediumM();
+                    StartMediumMode();
                 } 
             }
             else if (GameStatus == GEGGameStatus.Medium)
@@ -114,7 +114,7 @@ namespace GEGFramework
                     Debug.Log("Game in High Mode");
                     CouldChange = false;
                     LeftPeakDuration = PeakDuration;
-                    HighM();
+                    StartHighMode();
                 }
                 else
                 {
@@ -124,7 +124,7 @@ namespace GEGFramework
                         Debug.Log("a long time, Game in High Mode");
                         CouldChange = false;
                         LeftPeakDuration = PeakDuration;
-                        HighM();
+                        StartHighMode();
                     }
                 }
             } else
@@ -183,7 +183,7 @@ namespace GEGFramework
             }
         }
 
-        void RelaxM()
+        void StartRelaxMode()
         {
             EnemyNumberUpdate(0, 2);
             EnemyNumberUpdate(1, 0);
@@ -193,7 +193,7 @@ namespace GEGFramework
             EnemyPropertyChange("ZomBearAttackDamage", 0, 10);
             EnemyPropertyChange("ZomBearAttackRate", 0, 0.7f);
         }
-        void MediumM()
+        void StartMediumMode()
         {
 
             EnemyNumberUpdate(0, 2);
@@ -209,7 +209,7 @@ namespace GEGFramework
             EnemyPropertyChange("ZomBearAttackRate", 0, 1f);
         }
 
-        void HighM()
+        void StartHighMode()
         {
             EnemyNumberUpdate(0, 2);
             EnemyNumberUpdate(1, 2);
