@@ -50,9 +50,9 @@ namespace GEGFramework {
                 List<(GameObject Prefab, int Num)> temp = new List<(GameObject, int)>();
 
                 foreach (GEGCharacter c in GEGPackedData.characters) {
-                    if (c.nextWaveNum > 0 && c.type != GEGCharacterType.Player) {
-                        temp.Add((c.prefab, c.nextWaveNum)); // populate temp array
-                        totalSpawn += c.nextWaveNum;
+                    if (c.numNextWave > 0 && c.type != GEGCharacterType.Player) {
+                        temp.Add((c.prefab, c.numNextWave)); // populate temp array
+                        totalSpawn += c.numNextWave;
                     }
                 }
                 while (totalSpawn > 0) { // while temp is not empty

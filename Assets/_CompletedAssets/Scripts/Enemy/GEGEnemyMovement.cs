@@ -4,11 +4,15 @@ using GEGFramework;
 
 namespace CompleteProject {
     public class GEGEnemyMovement : MonoBehaviour, IGEGController {
-        public GEGCharacter _character;
-        public GEGCharacter Character {
-            get => _character;
-            set => _character = value;
-        }
+
+        [field: SerializeField]
+        public GEGCharacter Character { get; set; }
+
+        [field: SerializeField]
+        public float Scaler { get; set; }
+
+        [field: SerializeField]
+        public bool Proportional { get; set; }
 
         Transform player;                  // Reference to the player's position.
         GEGPlayerHealth playerHealth;      // Reference to the player's health.
@@ -25,7 +29,8 @@ namespace CompleteProject {
         }
 
         void OnEnable() {
-            nav.speed = _character["ZomBearSpeed"].value;
+            nav.speed = Character["ZomBearSpeed"].value;
+            nav.acceleration = nav.speed / 10;
         }
 
         void Update() {

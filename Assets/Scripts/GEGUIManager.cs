@@ -10,12 +10,12 @@ namespace GEGFramework {
         // Start is called before the first frame update
         void Start() {
             GEGManager.OnNewWaveStart += UpdateWaveText;
-            //GEGIntensityManager.OnIntenityChanged += UpdateIntenText;
+            GEGIntensityManager.OnIntensityChanged += UpdateIntenText;
         }
 
         // Call this function to update difficulty on UI
-        void UpdateIntenText(int currentInten) {
-            intensityText.text = "Intensity: " + currentInten;
+        void UpdateIntenText(float currentInten) {
+            intensityText.text = "Intensity: " + Mathf.RoundToInt(currentInten);
         }
 
         void UpdateWaveText(int waveNum) {

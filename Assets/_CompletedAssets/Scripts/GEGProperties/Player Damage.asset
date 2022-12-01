@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e48f4858866fe34d8500404290a9f82, type: 3}
-  m_Name: GEGPlayerHealth
+  m_Script: {fileID: 11500000, guid: adb41d8a4b25f7b47a8965345a7e5170, type: 3}
+  m_Name: Player Damage
   m_EditorClassIdentifier: 
-  value: 100
-  defaultValue: 100
-  propName: PlayerHealth
-  importance: 20
-  diffEnabled: 1
+  propName: PlayerDamage
+  enabled: 1
+  value: 20
+  importance: 30

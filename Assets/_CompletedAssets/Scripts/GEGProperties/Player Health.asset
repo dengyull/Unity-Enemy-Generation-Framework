@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 917bf852c9d1f434492924896043e79f, type: 3}
-  m_Name: GEGZomBearSpeed
+  m_Script: {fileID: 11500000, guid: adb41d8a4b25f7b47a8965345a7e5170, type: 3}
+  m_Name: Player Health
   m_EditorClassIdentifier: 
-  value: 3
-  defaultValue: 3
-  propName: ZomBearSpeed
-  importance: 20
-  diffEnabled: 1
+  propName: PlayerHealth
+  enabled: 1
+  value: 100
+  importance: 50
