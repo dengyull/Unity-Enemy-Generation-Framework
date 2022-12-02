@@ -5227,12 +5227,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4355667489581426946}
-  - component: {fileID: 4355667489594439306}
-  - component: {fileID: 4355667489594439305}
   - component: {fileID: 4355667489588315876}
   - component: {fileID: 4355667489584289348}
   - component: {fileID: 4355667489594439300}
   - component: {fileID: 4355667489582804166}
+  - component: {fileID: 4355667489594439306}
+  - component: {fileID: 4355667489594439305}
   m_Layer: 0
   m_Name: GEG Player
   m_TagString: Player
@@ -5258,46 +5258,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4355667489594439306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355667489580938530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29cea58e7c54d943b8c81b74e734376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Character>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
-    type: 2}
-  <Scaler>k__BackingField: 1
-  <Proportional>k__BackingField: 0
-  healthSlider: {fileID: 0}
-  damageImage: {fileID: 0}
-  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
-  summonCost: 50
-  flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  currentHealth: 100
---- !u!114 &4355667489594439305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355667489580938530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b1ba7cb29c03d44838e8c60a0d4326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Character>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
-    type: 2}
-  <Scaler>k__BackingField: 1
-  <Proportional>k__BackingField: 1
-  speed: 6
 --- !u!95 &4355667489588315876
 Animator:
   serializedVersion: 4
@@ -5445,6 +5405,46 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4355667489594439306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355667489580938530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29cea58e7c54d943b8c81b74e734376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Character>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
+    type: 2}
+  <Scaler>k__BackingField: 1
+  <Proportional>k__BackingField: 0
+  healthSlider: {fileID: 0}
+  damageImage: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
+  summonCost: 50
+  flashSpeed: 5
+  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
+  currentHealth: 100
+--- !u!114 &4355667489594439305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355667489580938530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b1ba7cb29c03d44838e8c60a0d4326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Character>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
+    type: 2}
+  <Scaler>k__BackingField: 1
+  <Proportional>k__BackingField: 1
+  speed: 6
 --- !u!1 &4355667489580938532
 GameObject:
   m_ObjectHideFlags: 0

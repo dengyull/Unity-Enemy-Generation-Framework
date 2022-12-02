@@ -7,7 +7,7 @@ namespace GEGFramework {
     [CreateAssetMenu(fileName = "GEGCharacter", menuName = "GEG Framework/Character")]
     public class GEGCharacter : ScriptableObject {
         public GameObject prefab;
-        public GEGCharacterType type;
+        public CharacterType type;
         public List<GEGCharacterProperty> properties;
         public int numNextWave; // number of instances to spawn in next wave
 
