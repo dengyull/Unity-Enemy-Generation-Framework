@@ -41,7 +41,7 @@ namespace CompleteProject {
             //faceLight = GetComponentInChildren<Light> ();
         }
 
-        void OnEnable() {
+        void Start() {
             damagePerShot = (int)Character["PlayerDamage"].value;
             timeBetweenBullets = Character["PlayerAttackRate"].value;
             range = Character["PlayerAttackRange"].value;

@@ -17,7 +17,7 @@ namespace GEGFramework {
         // Start is called before the first frame update
         void Start() {
             // Update wave number in debug UI:
-            FrameworkManager.OnNewWaveStart += (int waveNum) => waveText.text = "Wave: " + waveNum;
+            Spawner.OnNewWaveStart += (int waveNum) => waveText.text = "Wave: " + waveNum;
             // Update intensity value in debug UI:
             IntensityManager.OnIntensityChanged += (float intensity) => intensityText.text = "Intensity: "
                 + Mathf.RoundToInt(intensity);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,23 +10,48 @@ namespace GEGFramework {
     /// </summary>
     class Spawner : MonoBehaviour {
 
+        public static event Action<int> OnNewWaveStart;
+
+        public bool Spawning { get; private set; }
+
+        public static Spawner Instance { get; private set; } // singleton instance
+
         [TagSelector]
-        public string enemyTag = ""; // tag for all enemies in the scene
+        string enemyTag; // tag for all enemies in the scene
+        
+        [SerializeField, Tooltip("Time interval between spawning two enemies (in seconds)")]
+        float maxSpawnInterval;
 
-        int totalSpawn = 0; // total number of enemies to spawn in this wave
-        bool startSpawning = false, spawning = false;
-        Coroutine spawnCoroutine;
+        [SerializeField, Tooltip("Default spawning strategy (as random as possible)")]
+        bool defaultSpawning;
 
-        void OnEnable() {
-            FrameworkManager.OnNewWaveStart += (int _) => {
-                if (!spawning) startSpawning = true; // start spawning on new wave
-            };
+        int waveCounter;
+        int totalSpawn; // total number of enemies to spawn in this wave
+        bool startSpawning;
+
+        private void Awake() {
+            // Initialize singleton
+            if (Instance != null && Instance != this) Destroy(this);
+            else Instance = this;
+
+            waveCounter = 0;
+            totalSpawn = 0;
+            Spawning = false;
+            startSpawning = false;
         }
 
         void Update() {
-            if (startSpawning && !spawning) {
+            if (!HaveAliveEnemies() && !Spawning) {
+                waveCounter++;
+                startSpawning = true;
+                OnNewWaveStart?.Invoke(waveCounter);
+            }
+        }
+
+        void LateUpdate() { // start spawning in next frame after receiving signal
+            if (startSpawning && !Spawning) {
                 startSpawning = false;
-                spawnCoroutine = StartCoroutine(SpawnEnemies());
+                StartCoroutine(SpawnEnemies());
             }
         }
 
@@ -44,26 +70,25 @@ namespace GEGFramework {
         /// </summary>
         /// <returns></returns>
         IEnumerator SpawnEnemies() {
-            spawning = true;
-            if (PackedData.randomSpawn) {
-                float waveInterval = PackedData.maxWaveInterval;
+            Spawning = true;
+            if (defaultSpawning) {
                 List<(GameObject Prefab, int Num)> temp = new List<(GameObject, int)>();
 
-                foreach (GEGCharacter c in PackedData.characters) {
+                foreach (GEGCharacter c in PackedData.Instance.characters) {
                     if (c.numNextWave > 0 && c.type != CharacterType.Player) {
                         temp.Add((c.prefab, c.numNextWave)); // populate temp array
                         totalSpawn += c.numNextWave;
                     }
                 }
+
                 while (totalSpawn > 0) { // while temp is not empty
                     int randType = Random.Range(0, temp.Count);
-                    float randSpawnInterval = Random.Range(0, waveInterval / totalSpawn);
-                    int randPoint = Random.Range(0, PackedData.enemySpawnPoints.Count - 1); // spawn at random spawn point
+                    float randSpawnInterval = Random.Range(0.5f, maxSpawnInterval);
+                    int randPoint = Random.Range(0, PackedData.Instance.enemySpawnPoints.Count - 1); // spawn at random spawn point
 
-                    var inst = Instantiate(temp[randType].Prefab, PackedData.enemySpawnPoints[randPoint].position,
+                    var inst = Instantiate(temp[randType].Prefab, PackedData.Instance.enemySpawnPoints[randPoint].position,
                         temp[randType].Prefab.transform.rotation);
                     inst.tag = enemyTag;
-                    waveInterval -= randSpawnInterval;
                     yield return new WaitForSeconds(randSpawnInterval);
 
                     if (temp[randType].Num - 1 > 0) // if character[i] has more instances to be spawned
@@ -73,8 +98,7 @@ namespace GEGFramework {
                     totalSpawn--;
                 }
             }
-            if (spawnCoroutine != null) StopCoroutine(spawnCoroutine);
-            spawning = false;
+            Spawning = false;
         }
     }
 }

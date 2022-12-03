@@ -8,12 +8,11 @@ namespace GEGFramework {
     public class GEGCharacter : ScriptableObject {
         public GameObject prefab;
         public CharacterType type;
-        public List<GEGCharacterProperty> properties;
         public int numNextWave; // number of instances to spawn in next wave
+        public List<GEGProperty> properties;
 
-        public GEGCharacterProperty this[string key] {
+        public GEGProperty this[string key] {
             get => properties.Find(item => item.propertyName == key);
-            set => properties.Add(value);
         }
     }
 }

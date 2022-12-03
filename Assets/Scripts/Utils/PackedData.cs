@@ -5,18 +5,22 @@ namespace GEGFramework {
     /// <summary>
     /// Packed data for GEG Framework.
     /// </summary>
-    class PackedData {
-        public static bool randomSpawn;
-        public static float maxWaveInterval; // Time interval (in seconds) between each wave
-        public static List<Transform> enemySpawnPoints;
-        public static List<GEGCharacter> characters; // Data of each type of character (in GEGCharacterInst type)
+    [System.Serializable]
+    public class PackedData {
+        static PackedData _instance = null;
+        public static PackedData Instance {
+            get {
+                if (_instance == null) {
+                    _instance = new PackedData();
+                }
+                return _instance;
+            }
+        }
 
-        /// <summary>
-        /// Default GEGPackedData constructor
-        /// </summary>
+        [SerializeField] public List<Transform> enemySpawnPoints;
+        [SerializeField] public List<GEGCharacter> characters;
+
         public PackedData() {
-            maxWaveInterval = 60;
-            randomSpawn = true;
             enemySpawnPoints = new List<Transform>();
             characters = new List<GEGCharacter>();
         }

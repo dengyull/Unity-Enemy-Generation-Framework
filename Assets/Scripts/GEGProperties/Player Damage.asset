@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Damage
   m_EditorClassIdentifier: 
   propertyName: PlayerDamage
-  enabled: 1
+  enabled: 0
   value: 20
   defaultValue: 20
   importance: 50

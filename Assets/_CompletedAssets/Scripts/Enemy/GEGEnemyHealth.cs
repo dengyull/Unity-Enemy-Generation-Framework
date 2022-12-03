@@ -13,8 +13,8 @@ namespace CompleteProject {
         [field: SerializeField]
         public bool Proportional { get; set; }
 
-        public int startingHealth;                  // The amount of health the enemy starts the game with.
-        public int currentHealth;                   // The current health the enemy has.
+        public float startingHealth;                  // The amount of health the enemy starts the game with.
+        public float currentHealth;                   // The current health the enemy has.
         public float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead.
         public int scoreValue = 10;                 // The amount added to the player's score when the enemy dies.
         public AudioClip deathClip;                 // The sound to play when the enemy dies.
@@ -38,9 +38,8 @@ namespace CompleteProject {
         }
 
         void OnEnable() {
-            startingHealth = (int)Character["EnemyHealth"].value;
-            // Setting the current health when the enemy first spawns.
-            currentHealth = startingHealth;
+            startingHealth = Character["EnemyHealth"].value;
+            currentHealth = startingHealth; // Setting the current health when the enemy first spawns.
         }
 
 
@@ -70,6 +69,9 @@ namespace CompleteProject {
 
             // And play the particles.
             hitParticles.Play();
+
+            IntensityManager.Instance.UpdateIntensity(currentHealth / startingHealth,
+                    Scaler, Proportional); // if taking damage, tell intensity manager
 
             // If the current health is less than or equal to zero...
             if (currentHealth <= 0) {

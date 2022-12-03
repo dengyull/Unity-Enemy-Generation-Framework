@@ -10,6 +10,7 @@ public class DebugUIController : MonoBehaviour {
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] TextMeshProUGUI damageText;
     [SerializeField] TextMeshProUGUI rateText;
+    [SerializeField] TextMeshProUGUI speedText;
 
     // The health Script. Because it is used in update() so we store it as a class variable.
     GEGEnemyHealth healthScript;
@@ -23,10 +24,11 @@ public class DebugUIController : MonoBehaviour {
         healthScript = transform.parent.GetComponent<GEGEnemyHealth>();
 
         // Update UI
-        if (hpText && damageText && rateText) {
+        if (hpText && damageText && rateText && speedText) {
             hpText.text = "HP: " + healthScript.currentHealth.ToString();
-            damageText.text = "Damage: " + transform.parent.GetComponent<GEGEnemyAttack>().attackDamage.ToString();
+            damageText.text = "Damage: " + Mathf.Round(transform.parent.GetComponent<GEGEnemyAttack>().attackDamage).ToString();
             rateText.text = "AttackRate: " + transform.parent.GetComponent<GEGEnemyAttack>().timeBetweenAttacks.ToString();
+            speedText.text = "Speed: " + transform.parent.GetComponent<UnityEngine.AI.NavMeshAgent>().speed.ToString();
         }
     }
     void Update() {

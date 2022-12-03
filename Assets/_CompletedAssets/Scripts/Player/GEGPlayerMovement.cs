@@ -36,7 +36,7 @@ namespace CompleteProject {
             playerRigidbody = GetComponent<Rigidbody>();
         }
 
-        void OnEnable() {
+        void Start() {
             speed = Character["PlayerSpeed"].value;
         }
 

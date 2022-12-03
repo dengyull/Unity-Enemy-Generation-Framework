@@ -5231,7 +5231,7 @@ GameObject:
   - component: {fileID: 4355667489584289348}
   - component: {fileID: 4355667489594439300}
   - component: {fileID: 4355667489582804166}
-  - component: {fileID: 4355667489594439306}
+  - component: {fileID: 4062646420266089366}
   - component: {fileID: 4355667489594439305}
   m_Layer: 0
   m_Name: GEG Player
@@ -5405,7 +5405,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4355667489594439306
+--- !u!114 &4062646420266089366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5414,20 +5414,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4355667489580938530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29cea58e7c54d943b8c81b74e734376, type: 3}
+  m_Script: {fileID: 11500000, guid: ffe42c0ec6aea2143ae67069190e18af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Character>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
     type: 2}
   <Scaler>k__BackingField: 1
-  <Proportional>k__BackingField: 0
+  <Proportional>k__BackingField: 1
   healthSlider: {fileID: 0}
   damageImage: {fileID: 0}
-  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
-  summonCost: 50
+  deathClip: {fileID: 0}
+  summonCost: 30
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  currentHealth: 100
+  startingHealth: 0
+  currentHealth: 0
 --- !u!114 &4355667489594439305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5442,7 +5443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Character>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
     type: 2}
-  <Scaler>k__BackingField: 1
+  <Scaler>k__BackingField: 2
   <Proportional>k__BackingField: 1
   speed: 6
 --- !u!1 &4355667489580938532

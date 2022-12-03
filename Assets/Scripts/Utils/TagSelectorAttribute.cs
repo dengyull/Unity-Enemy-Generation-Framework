@@ -8,18 +8,18 @@ using System.Collections.Generic;
 // Original by DYLAN ENGELMAN http://jupiterlighthousestudio.com/custom-inspectors-unity/
 // Altered by Brecht Lecluyse https://www.brechtos.com and Kangwei Liao
 
-public class TagSelector : PropertyAttribute {
+public class TagSelectorAttribute : PropertyAttribute {
     public bool UseDefaultTagFieldDrawer = false;
 }
 
 #if UNITY_EDITOR
-[CustomPropertyDrawer(typeof(TagSelector))]
+[CustomPropertyDrawer(typeof(TagSelectorAttribute))]
 public class TagSelectorPropertyDrawer : PropertyDrawer {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
         if (property.propertyType == SerializedPropertyType.String) {
             EditorGUI.BeginProperty(position, label, property);
 
-            var attrib = this.attribute as TagSelector;
+            var attrib = this.attribute as TagSelectorAttribute;
 
             if (attrib.UseDefaultTagFieldDrawer) {
                 property.stringValue = EditorGUI.TagField(position, label, property.stringValue);

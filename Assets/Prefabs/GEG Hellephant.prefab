@@ -10226,8 +10226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Character>k__BackingField: {fileID: 11400000, guid: b3dab9feb236ee442b797ab88c3f6255,
     type: 2}
-  <Scaler>k__BackingField: 0
-  <Proportional>k__BackingField: 0
+  <Scaler>k__BackingField: 1
+  <Proportional>k__BackingField: 1
   startingHealth: 0
   currentHealth: 0
   sinkSpeed: 2.5

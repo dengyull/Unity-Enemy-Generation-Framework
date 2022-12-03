@@ -23,6 +23,8 @@ namespace CompleteProject {
         public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
         [HideInInspector]
+        public float startingHealth;
+        [HideInInspector]
         public float currentHealth;                                 // The current health the player has.
 
         Animator anim;                                              // Reference to the Animator component.
@@ -41,7 +43,8 @@ namespace CompleteProject {
         }
 
         void Start() {
-            currentHealth = Character["PlayerHealth"].value;
+            startingHealth = Character["PlayerHealth"].value;
+            currentHealth = startingHealth;
         }
 
         void Update() {
@@ -85,8 +88,6 @@ namespace CompleteProject {
             // Reduce the current health by the damage amount.
             currentHealth -= amount;
 
-            IGEGController.valueChanged?.Invoke(amount); // Invoke this event for intensity calculation
-
             // Set the health bar's value to the current health.
             if (healthSlider != null)
                 healthSlider.value = currentHealth;
@@ -94,6 +95,9 @@ namespace CompleteProject {
             // Play the hurt sound effect.
             if (playerAudio != null)
                 playerAudio.Play();
+
+            IntensityManager.Instance.UpdateIntensity(currentHealth / startingHealth,
+                    Scaler, Proportional); // if taking damage, tell intensity manager
 
             // If the player has lost all it's health and the death flag hasn't been set yet...
             if (currentHealth <= 0 && !isDead) {
