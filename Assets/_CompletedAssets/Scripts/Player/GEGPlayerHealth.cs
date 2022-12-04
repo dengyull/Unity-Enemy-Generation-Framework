@@ -136,6 +136,7 @@ namespace CompleteProject {
 
         public void RestartLevel() {
             // Reload the level that is currently loaded.
+            IntensityManager.ResetProperties();
             SceneManager.LoadScene(0);
         }
     }

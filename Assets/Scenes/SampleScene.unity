@@ -4884,6 +4884,7 @@ GameObject:
   - component: {fileID: 1576885849}
   - component: {fileID: 1576885848}
   - component: {fileID: 1576885847}
+  - component: {fileID: 1576885853}
   - component: {fileID: 1576885846}
   m_Layer: 5
   m_Name: HUDCanvas
@@ -5024,6 +5025,20 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &1576885853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576885845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189bfb9c6772b6b4a87e12cd8b9af36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paused: {fileID: 24500000, guid: 5b84db49d40ea449aa4f3e3bd229ab5b, type: 2}
+  unpaused: {fileID: 24500003, guid: 5b84db49d40ea449aa4f3e3bd229ab5b, type: 2}
 --- !u!1 &1631760988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5641,6 +5656,11 @@ PrefabInstance:
         type: 3}
       propertyPath: easyModeScaler
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959432167049201277, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
+        type: 3}
+      propertyPath: normalIntensityIncScalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}

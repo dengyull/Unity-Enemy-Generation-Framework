@@ -566,16 +566,16 @@ MonoBehaviour:
   hardModeDuration: 3
   hardEntryThreshold: 70
   maxAdjustment: 20
-  expectedFelxibity: 10
+  expectedFelxibity: 5
   expectEasyIntensity: 5
   easyIntensityIncScalar: 1
   easyIntensityDecScalar: 5
-  expectNormalIntensity: 50
+  expectNormalIntensity: 60
   normalIntensityIncScalar: 0.8
   normalIntensityDecScalar: 2
-  expectHardIntensity: 100
-  hardIntensityIncScalar: 0.5
-  hardIntensityDecScalar: 2
+  expectHardIntensity: 90
+  hardIntensityIncScalar: 1
+  hardIntensityDecScalar: 3
   cumulationRate: 10
 --- !u!114 &2651012383412161553
 MonoBehaviour:

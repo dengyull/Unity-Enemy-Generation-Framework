@@ -108,11 +108,7 @@ namespace GEGFramework {
         }
 
         void OnApplicationQuit() {
-            foreach (GEGCharacter c in PackedData.Instance.characters) {
-                foreach (GEGProperty prop in c.properties) {
-                    prop.value = prop.defaultValue; // reset scriptable objects
-                }
-            }
+            ResetProperties();
         }
 
         /// <summary>
@@ -153,11 +149,13 @@ namespace GEGFramework {
                     }
                     if (_intensity > expectEasyIntensity + expectedFelxibity) { // relax mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
+                        easyIntensityDecScalar *= 1 + maxAdjustment / 100; // since difficulty decreased, scalar should decrease too
                     } else if (_intensity < expectEasyIntensity - expectedFelxibity) { // relax mode is too easy
                         UpdateAllEnemyProperty(true, maxAdjustment);
+                        easyIntensityIncScalar *= 1 + maxAdjustment / 100; // since difficulty increase, scalar should increase too
                     } // else within expect intensity
                     UpdateEnemyQuantity(0, 2);
-                    UpdateEnemyQuantity(1, 3);
+                    UpdateEnemyQuantity(1, 2);
                     UpdateEnemyQuantity(2, 0);
                     break;
                 case GameMode.Normal:
@@ -167,11 +165,13 @@ namespace GEGFramework {
                     }
                     if (_intensity > expectNormalIntensity + expectedFelxibity) { // normal mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
+                        normalIntensityDecScalar *= 1 + maxAdjustment / 100;
                     } else if (_intensity < expectNormalIntensity - expectedFelxibity) { // normal mode is too easy
                         UpdateAllEnemyProperty(true, maxAdjustment);
+                        normalIntensityIncScalar *= 1 + maxAdjustment / 100;
                     } // else within expect intensity
-                    UpdateEnemyQuantity(0, 5);
-                    UpdateEnemyQuantity(1, 5);
+                    UpdateEnemyQuantity(0, 3);
+                    UpdateEnemyQuantity(1, 3);
                     UpdateEnemyQuantity(2, 2);
                     break;
                 case GameMode.Hard:
@@ -181,12 +181,14 @@ namespace GEGFramework {
                     }
                     if (_intensity > expectHardIntensity + expectedFelxibity) { // hard mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
+                        hardIntensityDecScalar *= 1 + maxAdjustment / 100;
                     } else if (_intensity < expectHardIntensity - expectedFelxibity) { // hard mode is too easy
                         UpdateAllEnemyProperty(true, maxAdjustment);
+                        hardIntensityIncScalar *= 1 + maxAdjustment / 100;
                     } // else within expect intensity
-                    UpdateEnemyQuantity(0, 8);
-                    UpdateEnemyQuantity(1, 7);
-                    UpdateEnemyQuantity(2, 5);
+                    UpdateEnemyQuantity(0, 5);
+                    UpdateEnemyQuantity(1, 5);
+                    UpdateEnemyQuantity(2, 3);
                     break;
             }
         }
@@ -210,6 +212,14 @@ namespace GEGFramework {
             if (index < PackedData.Instance.characters.Count) {
                 if (PackedData.Instance.characters[index].type == CharacterType.Enemy)
                     PackedData.Instance.characters[index].numNextWave = quantity;
+            }
+        }
+
+        public static void ResetProperties() {
+            foreach (GEGCharacter c in PackedData.Instance.characters) {
+                foreach (GEGProperty prop in c.properties) {
+                    prop.value = prop.defaultValue; // reset scriptable objects
+                }
             }
         }
     }
