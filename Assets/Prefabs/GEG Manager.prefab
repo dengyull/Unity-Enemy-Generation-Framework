@@ -383,7 +383,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8170618343774549857}
-  - component: {fileID: 5132573681559756745}
   - component: {fileID: 3959432167049201277}
   - component: {fileID: 2651012383412161553}
   - component: {fileID: 3743787262614403139}
@@ -410,28 +409,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5132573681559756745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8170618343774549855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0c7fd3de89ebc4bafd849fbd3d6105, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  packedData:
-    enemySpawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    characters:
-    - {fileID: 11400000, guid: f6d8f53cce830c949a00109a69406610, type: 2}
-    - {fileID: 11400000, guid: 31a2bdfbe674c064ebb60ab486155dbb, type: 2}
-    - {fileID: 11400000, guid: b3dab9feb236ee442b797ab88c3f6255, type: 2}
-    - {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07, type: 2}
 --- !u!114 &3959432167049201277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +424,7 @@ MonoBehaviour:
   _intensity: 0
   currentMode: 0
   autoDecreaseAmount: 1
-  autoDecreaseCooldown: 1
+  autoDecreaseCooldown: 5
   easyModeDuration: 3
   hardModeDuration: 3
   hardModeThreshold: 60
@@ -466,6 +443,13 @@ MonoBehaviour:
   enemyTag: Enemy
   maxSpawnInterval: 5
   defaultSpawning: 1
+  packedData:
+    enemySpawnPoints: []
+    characters:
+    - {fileID: 11400000, guid: b3dab9feb236ee442b797ab88c3f6255, type: 2}
+    - {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07, type: 2}
+    - {fileID: 11400000, guid: f6d8f53cce830c949a00109a69406610, type: 2}
+    - {fileID: 11400000, guid: 31a2bdfbe674c064ebb60ab486155dbb, type: 2}
 --- !u!114 &3743787262614403139
 MonoBehaviour:
   m_ObjectHideFlags: 0
