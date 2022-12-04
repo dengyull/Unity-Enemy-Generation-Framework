@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: ZomBunnySpeed
   enabled: 1
-  value: 8
-  defaultValue: 4
+  value: 6
+  defaultValue: 6
   importance: 40

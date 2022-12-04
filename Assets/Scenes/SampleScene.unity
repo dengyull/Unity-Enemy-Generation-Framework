@@ -5481,35 +5481,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2651012383412161553, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}
-      propertyPath: packedData.characters.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2651012383412161553, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
-      propertyPath: packedData.characters.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: b3dab9feb236ee442b797ab88c3f6255,
-        type: 2}
-    - target: {fileID: 2651012383412161553, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
-      propertyPath: packedData.characters.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
-        type: 2}
-    - target: {fileID: 2651012383412161553, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
-      propertyPath: packedData.characters.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: f6d8f53cce830c949a00109a69406610,
-        type: 2}
-    - target: {fileID: 2651012383412161553, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
-      propertyPath: packedData.characters.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 31a2bdfbe674c064ebb60ab486155dbb,
-        type: 2}
-    - target: {fileID: 2651012383412161553, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
       propertyPath: packedData.enemySpawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1192309742}

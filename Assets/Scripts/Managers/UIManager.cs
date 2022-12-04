@@ -11,13 +11,17 @@ namespace GEGFramework {
 
         [SerializeField] GameObject debugPrefab;
         [SerializeField] bool debugEnabled;
+        [SerializeField] TMP_Text modeText;
         [SerializeField] TMP_Text waveText;
         [SerializeField] TMP_Text intensityText;
 
         // Start is called before the first frame update
         void Start() {
             // Update wave number in debug UI:
-            Spawner.OnNewWaveStart += (int waveNum) => waveText.text = "Wave: " + waveNum;
+            Spawner.OnNewWaveStart += (int waveNum) => {
+                waveText.text = "Mode: " + IntensityManager.Instance.Mode;
+                waveText.text = "Wave: " + waveNum;
+            };
             // Update intensity value in debug UI:
             IntensityManager.OnIntensityChanged += (float intensity) => intensityText.text = "Intensity: "
                 + Mathf.RoundToInt(intensity);

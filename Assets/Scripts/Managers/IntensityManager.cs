@@ -12,6 +12,7 @@ namespace GEGFramework {
         public float Intensity { get { return _intensity; } private set { _intensity = value; } }
 
         [SerializeField] GameMode currentMode = GameMode.Easy;
+        public GameMode Mode { get { return currentMode; } }
 
         [SerializeField, Tooltip("Value (in intensity value) at which intensity value decreases per second")]
         float autoDecreaseAmount = 1f;

@@ -30,7 +30,7 @@ namespace GEGFramework {
         bool startSpawning;
 
         [SerializeField]
-        PackedData packedData = PackedData.Instance;
+        PackedData spawnData = PackedData.Instance;
 
         private void Awake() {
             // Initialize singleton

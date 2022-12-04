@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: PlayerDamage
   enabled: 0
-  value: 20
-  defaultValue: 20
+  value: 15
+  defaultValue: 15
   importance: 50

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZomBunnyAttackRate
   m_EditorClassIdentifier: 
   propertyName: ZomBunnyAttackRate
-  enabled: 1
-  value: 1
+  enabled: 0
+  value: 0.5
   defaultValue: 0.5
   importance: 30

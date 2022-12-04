@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HellephantAttackRate
   m_EditorClassIdentifier: 
   propertyName: HellephantAttackRate
-  enabled: 1
+  enabled: 0
   value: 0.5
   defaultValue: 0.5
   importance: 30
