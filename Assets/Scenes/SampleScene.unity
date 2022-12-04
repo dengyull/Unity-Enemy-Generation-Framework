@@ -5533,11 +5533,6 @@ PrefabInstance:
       propertyPath: debugEnabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3959432167049201277, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
-        type: 3}
-      propertyPath: autoDecreaseCooldown
-      value: 5.43
-      objectReference: {fileID: 0}
     - target: {fileID: 4642523825903626000, guid: 79df83b4c974de44e9a5bf5dd5938b9b,
         type: 3}
       propertyPath: PeakDuration

@@ -29,6 +29,9 @@ namespace GEGFramework {
         int totalSpawn; // total number of enemies to spawn in this wave
         bool startSpawning;
 
+        [SerializeField]
+        PackedData packedData = PackedData.Instance;
+
         private void Awake() {
             // Initialize singleton
             if (Instance != null && Instance != this) Destroy(this);
