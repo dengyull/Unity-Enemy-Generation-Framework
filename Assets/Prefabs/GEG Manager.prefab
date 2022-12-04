@@ -571,7 +571,7 @@ MonoBehaviour:
   easyIntensityIncScalar: 1
   easyIntensityDecScalar: 5
   expectNormalIntensity: 60
-  normalIntensityIncScalar: 0.8
+  normalIntensityIncScalar: 1
   normalIntensityDecScalar: 2
   expectHardIntensity: 90
   hardIntensityIncScalar: 1
