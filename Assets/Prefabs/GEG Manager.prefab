@@ -561,10 +561,15 @@ MonoBehaviour:
   _intensity: 0
   currentMode: 0
   autoDecreaseAmount: 1
-  autoDecreaseCooldown: 5
+  autoDecreaseCooldown: 3
   easyModeDuration: 3
   hardModeDuration: 3
-  hardModeThreshold: 60
+  hardModeThreshold: 70
+  expectedFelxibity: 5
+  expectEasyIntensity: 5
+  expectNormalIntensity: 50
+  expectHardIntensity: 100
+  maxAdjustment: 10
 --- !u!114 &2651012383412161553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,16 +585,16 @@ MonoBehaviour:
   enemyTag: Enemy
   maxSpawnInterval: 5
   defaultSpawning: 1
-  packedData:
+  spawnData:
     enemySpawnPoints:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     characters:
+    - {fileID: 11400000, guid: 31a2bdfbe674c064ebb60ab486155dbb, type: 2}
+    - {fileID: 11400000, guid: f6d8f53cce830c949a00109a69406610, type: 2}
     - {fileID: 11400000, guid: b3dab9feb236ee442b797ab88c3f6255, type: 2}
     - {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07, type: 2}
-    - {fileID: 11400000, guid: f6d8f53cce830c949a00109a69406610, type: 2}
-    - {fileID: 11400000, guid: 31a2bdfbe674c064ebb60ab486155dbb, type: 2}
 --- !u!114 &3743787262614403139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,5 +610,6 @@ MonoBehaviour:
   debugPrefab: {fileID: 5740270643734321781, guid: e7d7eca34b2cb294a8e03b88f776afd4,
     type: 3}
   debugEnabled: 0
+  modeText: {fileID: 2674877538644328388}
   waveText: {fileID: 7924717750670119583}
   intensityText: {fileID: 2808165457663979716}

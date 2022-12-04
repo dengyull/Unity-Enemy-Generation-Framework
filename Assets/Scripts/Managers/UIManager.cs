@@ -19,7 +19,17 @@ namespace GEGFramework {
         void Start() {
             // Update wave number in debug UI:
             Spawner.OnNewWaveStart += (int waveNum) => {
-                waveText.text = "Mode: " + IntensityManager.Instance.Mode;
+                switch (IntensityManager.Instance.Mode) {
+                    case GameMode.Easy:
+                        modeText.text = "Mode: Easy";
+                        break;
+                    case GameMode.Normal:
+                        modeText.text = "Mode: Normal";
+                        break;
+                    case GameMode.Hard:
+                        modeText.text = "Mode: Hard";
+                        break;
+                }
                 waveText.text = "Wave: " + waveNum;
             };
             // Update intensity value in debug UI:
@@ -52,8 +62,9 @@ namespace GEGFramework {
         #region SerializedProperties
         SerializedProperty debugPrefab;
         SerializedProperty debugEnabled;
-        SerializedProperty intensityText;
+        SerializedProperty modeText;
         SerializedProperty waveText;
+        SerializedProperty intensityText;
         #endregion
 
         UIManager manager;
@@ -62,8 +73,10 @@ namespace GEGFramework {
             manager = target as UIManager;
             debugPrefab = serializedObject.FindProperty("debugPrefab");
             debugEnabled = serializedObject.FindProperty("debugEnabled");
-            intensityText = serializedObject.FindProperty("intensityText");
+            modeText = serializedObject.FindProperty("modeText");
             waveText = serializedObject.FindProperty("waveText");
+            intensityText = serializedObject.FindProperty("intensityText");
+
         }
 
         public override void OnInspectorGUI() {
@@ -71,8 +84,9 @@ namespace GEGFramework {
             EditorGUILayout.PropertyField(debugPrefab);
             debugEnabled.boolValue = EditorGUILayout.Toggle("Debug UI", debugEnabled.boolValue); // toggle field for debugUI
             if (debugEnabled.boolValue) { // if debug UI is enabled, show:
-                EditorGUILayout.PropertyField(intensityText);
+                EditorGUILayout.PropertyField(modeText);
                 EditorGUILayout.PropertyField(waveText);
+                EditorGUILayout.PropertyField(intensityText);
             }
             serializedObject.ApplyModifiedProperties();
             manager.ToggleDebugUI();

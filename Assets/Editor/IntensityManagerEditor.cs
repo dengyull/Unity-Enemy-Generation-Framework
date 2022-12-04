@@ -12,6 +12,11 @@ namespace GEGFramework {
         SerializedProperty easyModeDuration;
         SerializedProperty hardModeDuration;
         SerializedProperty hardModeThreshold;
+        SerializedProperty expectedFelxibity;
+        SerializedProperty expectEasyIntensity;
+        SerializedProperty expectNormalIntensity;
+        SerializedProperty expectHardIntensity;
+        SerializedProperty maxAdjustment;
         #endregion
 
         IntensityManager _target;
@@ -26,6 +31,11 @@ namespace GEGFramework {
             easyModeDuration = serializedObject.FindProperty("easyModeDuration");
             hardModeDuration = serializedObject.FindProperty("hardModeDuration");
             hardModeThreshold = serializedObject.FindProperty("hardModeThreshold");
+            expectedFelxibity = serializedObject.FindProperty("expectedFelxibity");
+            expectEasyIntensity = serializedObject.FindProperty("expectEasyIntensity");
+            expectNormalIntensity = serializedObject.FindProperty("expectNormalIntensity");
+            expectHardIntensity = serializedObject.FindProperty("expectHardIntensity");
+            maxAdjustment = serializedObject.FindProperty("maxAdjustment");
         }
 
         public override void OnInspectorGUI() {
@@ -34,7 +44,8 @@ namespace GEGFramework {
             EditorGUILayout.PropertyField(currentMode);
             EditorGUILayout.PropertyField(autoDecreaseAmount);
             EditorGUILayout.PropertyField(autoDecreaseCooldown);
-            EditorGUILayout.PropertyField(hardModeThreshold);
+            EditorGUILayout.PropertyField(expectedFelxibity);
+            EditorGUILayout.PropertyField(maxAdjustment);
 
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("Duration Settings", EditorStyles.boldLabel);
@@ -47,7 +58,19 @@ namespace GEGFramework {
             GUILayout.FlexibleSpace();
             EditorGUILayout.PropertyField(hardModeDuration, GUIContent.none, true, GUILayout.MinWidth(70));
             EditorGUILayout.EndHorizontal();
+
             EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("Easy Mode Settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(expectEasyIntensity);
+
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("Normal Mode Settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(expectNormalIntensity);
+
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("Hard Mode Settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(hardModeThreshold);
+            EditorGUILayout.PropertyField(expectHardIntensity);
 
             serializedObject.ApplyModifiedProperties();
         }
