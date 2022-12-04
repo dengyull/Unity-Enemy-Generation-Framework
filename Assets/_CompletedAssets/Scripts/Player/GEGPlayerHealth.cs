@@ -19,7 +19,7 @@ namespace CompleteProject {
         public Slider healthSlider;                                 // Reference to the UI's health bar.
         public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
         public AudioClip deathClip;                                 // The audio clip to play when the player dies.
-        public int summonCost;                                 // Cost of summoning a bro to help you
+        public int summonCost;                                      // Cost of summoning a bro to help you
         public int maxNumBros;
         public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
         public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.

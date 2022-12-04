@@ -569,12 +569,12 @@ MonoBehaviour:
   expectedFelxibity: 10
   expectEasyIntensity: 5
   easyIntensityIncScalar: 1
-  easyIntensityDecScalar: 2
+  easyIntensityDecScalar: 5
   expectNormalIntensity: 50
-  normalIntensityIncScalar: 1
+  normalIntensityIncScalar: 0.8
   normalIntensityDecScalar: 2
   expectHardIntensity: 100
-  hardIntensityIncScalar: 1
+  hardIntensityIncScalar: 0.5
   hardIntensityDecScalar: 2
   cumulationRate: 10
 --- !u!114 &2651012383412161553

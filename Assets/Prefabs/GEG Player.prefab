@@ -5420,12 +5420,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GEGCharacter>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
     type: 2}
-  <IntensityScalar>k__BackingField: 1
+  <IntensityScalar>k__BackingField: 5
   <IncreaseIntensity>k__BackingField: 1
   healthSlider: {fileID: 0}
   damageImage: {fileID: 0}
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
-  summonCost: 80
+  summonCost: 200
   maxNumBros: 5
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
@@ -5445,8 +5445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GEGCharacter>k__BackingField: {fileID: 11400000, guid: 228c9c539bc255b45a6528cb73c65e07,
     type: 2}
-  <IntensityScalar>k__BackingField: 0
-  <IncreaseIntensity>k__BackingField: 0
+  <IntensityScalar>k__BackingField: 1
+  <IncreaseIntensity>k__BackingField: 1
   speed: 6
 --- !u!1 &4355667489580938532
 GameObject:
