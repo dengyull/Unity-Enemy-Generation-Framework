@@ -84,7 +84,8 @@ namespace CompleteProject {
             timer = 0f;
 
             // Play the gun shot audioclip.
-            gunAudio.Play();
+            if (gunAudio != null)
+                gunAudio.Play();
 
             // Enable the lights.
             gunLight.enabled = true;

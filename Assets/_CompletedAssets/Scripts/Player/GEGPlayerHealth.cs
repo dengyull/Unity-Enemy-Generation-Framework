@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 using GEGFramework;
 
 namespace CompleteProject {
@@ -18,7 +19,8 @@ namespace CompleteProject {
         public Slider healthSlider;                                 // Reference to the UI's health bar.
         public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
         public AudioClip deathClip;                                 // The audio clip to play when the player dies.
-        public int summonCost = 50;                                 // Cost of summoning a bro to help you
+        public int summonCost;                                 // Cost of summoning a bro to help you
+        public int maxNumBros;
         public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
         public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
@@ -33,6 +35,7 @@ namespace CompleteProject {
         GEGPlayerShooting playerShooting;                           // Reference to the PlayerShooting script.
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
+        int broCount = 1;
 
         void Awake() {
             // Setting up the references.
@@ -60,8 +63,8 @@ namespace CompleteProject {
                     damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
             }
 
-            if (Input.GetKeyDown(KeyCode.C) && gameObject.name == "GEG Player"
-                && ScoreManager.score >= summonCost) {
+            if (Input.GetKeyDown(KeyCode.B) && gameObject.name == "GEG Player"
+                && ScoreManager.score >= summonCost && broCount <= maxNumBros) {
                 SummonBros();
             }
 
@@ -76,9 +79,13 @@ namespace CompleteProject {
                 GameObject bro = Instantiate(gameObject, broPos.position, transform.rotation);
                 bro.transform.position = new Vector3(transform.position.x + randRange, transform.position.y,
                     transform.position.z + randRange);
-                bro.name = "GEG Player (bro)";
+                bro.name = "GEG Player (Bro)";
+                Destroy(bro.GetComponent<AudioSource>());
+                Destroy(bro.transform.GetChild(2).GetComponent<AudioSource>());
+                ScoreManager.score -= summonCost;
+                broCount++;
+                summonCost *= broCount;
             }
-            ScoreManager.score -= summonCost;
         }
 
         public void TakeDamage(int amount) {
