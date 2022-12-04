@@ -7,13 +7,13 @@ namespace CompleteProject {
     public class GEGPlayerHealth : MonoBehaviour, IGEGController {
 
         [field: SerializeField]
-        public GEGCharacter Character { get; set; }
+        public GEGCharacter GEGCharacter { get; set; }
 
         [field: SerializeField]
-        public float Scaler { get; set; }
+        public float IntensityScalar { get; set; }
 
         [field: SerializeField]
-        public bool Proportional { get; set; }
+        public bool IncreaseIntensity { get; set; }
 
         public Slider healthSlider;                                 // Reference to the UI's health bar.
         public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
@@ -43,7 +43,7 @@ namespace CompleteProject {
         }
 
         void Start() {
-            startingHealth = Character["PlayerHealth"].value;
+            startingHealth = GEGCharacter["PlayerHealth"].value;
             currentHealth = startingHealth;
         }
 
@@ -97,7 +97,7 @@ namespace CompleteProject {
                 playerAudio.Play();
 
             IntensityManager.Instance.UpdateIntensity(currentHealth / startingHealth,
-                    Scaler, Proportional); // if taking damage, tell intensity manager
+                    IntensityScalar, IncreaseIntensity); // if taking damage, tell intensity manager
 
             // If the player has lost all it's health and the death flag hasn't been set yet...
             if (currentHealth <= 0 && !isDead) {

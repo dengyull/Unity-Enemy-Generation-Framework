@@ -565,11 +565,14 @@ MonoBehaviour:
   easyModeDuration: 3
   hardModeDuration: 3
   hardModeThreshold: 70
-  expectedFelxibity: 5
+  maxAdjustment: 20
+  expectedFelxibity: 10
   expectEasyIntensity: 5
-  expectNormalIntensity: 50
+  easyModeIntensityScalar: 0.2
+  expectNormalIntensity: 60
+  normalModeIntensityScalar: 0.5
   expectHardIntensity: 100
-  maxAdjustment: 10
+  hardModeIntensityScalar: 0.7
 --- !u!114 &2651012383412161553
 MonoBehaviour:
   m_ObjectHideFlags: 0
