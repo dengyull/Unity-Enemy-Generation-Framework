@@ -5,6 +5,7 @@ namespace GEGFramework {
     public sealed class IntensityManager : MonoBehaviour {
 
         public static event Action<float> OnIntensityChanged; // invoked once intensity value changed
+        public static event Action<GameMode> OnModeChanged; // invoked once GameMode changed
         public static IntensityManager Instance { get; private set; } // singleton instance
 
         [SerializeField, Range(0, 100), Tooltip("Emotional intensity of player")]
@@ -75,6 +76,7 @@ namespace GEGFramework {
             durationCounter = 0;
             coolDownTimer = autoDecreaseCooldown;
             OnIntensityChanged?.Invoke(_intensity);
+            OnModeChanged?.Invoke(currentMode);
         }
 
         void OnEnable() {
@@ -146,6 +148,7 @@ namespace GEGFramework {
                     if (durationCounter > easyModeDuration) {
                         durationCounter = 0;
                         currentMode = GameMode.Normal;
+            OnModeChanged?.Invoke(currentMode);
                     }
                     if (_intensity > expectEasyIntensity + expectedFelxibity) { // relax mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
@@ -154,14 +157,12 @@ namespace GEGFramework {
                         UpdateAllEnemyProperty(true, maxAdjustment);
                         easyIntensityIncScalar *= 1 + maxAdjustment / 100; // since difficulty increase, scalar should increase too
                     } // else within expect intensity
-                    UpdateEnemyQuantity(0, 2);
-                    UpdateEnemyQuantity(1, 2);
-                    UpdateEnemyQuantity(2, 0);
                     break;
                 case GameMode.Normal:
                     if (_intensity >= hardEntryThreshold) {
                         durationCounter = 0;
                         currentMode = GameMode.Hard;
+            OnModeChanged?.Invoke(currentMode);
                     }
                     if (_intensity > expectNormalIntensity + expectedFelxibity) { // normal mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
@@ -170,14 +171,12 @@ namespace GEGFramework {
                         UpdateAllEnemyProperty(true, maxAdjustment);
                         normalIntensityIncScalar *= 1 + maxAdjustment / 100;
                     } // else within expect intensity
-                    UpdateEnemyQuantity(0, 3);
-                    UpdateEnemyQuantity(1, 3);
-                    UpdateEnemyQuantity(2, 2);
                     break;
                 case GameMode.Hard:
                     if (durationCounter > hardModeDuration) {
                         durationCounter = 0;
                         currentMode = GameMode.Easy;
+            OnModeChanged?.Invoke(currentMode);
                     }
                     if (_intensity > expectHardIntensity + expectedFelxibity) { // hard mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
@@ -186,9 +185,6 @@ namespace GEGFramework {
                         UpdateAllEnemyProperty(true, maxAdjustment);
                         hardIntensityIncScalar *= 1 + maxAdjustment / 100;
                     } // else within expect intensity
-                    UpdateEnemyQuantity(0, 5);
-                    UpdateEnemyQuantity(1, 5);
-                    UpdateEnemyQuantity(2, 3);
                     break;
             }
         }
