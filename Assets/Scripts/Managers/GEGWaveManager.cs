@@ -39,6 +39,12 @@ namespace GEGFramework
         {
 
         }
+        
+
+        /// <summary>
+        /// update with current mode.
+        /// </summary>
+        /// <param name="mode">current game code
         void apply(GameMode mode)
         {
             switch (mode)
