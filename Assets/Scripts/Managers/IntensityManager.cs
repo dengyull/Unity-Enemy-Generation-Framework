@@ -36,7 +36,7 @@ namespace GEGFramework {
 
         [SerializeField, Range(0, 100), Tooltip("Flexibility of expected intensity; Expected intensity range " +
             "= [expectIntensity - expectedFelxibity, expectIntensity + expectedFelxibity]")]
-        float expectedFelxibity; // [expectIntensity - expectedFelxibity, expectIntensity + expectedFelxibity]
+        float expectedFlexibility; // [expectIntensity - expectedFelxibity, expectIntensity + expectedFelxibity]
 
         [SerializeField, Range(0, 100), Tooltip("Expected emotional intensity of easy mode")]
         float expectEasyIntensity;
@@ -112,7 +112,7 @@ namespace GEGFramework {
         }
 
         /// <summary>
-        /// Update the intensity value base on special event triggers
+        /// Update the intensity value base on certain property
         /// </summary>
         /// <param name="percent">(e.g., currentHealth/maxHealth)</param>
         /// <param name="scalar">Scale up/down the [percent] parameter</param>
@@ -139,6 +139,9 @@ namespace GEGFramework {
             coolDownTimer = autoDecreaseCooldown;
         }
 
+        /// <summary>
+        /// Called when new wave comes, deciding whether the enemies should be buffed/debuffed
+        /// </summary>
         void UpdateGameMode() {
             durationCounter++;
             switch (currentMode) {
@@ -147,10 +150,10 @@ namespace GEGFramework {
                         durationCounter = 0;
                         currentMode = GameMode.Normal;
                     }
-                    if (_intensity > expectEasyIntensity + expectedFelxibity) { // relax mode is too hard
+                    if (_intensity > expectEasyIntensity + expectedFlexibility) { // relax mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
                         easyIntensityDecScalar *= 1 + maxAdjustment / 100; // since difficulty decreased, scalar should decrease too
-                    } else if (_intensity < expectEasyIntensity - expectedFelxibity) { // relax mode is too easy
+                    } else if (_intensity < expectEasyIntensity - expectedFlexibility) { // relax mode is too easy
                         UpdateAllEnemyProperty(true, maxAdjustment);
                         easyIntensityIncScalar *= 1 + maxAdjustment / 100; // since difficulty increase, scalar should increase too
                     } // else within expect intensity
@@ -163,15 +166,15 @@ namespace GEGFramework {
                         durationCounter = 0;
                         currentMode = GameMode.Hard;
                     }
-                    if (_intensity > expectNormalIntensity + expectedFelxibity) { // normal mode is too hard
+                    if (_intensity > expectNormalIntensity + expectedFlexibility) { // normal mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
                         normalIntensityDecScalar *= 1 + maxAdjustment / 100;
-                    } else if (_intensity < expectNormalIntensity - expectedFelxibity) { // normal mode is too easy
+                    } else if (_intensity < expectNormalIntensity - expectedFlexibility) { // normal mode is too easy
                         UpdateAllEnemyProperty(true, maxAdjustment);
                         normalIntensityIncScalar *= 1 + maxAdjustment / 100;
                     } // else within expect intensity
-                    UpdateEnemyQuantity(0, 3);
-                    UpdateEnemyQuantity(1, 3);
+                    UpdateEnemyQuantity(0, 2);
+                    UpdateEnemyQuantity(1, 2);
                     UpdateEnemyQuantity(2, 2);
                     break;
                 case GameMode.Hard:
@@ -179,10 +182,10 @@ namespace GEGFramework {
                         durationCounter = 0;
                         currentMode = GameMode.Easy;
                     }
-                    if (_intensity > expectHardIntensity + expectedFelxibity) { // hard mode is too hard
+                    if (_intensity > expectHardIntensity + expectedFlexibility) { // hard mode is too hard
                         UpdateAllEnemyProperty(false, maxAdjustment);
                         hardIntensityDecScalar *= 1 + maxAdjustment / 100;
-                    } else if (_intensity < expectHardIntensity - expectedFelxibity) { // hard mode is too easy
+                    } else if (_intensity < expectHardIntensity - expectedFlexibility) { // hard mode is too easy
                         UpdateAllEnemyProperty(true, maxAdjustment);
                         hardIntensityIncScalar *= 1 + maxAdjustment / 100;
                     } // else within expect intensity
@@ -193,6 +196,12 @@ namespace GEGFramework {
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="increase">Indicating should increase/decrease</param>
+        /// <param name="percent"></param>
+        /// <param name="scaler"></param>
         void UpdateAllEnemyProperty(bool increase, float percent, float? scaler = null) {
             foreach (GEGCharacter c in PackedData.Instance.characters) {
                 if (c.type == CharacterType.Enemy) { // if it's an enemy type

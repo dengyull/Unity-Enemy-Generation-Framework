@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: HellephantDamage
   enabled: 1
-  value: 35
-  defaultValue: 35
-  importance: 50
+  value: 30
+  defaultValue: 30
+  importance: 100
