@@ -116,8 +116,8 @@ namespace GEGFramework {
         /// <summary>
         /// Update the intensity value base on certain property
         /// </summary>
-        /// <param name="percent">(e.g., currentHealth/maxHealth)</param>
-        /// <param name="scalar">Scale up/down the [percent] parameter</param>
+        /// <param name="percent">This property's current value as a percentage (e.g., currentHealth/maxHealth)</param>
+        /// <param name="scalar">Scale up/down the [propAdj] parameter</param>
         /// <param name="increase">If true, the intensity will increase as [percent] increases</param>
         public void UpdateIntensity(float percent, float scalar, bool increase) {
             float contribute = 0;
@@ -142,7 +142,7 @@ namespace GEGFramework {
         }
 
         /// <summary>
-        /// Called when new wave comes, deciding whether the enemies should be buffed/debuffed
+        /// Called when new wave arrives, deciding whether the enemies should be buffed/debuffed
         /// </summary>
         void UpdateGameMode() {
             durationCounter++;
@@ -199,10 +199,10 @@ namespace GEGFramework {
         }
 
         /// <summary>
-        /// 
+        /// Update all enemies' enabled properties
         /// </summary>
         /// <param name="increase">Indicating should increase/decrease</param>
-        /// <param name="adjustment">Amount of adjustment of all properties in all types of enemy</param>
+        /// <param name="adjustment">Amount of adjustment</param>
         /// <param name="scaler">Scale up/down the adjustment</param>
         void UpdateAllEnemyProperty(bool increase, float adjustment, float? scaler = null) {
             if (scaler.HasValue) adjustment *= scaler.Value / 100;
