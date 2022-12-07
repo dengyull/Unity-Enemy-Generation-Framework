@@ -22,7 +22,7 @@ namespace GEGFramework {
         SerializedProperty expectHardIntensity;
         SerializedProperty hardIntensityIncScalar;
         SerializedProperty hardIntensityDecScalar;
-        SerializedProperty maxAdjustment;
+        SerializedProperty adjustment;
         SerializedProperty cumulationRate;
         #endregion
 
@@ -39,7 +39,7 @@ namespace GEGFramework {
             hardModeDuration = serializedObject.FindProperty("hardModeDuration");
             hardEntryThreshold = serializedObject.FindProperty("hardEntryThreshold");
             expectedFlexibility = serializedObject.FindProperty("expectedFlexibility");
-            maxAdjustment = serializedObject.FindProperty("maxAdjustment");
+            adjustment = serializedObject.FindProperty("adjustment");
             cumulationRate = serializedObject.FindProperty("cumulationRate");
 
             expectEasyIntensity = serializedObject.FindProperty("expectEasyIntensity");
@@ -62,7 +62,7 @@ namespace GEGFramework {
             EditorGUILayout.PropertyField(autoDecreaseAmount);
             EditorGUILayout.PropertyField(autoDecreaseCooldown);
             EditorGUILayout.PropertyField(expectedFlexibility);
-            EditorGUILayout.PropertyField(maxAdjustment);
+            EditorGUILayout.PropertyField(adjustment);
             EditorGUILayout.PropertyField(cumulationRate);
 
             EditorGUILayout.Space(10);

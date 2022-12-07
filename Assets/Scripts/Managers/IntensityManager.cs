@@ -30,9 +30,9 @@ namespace GEGFramework {
         [SerializeField, Tooltip("The threshold (in intensity value) that triggers the hard mode")]
         float hardEntryThreshold;
 
-        [SerializeField, Range(1, 100), Tooltip("Maximum amount of adjustment (in percentage) for each property" +
+        [SerializeField, Range(1, 100), Tooltip("Amount of adjustment (in percentage) for each property" +
             " for each time the difficulty adjustment happens")]
-        float maxAdjustment;
+        float adjustment;
 
         [SerializeField, Range(0, 100), Tooltip("Flexibility of expected intensity; Expected intensity range " +
             "= [expectIntensity - expectedFelxibity, expectIntensity + expectedFelxibity]")]
@@ -70,11 +70,6 @@ namespace GEGFramework {
             // Initialize singleton
             if (Instance != null && Instance != this) Destroy(this);
             else Instance = this;
-
-            cumulation = 1;
-            durationCounter = 0;
-            coolDownTimer = autoDecreaseCooldown;
-            OnIntensityChanged?.Invoke(_intensity);
         }
 
         void OnEnable() {
@@ -83,6 +78,13 @@ namespace GEGFramework {
                 coolDownTimer = autoDecreaseCooldown;
                 UpdateGameMode(); // Udpate game mode when new wave starts
             };
+        }
+
+        private void Start() {
+            cumulation = 1;
+            durationCounter = 0;
+            coolDownTimer = autoDecreaseCooldown;
+            OnIntensityChanged?.Invoke(_intensity);
         }
 
         // Update is called once per frame
@@ -126,10 +128,10 @@ namespace GEGFramework {
                     break;
                 case GameMode.Normal:
                     contribute = increase ? percent * scalar * normalIntensityIncScalar
-                        : percent* scalar * normalIntensityDecScalar;
+                        : percent * scalar * normalIntensityDecScalar;
                     break;
                 case GameMode.Hard:
-                    contribute = increase ? percent * scalar * hardIntensityIncScalar 
+                    contribute = increase ? percent * scalar * hardIntensityIncScalar
                         : percent * scalar * hardIntensityDecScalar;
                     break;
             }
@@ -151,11 +153,11 @@ namespace GEGFramework {
                         currentMode = GameMode.Normal;
                     }
                     if (_intensity > expectEasyIntensity + expectedFlexibility) { // relax mode is too hard
-                        UpdateAllEnemyProperty(false, maxAdjustment);
-                        easyIntensityDecScalar *= 1 + maxAdjustment / 100; // since difficulty decreased, scalar should decrease too
+                        UpdateAllEnemyProperty(false, adjustment);
+                        easyIntensityDecScalar *= 1 + adjustment / 100; // since difficulty decreased, scalar should decrease too
                     } else if (_intensity < expectEasyIntensity - expectedFlexibility) { // relax mode is too easy
-                        UpdateAllEnemyProperty(true, maxAdjustment);
-                        easyIntensityIncScalar *= 1 + maxAdjustment / 100; // since difficulty increase, scalar should increase too
+                        UpdateAllEnemyProperty(true, adjustment);
+                        easyIntensityIncScalar *= 1 + adjustment / 100; // since difficulty increase, scalar should increase too
                     } // else within expect intensity
                     UpdateEnemyQuantity(0, 2);
                     UpdateEnemyQuantity(1, 2);
@@ -167,11 +169,11 @@ namespace GEGFramework {
                         currentMode = GameMode.Hard;
                     }
                     if (_intensity > expectNormalIntensity + expectedFlexibility) { // normal mode is too hard
-                        UpdateAllEnemyProperty(false, maxAdjustment);
-                        normalIntensityDecScalar *= 1 + maxAdjustment / 100;
+                        UpdateAllEnemyProperty(false, adjustment);
+                        normalIntensityDecScalar *= 1 + adjustment / 100;
                     } else if (_intensity < expectNormalIntensity - expectedFlexibility) { // normal mode is too easy
-                        UpdateAllEnemyProperty(true, maxAdjustment);
-                        normalIntensityIncScalar *= 1 + maxAdjustment / 100;
+                        UpdateAllEnemyProperty(true, adjustment);
+                        normalIntensityIncScalar *= 1 + adjustment / 100;
                     } // else within expect intensity
                     UpdateEnemyQuantity(0, 2);
                     UpdateEnemyQuantity(1, 2);
@@ -183,11 +185,11 @@ namespace GEGFramework {
                         currentMode = GameMode.Easy;
                     }
                     if (_intensity > expectHardIntensity + expectedFlexibility) { // hard mode is too hard
-                        UpdateAllEnemyProperty(false, maxAdjustment);
-                        hardIntensityDecScalar *= 1 + maxAdjustment / 100;
+                        UpdateAllEnemyProperty(false, adjustment);
+                        hardIntensityDecScalar *= 1 + adjustment / 100;
                     } else if (_intensity < expectHardIntensity - expectedFlexibility) { // hard mode is too easy
-                        UpdateAllEnemyProperty(true, maxAdjustment);
-                        hardIntensityIncScalar *= 1 + maxAdjustment / 100;
+                        UpdateAllEnemyProperty(true, adjustment);
+                        hardIntensityIncScalar *= 1 + adjustment / 100;
                     } // else within expect intensity
                     UpdateEnemyQuantity(0, 5);
                     UpdateEnemyQuantity(1, 5);
@@ -200,23 +202,29 @@ namespace GEGFramework {
         /// 
         /// </summary>
         /// <param name="increase">Indicating should increase/decrease</param>
-        /// <param name="percent"></param>
-        /// <param name="scaler"></param>
-        void UpdateAllEnemyProperty(bool increase, float percent, float? scaler = null) {
+        /// <param name="adjustment">Amount of adjustment of all properties in all types of enemy</param>
+        /// <param name="scaler">Scale up/down the adjustment</param>
+        void UpdateAllEnemyProperty(bool increase, float adjustment, float? scaler = null) {
+            if (scaler.HasValue) adjustment *= scaler.Value / 100;
             foreach (GEGCharacter c in PackedData.Instance.characters) {
                 if (c.type == CharacterType.Enemy) { // if it's an enemy type
                     foreach (GEGProperty prop in c.properties) {
-                        if (prop.enabled) { // if the property enabled for evaluation
-                            float adjustment = increase ? 
-                                prop.defaultValue * ((percent + cumulation) / 100) * (prop.importance / 100)
-                                : prop.defaultValue * (percent / 100) * (prop.importance / 100);
-                            prop.value += increase ? adjustment : -adjustment; // update property's value
+                        if (prop.enabled) { // if the property enabled for evaluation, calculate adjustment value
+                            float temp_adj = increase ?
+                                prop.defaultValue * ((adjustment + cumulation) / 100) * (prop.difficultyImportance / 100)
+                                : prop.defaultValue * (adjustment / 100) * (prop.difficultyImportance / 100);
+                            prop.value += increase ? temp_adj : -temp_adj; // update property's value
                         }
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Adjusts the quantity of spawning enemies of a specific type
+        /// </summary>
+        /// <param name="index">Character index in PackedData.characters</param>
+        /// <param name="quantity">Desired quantity</param>
         void UpdateEnemyQuantity(int index, int quantity) {
             if (index < PackedData.Instance.characters.Count) {
                 if (PackedData.Instance.characters[index].type == CharacterType.Enemy)
@@ -224,6 +232,9 @@ namespace GEGFramework {
             }
         }
 
+        /// <summary>
+        /// Reset GEGCharacters' properties to [property].defaultValue
+        /// </summary>
         public static void ResetProperties() {
             foreach (GEGCharacter c in PackedData.Instance.characters) {
                 foreach (GEGProperty prop in c.properties) {

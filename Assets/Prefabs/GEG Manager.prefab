@@ -561,15 +561,15 @@ MonoBehaviour:
   _intensity: 0
   currentMode: 0
   autoDecreaseAmount: 1
-  autoDecreaseCooldown: 1
+  autoDecreaseCooldown: 2
   easyModeDuration: 3
   hardModeDuration: 3
   hardEntryThreshold: 70
-  maxAdjustment: 20
-  expectedFlexibility: 0
+  adjustment: 10
+  expectedFlexibility: 5
   expectEasyIntensity: 5
   easyIntensityIncScalar: 1
-  easyIntensityDecScalar: 5
+  easyIntensityDecScalar: 3
   expectNormalIntensity: 60
   normalIntensityIncScalar: 1
   normalIntensityDecScalar: 2

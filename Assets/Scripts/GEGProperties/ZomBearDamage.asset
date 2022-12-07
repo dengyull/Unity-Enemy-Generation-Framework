@@ -16,4 +16,6 @@ MonoBehaviour:
   enabled: 1
   value: 15
   defaultValue: 15
-  importance: 100
+  difficultyImportance: 80
+  intensityImportance: 0
+  increaseIntensity: 0

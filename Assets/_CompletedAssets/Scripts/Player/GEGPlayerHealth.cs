@@ -103,8 +103,10 @@ namespace CompleteProject {
             if (playerAudio != null)
                 playerAudio.Play();
 
+            // If taking damage, inform intensity manager:
             IntensityManager.Instance.UpdateIntensity(currentHealth / startingHealth,
-                    IntensityScalar, IncreaseIntensity); // if taking damage, inform intensity manager
+                    GEGCharacter["PlayerHealth"].intensityScalar,
+                    GEGCharacter["PlayerHealth"].increaseIntensity);
 
             // If the player has lost all it's health and the death flag hasn't been set yet...
             if (currentHealth <= 0 && !isDead) {
