@@ -12,7 +12,7 @@ namespace GEGFramework {
         SerializedProperty easyModeDuration;
         SerializedProperty hardModeDuration;
         SerializedProperty hardEntryThreshold;
-        SerializedProperty expectedFelxibity;
+        SerializedProperty expectedFlexibility;
         SerializedProperty expectEasyIntensity;
         SerializedProperty easyIntensityIncScalar;
         SerializedProperty easyIntensityDecScalar;
@@ -22,7 +22,7 @@ namespace GEGFramework {
         SerializedProperty expectHardIntensity;
         SerializedProperty hardIntensityIncScalar;
         SerializedProperty hardIntensityDecScalar;
-        SerializedProperty maxAdjustment;
+        SerializedProperty adjustment;
         SerializedProperty cumulationRate;
         #endregion
 
@@ -38,8 +38,8 @@ namespace GEGFramework {
             easyModeDuration = serializedObject.FindProperty("easyModeDuration");
             hardModeDuration = serializedObject.FindProperty("hardModeDuration");
             hardEntryThreshold = serializedObject.FindProperty("hardEntryThreshold");
-            expectedFelxibity = serializedObject.FindProperty("expectedFelxibity");
-            maxAdjustment = serializedObject.FindProperty("maxAdjustment");
+            expectedFlexibility = serializedObject.FindProperty("expectedFlexibility");
+            adjustment = serializedObject.FindProperty("adjustment");
             cumulationRate = serializedObject.FindProperty("cumulationRate");
 
             expectEasyIntensity = serializedObject.FindProperty("expectEasyIntensity");
@@ -61,8 +61,8 @@ namespace GEGFramework {
             EditorGUILayout.PropertyField(currentMode);
             EditorGUILayout.PropertyField(autoDecreaseAmount);
             EditorGUILayout.PropertyField(autoDecreaseCooldown);
-            EditorGUILayout.PropertyField(expectedFelxibity);
-            EditorGUILayout.PropertyField(maxAdjustment);
+            EditorGUILayout.PropertyField(expectedFlexibility);
+            EditorGUILayout.PropertyField(adjustment);
             EditorGUILayout.PropertyField(cumulationRate);
 
             EditorGUILayout.Space(10);

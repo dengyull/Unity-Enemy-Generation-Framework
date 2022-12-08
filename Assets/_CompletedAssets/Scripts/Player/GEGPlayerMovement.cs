@@ -14,6 +14,7 @@ namespace CompleteProject {
         [field: SerializeField]
         public bool IncreaseIntensity { get; set; }
 
+        [HideInInspector]
         public float speed;            // The speed that the player will move at.
 
 

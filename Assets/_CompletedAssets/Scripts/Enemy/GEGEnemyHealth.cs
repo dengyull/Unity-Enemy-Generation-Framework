@@ -71,8 +71,10 @@ namespace CompleteProject {
             // And play the particles.
             hitParticles.Play();
 
+            // If taking damage, inform intensity manager:
             IntensityManager.Instance.UpdateIntensity(currentHealth / startingHealth,
-                    IntensityScalar, IncreaseIntensity); // if taking damage, tell intensity manager
+                    GEGCharacter[GEGCharacter.name + "Health"].intensityScalar, 
+                    GEGCharacter[GEGCharacter.name + "Health"].increaseIntensity); 
 
             // If the current health is less than or equal to zero...
             if (currentHealth <= 0) {
